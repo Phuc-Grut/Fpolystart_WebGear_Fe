@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './component/register/register.component';
 import { LoginComponent } from './component/login/login.component';
 import { EmailComponent } from './component/email/email.component';
-import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
@@ -22,12 +21,11 @@ import { EditUsersComponent } from './component/edit-users/edit-users.component'
 import { AddVouchersComponent } from './component/add-vouchers/add-vouchers.component';
 import { EditVouchersComponent } from './component/edit-vouchers/edit-vouchers.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { TestComponent } from './test/test.component';
 import { DetailProductComponent } from './component/detail-product/detail-product.component';
 import { CategoryComponent } from './component/category/category.component';
 import { DetailOrdersComponent } from './component/detail-orders/detail-orders.component';
 import { EditOrdersComponent } from './component/edit-orders/edit-orders.component';
-
+import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent }, 
   { path: 'register', component: RegisterComponent },
@@ -56,8 +54,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'orders/:id', component: DetailOrdersComponent },
-  { path: 'edit-orders/:id', component: EditOrdersComponent },
-  { path: 'test', component: TestComponent }
+  { path: 'edit-orders/:id', component: EditOrdersComponent }
 ];
 
 @NgModule({

@@ -14,10 +14,10 @@
 
   <app-add-products
     [showModal]="showModalAdd"
-    (close)="closeModalAdd()"
+    (close)="closeModalAdd()" 
   ></app-add-products>
-  <div *ngIf="products.length > 0; else loading" class="product-table-wrapper">
-    <table class="product-table">
+  <!-- <div *ngIf="products.length > 0" class="product-table-wrapper"> -->
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>ProductId</th>
@@ -74,8 +74,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
-  <ng-template #loading>
-    <p>Loading products...</p>
-  </ng-template>
+  <!-- </div> -->
 </div>

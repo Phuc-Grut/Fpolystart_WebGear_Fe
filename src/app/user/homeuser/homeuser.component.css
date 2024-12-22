@@ -460,3 +460,167 @@
     background-color: #ff3300;
   }
   
+  /* Container chính chứa input và icon */
+.container-3 {
+  width: 200px;
+  height: 50px;
+  position: relative;
+  vertical-align: middle;
+  white-space: nowrap;
+  border-radius: 5px;
+  background-color: #c8ccd5;
+}
+
+/* Input search */
+.container-3 input#search {
+  width: 80%;
+  height: 100%;
+  background-color: #c8ccd5;
+  border: none;
+  font-size: 10pt;
+  color: #262626;
+  padding-left: 35px; /* Để chừa chỗ cho icon */
+  border-radius: 5px;
+  color: #fff;
+}
+
+/* Placeholder styling */
+.container-3 input#search::-webkit-input-placeholder {
+  color: #65737e;
+}
+.container-3 input#search:-moz-placeholder {
+  color: #65737e;
+}
+.container-3 input#search::-moz-placeholder {
+  color: #65737e;
+}
+.container-3 input#search:-ms-input-placeholder {
+  color: #65737e;
+}
+
+/* Icon position */
+.container-3 .icon {
+  position: absolute;
+  top: 50%;
+  left: 5px; /* Đặt vị trí cho icon */
+  transform: translateY(-50%); /* Căn giữa icon theo chiều dọc */
+  z-index: 1;
+  color: #eff3f6;
+  transition: all 0.55s ease;
+  margin-left: 25px;
+}
+
+/* Xử lý khi focus hoặc active vào input */
+.container-3 input#search:focus,
+.container-3 input#search:active {
+  outline: none;
+}
+
+/* Hiệu ứng hover trên icon */
+.container-3:hover .icon {
+  color: #93a2ad;
+  transform: scale(1.5);
+  margin-top: 0; /* Đảm bảo icon không bị lệch khi hover */
+}
+
+
+/* Container chứa các phần tử */
+.container {
+  display: flex; /* Dùng Flexbox để căn chỉnh các item theo chiều ngang */
+  justify-content: space-between; /* Tạo khoảng cách đều giữa các item */
+  align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+  gap: 20px; /* Khoảng cách giữa các phần tử */
+  margin-right: 150px;
+}
+
+/* Mỗi item chứa icon và văn bản */
+.item {
+  display: flex;
+  align-items: center; /* Căn giữa icon và văn bản theo chiều dọc */
+}
+
+/* Icon */
+.item i {
+  font-size: 30px; /* Kích thước icon */
+  margin-right: 10px; /* Khoảng cách giữa icon và văn bản */
+  animation: shake 1s infinite ease-in-out; /* Hiệu ứng lắc lư */
+}
+
+/* Hotline info */
+.hotline-info {
+  display: flex;
+  flex-direction: column; /* Đặt Hotline và Số điện thoại theo chiều dọc */
+}
+
+/* Hotline text */
+.hotline-text {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Số điện thoại */
+.phone-number {
+  font-size: 16px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 0;
+}
+
+/* Tư vấn trực tiếp */
+.item span {
+  font-size: 16px;
+  margin-right: 20PX;
+}
+
+/* Hiệu ứng lắc lư cho icon */
+@keyframes shake {
+  0% {
+      transform: rotate(0deg);
+  }
+  25% {
+      transform: rotate(-10deg);
+  }
+  50% {
+      transform: rotate(10deg);
+  }
+  75% {
+      transform: rotate(-10deg);
+  }
+  100% {
+      transform: rotate(0deg);
+  }
+}
+
+
+/* Container chứa icon và chữ "Giỏ hàng" */
+.cart-container {
+  display: flex;           /* Dùng Flexbox để căn chỉnh các phần tử theo chiều ngang */
+  align-items: center;     /* Căn giữa các phần tử theo chiều dọc */
+  padding: 10px 20px;      /* Thêm khoảng cách xung quanh */
+  border: 2px solid #007bff; /* Viền cho container */
+  border-radius: 15px;     /* Bo góc container */
+  background-color: #f1f1f1; /* Màu nền cho container */
+  font-size: 16px;
+  cursor: pointer;         /* Thêm hiệu ứng con trỏ khi hover */
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền khi hover */
+  white-space: nowrap;     /* Ngăn không cho chữ xuống dòng */
+}
+
+/* Icon giỏ hàng */
+.cart-container i {
+  font-size: 24px;         /* Kích thước icon */
+  color: #007bff;          /* Màu của icon */
+  margin-right: 10px;      /* Khoảng cách giữa icon và chữ */
+}
+
+/* Chữ "Giỏ hàng" */
+.cart-container .cart-text {
+  font-size: 16px;
+  color: #007bff;          /* Màu của chữ */
+}
+
+/* Thêm hiệu ứng khi hover */
+.cart-container:hover {
+  background-color: #e2f4ff; /* Màu nền khi hover */
+}
