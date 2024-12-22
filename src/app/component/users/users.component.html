@@ -1,46 +1,55 @@
 <div class="head-title">
-    <div class="left">
-        <h1>Users</h1>
-        <ul class="breadcrumb">
-            <li><a >Users</a></li>
-            <li><i class='bx bx-chevron-right'></i></li>
-            <li><a class="active" >Quản Lý Người Dùng</a></li>
-        </ul>
-    </div>
+  <div class="left">
+      <h1>Users</h1>
+      <ul class="breadcrumb">
+          <li><a>Users</a></li>
+          <li><i class='bx bx-chevron-right'></i></li>
+          <li><a class="active">Quản Lý Người Dùng</a></li>
+      </ul>
+  </div>
 </div>
 <br>
 <div class="carte">
-    <button class="btn-add" (click)="openModalAdd()">Thêm Sản Phẩm Mới +</button>
+  <!-- Nút thêm người dùng -->
+  <button class="btn-add" (click)="openModalAdd()">Thêm Người Dùng Mới +</button>
 
-    <app-add-users [showModal]="showModalAdd" (close)="closeModalAdd()"></app-add-users> 
+  <!-- Modal thêm người dùng -->
+  <app-add-users [showModal]="showModalAdd" (close)="closeModalAdd()"></app-add-users>
 
-    <table>
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Tên Người Dùng</th>
-                <th>Email</th>
-                <th>Ngày Tạo</th>
-                <th>Ủy Quyền</th>
-                <th>Thao Tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.createdAt | date }}</td>
-                <td>{{ user.role }}</td>
-                <td class="action-icons">
-                    <i class='bx bxs-edit' title="Chỉnh sửa" (click)="editUser(user.id)"></i>
-                    <div class="toggle">
-                        <input type="checkbox" id="toggle{{ i }}" [(ngModel)]="user.isActive">
-                        <label for="toggle{{ i }}" class="toggle-label"></label>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <!-- Bảng hiển thị danh sách người dùng -->
+  <table>
+      <thead>
+          <tr>
+              <th>STT</th>
+              <th>Tên Người Dùng</th>
+              <th>Email</th>
+              <th>Số Điện Thoại</th>
+              <th>Ngày Tạo</th>
+              <th>Ủy Quyền</th>
+              <th>Trạng Thái</th>
+              <th>Thao Tác</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Lặp qua danh sách người dùng -->
+          <tr *ngFor="let user of users; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phoneNumber }}</td>
+              <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ user.role }}</td>
+              <td>
+                  <div class="toggle">
+                      <input type="checkbox" id="toggle{{ i }}" [(ngModel)]="user.isActive">
+                      <label for="toggle{{ i }}" class="toggle-label"></label>
+                  </div>
+              </td>
+              <td class="action-icons">
+                  <i class='bx bxs-edit' title="Chỉnh sửa" (click)="editUser(user.id)"></i>
+              </td>
+          </tr>
+      </tbody>
+  </table>
 </div>
 <br>
