@@ -17,14 +17,9 @@ export class OrderService {
           params = params.append(key, request[key]);
         }
       });
-    }
+    } 
     // Gửi yêu cầu GET với các tham số
-    return this.http.get(this.apiUrl, { params }).pipe(
-      catchError((error) => {
-        console.error('Error fetching orders:', error);
-        return throwError(() => new Error('Failed to fetch orders.'));
-      })
-    );
+    return this.http.get(`${this.apiUrl}/get-all-order`, { params: params });
   }
   
   getOrderById(orderId: number): Observable<any> {

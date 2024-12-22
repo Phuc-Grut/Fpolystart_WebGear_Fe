@@ -1,86 +1,123 @@
-<div *ngIf="showModal" class="modal-overlay"(click)="onOverlayClick($event)">
-    <div class="modal-content">
-        <button class="close-btn" (click)="closeModal()">×</button>
-<div class="carte"> 
-    <h1>Thêm sản phẩm mới</h1>
-    <div class="container">
+<div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <div class="carte">
+      <h1>Thêm sản phẩm mới</h1>
+      <div class="container">
         <form (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-sm-5">
-                    <div class="image-upload">
-                        <img id="productImage" src="" alt="Ảnh Sản Phẩm" style="display: none;">
-                        <i class='bx bx-image' id="defaultIcon" style="font-size: 50px; color: var(--grey); margin-bottom: 10px;"></i>
-                        <label for="fileInput">Chọn Ảnh</label>
-                        <input type="file" id="fileInput" accept="image/*" (change)="previewImage($event)" style="display:none;">
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                    <div class="co-1">
-                        <label for="productName">Tên Sản Phẩm</label>
-                        <input type="text" [(ngModel)]="product.productName" id="productName" class="form-control" placeholder="Nhập tên sản phẩm">
-                    </div>
-                    <div class="co-1">
-                        <label for="category">Danh Mục</label>
-                        <select [(ngModel)]="product.category" id="category" class="form-select">
-                            <option value="chuột">Chuột</option>
-                            <option value="bàn phím">Bàn Phím</option>
-                        </select>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-sm-5">
+              <div class="image-upload">
+                <img id="productImage" src="" alt="Ảnh Sản Phẩm" style="display: none" />
+                <i class="bx bx-image" id="defaultIcon" style="font-size: 50px; color: var(--grey); margin-bottom: 10px;"></i>
+                <label for="fileInput">Chọn Ảnh</label>
+                <input type="file" id="fileInput" accept="image/*" (change)="previewImage($event)" style="display: none" />
+              </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label for="price">Price </label>
-                    <input type="number" [(ngModel)]="product.price" id="quantity" class="form-control" placeholder="Nhập price">
-                </div>
-                <div class="col">
-                    <label for="quantity">Quantity </label>
-                    <input type="number" [(ngModel)]="product.quantity" id="quantity" class="form-control" placeholder="Nhập quantity">
-                </div>
-                <div class="col">
-                    <label for="size">Size</label>
-                    <select [(ngModel)]="product.size" id="size" class="form-select">
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                    </select>
-                </div>
+            <div class="col-sm-7">
+              <div class="co-1">
+                <label for="category">Danh Mục</label>
+                <select [(ngModel)]="product.categoryID" id="category" class="form-select" (change)="onCategoryChange()">
+                  <option *ngFor="let category of categories" [value]="category.categoryID">
+                    {{ category.categoryName }}
+                  </option>
+                </select>
+              </div>
             </div>
-            
-            <div class="row">
-                <div class="col">
-                    <label for="view">View </label>
-                    <input type="number" [(ngModel)]="product.view" id="quantity" class="form-control" placeholder="Nhập view">
-                </div>
-                <div class="col">
-                    <label for="weight ">Weight  </label>
-                    <input type="number" [(ngModel)]="product.weight" id="quantity" class="form-control" placeholder="Nhập weight">
-                </div>
-                <div class="col">
-                    <label for="led">LED</label>
-                    <select [(ngModel)]="product.view" id="led" class="form-select">
-                        <option value="Có">Có</option>
-                        <option value="Không">Không</option>
-                    </select>
-                </div>
+          </div>
+
+          <!-- Các trường chung cho tất cả các loại sản phẩm -->
+          <div class="row">
+            <div class="col">
+              <label for="productId">Product ID</label>
+              <input type="number" [(ngModel)]="product.productID" id="productId" class="form-control" placeholder="Nhập mã sản phẩm" required />
             </div>
-            <div class="row">
-                <div class="col">
-                    <label for="batteryCapacity">BatteryCapacity </label>
-                    <input type="number" [(ngModel)]="product.batteryCapacity" id="quantity" class="form-control" placeholder="Nhập batteryCapacity">
-                </div>
-                <div class="col">
-                    <label for="category ">Category  </label>
-                    <input type="number" [(ngModel)]="product.category" id="quantity" class="form-control" placeholder="Nhập category">
-                </div>
+            <div class="col">
+              <label for="color">Color</label>
+              <input type="text" [(ngModel)]="product.color" id="color" class="form-control" placeholder="Nhập màu sắc" required />
             </div>
-            <div class="form-group">
-                <label for="description">Mô Tả</label>
-                <textarea [(ngModel)]="product.description" id="description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm"></textarea>
+            <div class="col">
+              <label for="led">Led</label>
+              <input type="text" [(ngModel)]="product.led" id="led" class="form-control" placeholder="Nhập đèn" required />
             </div>
-            <div class="button-container">
-                <button type="submit" class="btn btn-primary" (click)="onSubmit()"><i class='bx bxs-save'></i>Thêm mới sản phẩm</button>
+            <div class="col">
+              <label for="ss">SS</label>
+              <input type="text" [(ngModel)]="product.ss" id="ss" class="form-control" placeholder="Nhập SS" required />
             </div>
-            </form>
-      </div>      
+          </div>
+
+          <!-- Các trường dành riêng cho chuột (categoryID = 1) -->
+          <div *ngIf="product.categoryID === 1" class="row">
+            <div class="col">
+              <label for="mouseDetailID">Mouse Detail ID</label>
+              <input type="text" [(ngModel)]="mouseDetails.mouseDetailID" id="mouseDetailID" class="form-control" placeholder="Nhập mã chuột" required />
+            </div>
+            <div class="col">
+              <label for="dpi">DPI</label>
+              <input type="number" [(ngModel)]="mouseDetails.dpi" id="dpi" class="form-control" placeholder="Nhập độ phân giải" required />
+            </div>
+            <div class="col">
+              <label for="connectivity">Connectivity</label>
+              <input type="text" [(ngModel)]="mouseDetails.connectivity" id="connectivity" class="form-control" placeholder="Nhập kết nối" required />
+            </div>
+            <div class="col">
+              <label for="dimensions">Dimensions</label>
+              <input type="text" [(ngModel)]="mouseDetails.dimensions" id="dimensions" class="form-control" placeholder="Nhập kích thước" required />
+            </div>
+            <div class="col">
+              <label for="weight">Weight</label>
+              <input type="text" [(ngModel)]="mouseDetails.weight" id="weight" class="form-control" placeholder="Nhập trọng lượng" required />
+            </div>
+            <div class="col">
+              <label for="material">Material</label>
+              <input type="text" [(ngModel)]="mouseDetails.material" id="material" class="form-control" placeholder="Nhập vật liệu" required />
+            </div>
+            <div class="col">
+              <label for="eyeReading">EyeReading</label>
+              <input type="text" [(ngModel)]="mouseDetails.eyeReading" id="eyeReading" class="form-control" placeholder="Nhập tốc độ đọc" required />
+            </div>
+            <div class="col">
+              <label for="button">Button</label>
+              <input type="number" [(ngModel)]="mouseDetails.button" id="button" class="form-control" placeholder="Nhập số nút" required />
+            </div>
+          </div>
+
+          <!-- Các trường dành riêng cho bàn phím (categoryID = 2) -->
+          <div *ngIf="product.categoryID === 2" class="row">
+            <div class="col">
+              <label for="keyboardDetailID">Keyboard Detail ID</label>
+              <input type="text" [(ngModel)]="keyboardDetails.keyboardDetailID" id="keyboardDetailID" class="form-control" placeholder="Nhập mã bàn phím" required />
+            </div>
+            <div class="col">
+              <label for="layout">Layout</label>
+              <input type="text" [(ngModel)]="keyboardDetails.layout" id="layout" class="form-control" placeholder="Nhập layout" required />
+            </div>
+            <div class="col">
+              <label for="case">Case</label>
+              <input type="text" [(ngModel)]="keyboardDetails.case" id="case" class="form-control" placeholder="Nhập vỏ bàn phím" required />
+            </div>
+            <div class="col">
+              <label for="switch">Switch</label>
+              <input type="text" [(ngModel)]="keyboardDetails.switch" id="switch" class="form-control" placeholder="Nhập switch" required />
+            </div>
+            <div class="col">
+              <label for="switchLife">Switch Life</label>
+              <input type="number" [(ngModel)]="keyboardDetails.switchLife" id="switchLife" class="form-control" placeholder="Nhập tuổi thọ switch" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Mô Tả</label>
+            <textarea [(ngModel)]="product.description" id="description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm"></textarea>
+          </div>
+
+          <div class="button-container">
+            <button type="submit" class="btn btn-primary">
+              <i class="bx bxs-save"></i>Thêm mới sản phẩm
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
