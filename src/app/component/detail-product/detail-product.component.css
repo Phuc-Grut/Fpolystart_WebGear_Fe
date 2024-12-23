@@ -1,157 +1,111 @@
 .product-detail-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.product-detail {
-  display: flex; /* Sử dụng Flexbox để tạo layout hai cột */
-  gap: 30px; /* Khoảng cách giữa ảnh và thông tin */
-  align-items: flex-start; /* Căn chỉnh phần tử bên trong cùng bắt đầu ở cùng một điểm */
-}
-
-.product-image {
-  flex: 1; /* Cột ảnh sẽ chiếm không gian 1 phần */
-}
-
-.product-image img {
-  width: 100%; /* Đảm bảo ảnh chiếm hết chiều rộng cột */
-  max-width: 400px; /* Đặt kích thước tối đa cho ảnh (tùy chỉnh theo nhu cầu) */
-  height: auto; /* Giữ tỷ lệ của ảnh */
-  object-fit: cover; /* Ảnh sẽ bao phủ toàn bộ phần tử mà không bị biến dạng */
-}
-
-.product-info {
-  flex: 2; /* Cột thông tin sản phẩm sẽ chiếm không gian gấp đôi so với ảnh */
-}
-
-.product-info div {
-  margin-bottom: 10px; /* Khoảng cách giữa các thông tin */
-  font-size: 16px; /* Kích thước font chữ */
-}
-
-.product-info strong {
-  font-weight: bold;
-}
-
-.product-info {
-  line-height: 1.5;
-}
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  opacity: 0.5;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Nội dung modal */
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
-  width: 100%;
-  animation: fadeIn 0.3s ease-in-out; /* Thêm hiệu ứng fade-in */
-}
-
-/* Hiệu ứng khi mở modal */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Nút đóng modal */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
-  color: #aaa;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  color: red;
-}
-
-/* Thêm phần nền mờ cho toàn bộ trang */
-body.modal-open {
-  overflow: hidden; /* Ngừng cuộn khi modal mở */
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-@media (max-width: 768px) {
+  
   .product-detail {
-    flex-direction: column;
-    align-items: center;
+    display: flex; /* Sử dụng Flexbox để tạo layout hai cột */
+    gap: 30px; /* Khoảng cách giữa ảnh và thông tin */
+    align-items: flex-start; /* Căn chỉnh phần tử bên trong cùng bắt đầu ở cùng một điểm */
   }
-
+  
+  .product-image {
+    flex: 1; /* Cột ảnh sẽ chiếm không gian 1 phần */
+  }
+  
   .product-image img {
-    max-width: 100%;
+    width: 100%; /* Đảm bảo ảnh chiếm hết chiều rộng cột */
+    max-width: 400px; /* Đặt kích thước tối đa cho ảnh (tùy chỉnh theo nhu cầu) */
+    height: auto; /* Giữ tỷ lệ của ảnh */
+    object-fit: cover; /* Ảnh sẽ bao phủ toàn bộ phần tử mà không bị biến dạng */
   }
-}
-/* Căn chỉnh toàn bộ bảng */
-.detail-table {
-  width: 100%; /* Bảng sẽ chiếm toàn bộ chiều ngang */
-  border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
-  margin-top: 20px;
-  font-size: 14px;
-  text-align: left;
-}
-
-/* Phong cách cho tiêu đề bảng */
-.detail-table thead th {
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
-  padding: 10px;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* Phong cách cho các dòng dữ liệu */
-.detail-table tbody td {
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-
-/* Dòng kẻ cho bảng */
-.detail-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9; /* Tô màu xen kẽ cho các dòng */
-}
-
-.detail-table tbody tr:hover {
-  background-color: #f1f1f1; /* Màu nền khi hover vào dòng */
-}
-
-/* Phong cách cho nút hành động */
-.action-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.action-btn:hover {
-  background-color: #0056b3;
-}
+  
+  .product-info {
+    flex: 2; /* Cột thông tin sản phẩm sẽ chiếm không gian gấp đôi so với ảnh */
+  }
+  
+  .product-info div {
+    margin-bottom: 10px; /* Khoảng cách giữa các thông tin */
+    font-size: 16px; /* Kích thước font chữ */
+  }
+  
+  .product-info strong {
+    font-weight: bold; /* Làm đậm các nhãn (label) */
+  }
+  
+  .product-info {
+    line-height: 1.5; /* Giãn dòng để thông tin dễ đọc hơn */
+  }
+  .modal-overlay {
+    position: fixed; /* Đảm bảo modal phủ toàn bộ màn hình */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05); /* Màu nền mờ, có thể thay đổi opacity */
+    display: flex;
+    justify-content: center; /* Căn giữa modal */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    z-index: 9999; /* Đảm bảo modal nổi lên trên các thành phần khác */
+  }
+  
+  /* Nội dung modal */
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    max-width: 600px;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out; /* Thêm hiệu ứng fade-in */
+  }
+  
+  /* Hiệu ứng khi mở modal */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Nút đóng modal */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: red;
+  }
+  
+  /* Thêm phần nền mờ cho toàn bộ trang */
+  body.modal-open {
+    overflow: hidden; /* Ngừng cuộn khi modal mở */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền mờ cho trang */
+  }
+  
+  @media (max-width: 768px) {
+    .product-detail {
+      flex-direction: column; /* Chuyển sang dạng cột khi màn hình nhỏ */
+      align-items: center; /* Căn giữa các phần tử */
+    }
+  
+    .product-image img {
+      max-width: 100%; /* Ảnh sẽ chiếm hết chiều rộng khi trên thiết bị nhỏ */
+    }
+  }
+   
