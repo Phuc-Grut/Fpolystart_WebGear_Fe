@@ -26,13 +26,12 @@
           <th>Price</th>
           <th>Quantity</th>
           <th>Sale</th>
-          <th>Description</th>
           <th>Thao Tác</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let product of products">
-          <td>{{ product.productID }}</td>
+          <td>{{ product.productCode }}</td>
           <td>
             <img
               [src]="baseUrl + product.avatarProduct"
@@ -45,7 +44,6 @@
           <td>{{ product.price | number : "1.0-0" }} VND</td>
           <td>{{ product.quantity }}</td>
           <td>%</td>
-          <td>{{ product.description }}</td>
           <td class="action-icons">
             <!-- <i class='bx bx-show' (click)="viewProductDetail(product.productID)"></i>  -->
             <!-- chưa hiển thị lên được chi tiết sản phẩm -->

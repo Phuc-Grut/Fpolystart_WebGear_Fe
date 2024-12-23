@@ -1,21 +1,75 @@
 <div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <button class="close-btn" (click)="closeModal()">×</button>
-    
+
     <div *ngIf="product" class="product-detail-container">
       <h2>Chi tiết sản phẩm</h2>
-      
+
       <div class="product-detail">
+        <!-- Ảnh và thông tin chung -->
         <div class="product-image">
-          <img [src]="product.avatarProduct" alt="Product Image" />
+          <img [src]="baseUrl + product.avatarProduct || 'path_to_placeholder_image'" alt="Product Image" />
         </div>
         <div class="product-info">
           <div><strong>Tên sản phẩm:</strong> {{ product.productName }}</div>
-          <div><strong>Giá:</strong> {{ product.price |  number:'1.0-0' }} VND </div>
-          <div><strong>Số lượng:</strong> {{ product.quantity }}</div>
-          <div><strong>Mô tả:</strong> {{ product.description }}</div>
+          <div><strong>Giá:</strong> {{ product.price | number:'1.0-0' }} VND</div>
+          <div><strong>Số lượng:</strong> {{ product.quantity || 'Không xác định' }}</div>
+          <div><strong>Mô tả:</strong> {{ product.description || 'Không có mô tả' }}</div>
         </div>
       </div>
+
+      <!-- Danh sách chi tiết sản phẩm -->
+      <div *ngIf="product" class="product-detail-list">
+        <h3>Chi tiết sản phẩm</h3>
+
+        <!-- Nếu sản phẩm là Chuột -->
+        <div *ngIf="product.categoryID === 1">
+          <table class="detail-table">
+            <thead>
+              <tr>
+                <th>Màu</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                
+                <th>DPI</th>
+                <th>Kết nối</th>
+                <th>Chất liệu</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detail of product.productDetail">
+                <td>{{ detail.color }}</td>
+                <td>{{ detail.dpi }}</td>
+                <td>{{ detail.connectivity }}</td>
+                <td>{{ detail.material }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Nếu sản phẩm là Bàn phím -->
+        <div *ngIf="product.categoryID === 2">
+          <table class="detail-table">
+            <thead>
+              <tr>
+                <th>Màu</th>
+                <th>Layout</th>
+                <th>Chất liệu</th>
+                <th>Switch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detail of product.productDetail">
+                <td>{{ detail.color }}</td>
+                <td>{{ detail.layout }}</td>
+                <td>{{ detail.case }}</td>
+                <td>{{ detail.switch }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
     </div>
   </div>
 </div>
