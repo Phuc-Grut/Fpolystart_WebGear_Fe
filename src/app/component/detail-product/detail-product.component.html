@@ -3,7 +3,7 @@
     <button class="close-btn" (click)="closeModal()">×</button>
 
     <div *ngIf="product" class="product-detail-container">
-      <h2>Chi tiết sản phẩm</h2>
+      <h2>Thông tin sản phẩm</h2>
 
       <div class="product-detail">
         <!-- Ảnh và thông tin chung -->
@@ -20,7 +20,7 @@
 
       <!-- Danh sách chi tiết sản phẩm -->
       <div *ngIf="product" class="product-detail-list">
-        <h3>Chi tiết sản phẩm</h3>
+        <h4>Chi tiết sản phẩm</h4>
 
         <!-- Nếu sản phẩm là Chuột -->
         <div *ngIf="product.categoryID === 1">
