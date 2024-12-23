@@ -82,6 +82,6 @@ import { FeedbackComponent } from './component/feedback/feedback.component';
     
   ],
   providers: [],
-  bootstrap: [UserHomeComponent]
+  bootstrap: [DashboardComponent]
 })
 export class AppModule { }
