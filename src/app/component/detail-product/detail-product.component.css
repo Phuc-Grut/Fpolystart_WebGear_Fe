@@ -108,4 +108,53 @@
       max-width: 100%; /* Ảnh sẽ chiếm hết chiều rộng khi trên thiết bị nhỏ */
     }
   }
+
+  
+/* Căn chỉnh toàn bộ bảng */
+.detail-table {
+  width: 100%; /* Bảng sẽ chiếm toàn bộ chiều ngang */
+  border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* Phong cách cho tiêu đề bảng */
+.detail-table thead th {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Phong cách cho các dòng dữ liệu */
+.detail-table tbody td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* Dòng kẻ cho bảng */
+.detail-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Tô màu xen kẽ cho các dòng */
+}
+
+.detail-table tbody tr:hover {
+  background-color: #f1f1f1; /* Màu nền khi hover vào dòng */
+}
+
+/* Phong cách cho nút hành động */
+.action-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #0056b3;
+}
+
    
