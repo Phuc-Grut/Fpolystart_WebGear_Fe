@@ -48,6 +48,7 @@
     justify-content: center; /* Căn giữa modal */
     align-items: center; /* Căn giữa theo chiều dọc */
     z-index: 9999; /* Đảm bảo modal nổi lên trên các thành phần khác */
+    overflow: auto
   }
   
   /* Nội dung modal */
@@ -56,9 +57,10 @@
     padding: 20px;
     border-radius: 8px;
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
-    /* max-width: '80%'; */
-    /* width: 100%; */
-    animation: fadeIn 0.3s ease-in-out; /* Thêm hiệu ứng fade-in */
+    max-width: 90%;
+    max-height: 90%;
+    animation: fadeIn 0.3s ease-in-out;
+    overflow: auto;
   }
   
   /* Hiệu ứng khi mở modal */
@@ -93,7 +95,7 @@
   body.modal-open {
     overflow: hidden; /* Ngừng cuộn khi modal mở */
     position: fixed;
-    width: 100%;
+    width: 90%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Màu nền mờ cho trang */
   }
@@ -117,6 +119,7 @@
   margin-top: 20px;
   font-size: 14px;
   text-align: left;
+  overflow-x: auto;
 }
 
 /* Phong cách cho tiêu đề bảng */
@@ -126,6 +129,12 @@
   padding: 10px;
   font-weight: bold;
   text-align: center;
+}
+
+.table-responsive {
+  overflow-x: auto; /* Kích hoạt cuộn ngang */
+  
+  margin-bottom: 20px; /* Khoảng cách phía dưới bảng */
 }
 
 /* Phong cách cho các dòng dữ liệu */
@@ -157,4 +166,17 @@
   background-color: #0056b3;
 }
 
+.additional-images {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.additional-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
    

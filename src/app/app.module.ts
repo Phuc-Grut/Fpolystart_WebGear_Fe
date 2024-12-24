@@ -36,6 +36,8 @@ import { VerifyEmailComponent } from './component/verify-email/verify-email.comp
 import { UserHomeComponent } from './user-home/user-home.component';
 import { NavUserHomeComponent } from './nav-user-home/nav-user-home.component';
 import { FeedbackComponent } from './component/feedback/feedback.component';
+import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
+import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,10 @@ import { FeedbackComponent } from './component/feedback/feedback.component';
     EditOrdersComponent,
     HomeComponent,
     UserHomeComponent,
-    NavUserHomeComponent
+    NavUserHomeComponent,
+    VerifyCodeComponent,
+    ResendVerificationCodeComponent
+
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,7 @@ import { FeedbackComponent } from './component/feedback/feedback.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    
+
   ],
   providers: [],
   bootstrap: [UserHomeComponent]

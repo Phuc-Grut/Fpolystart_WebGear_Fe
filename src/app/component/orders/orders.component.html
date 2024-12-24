@@ -31,7 +31,7 @@
                 <td>{{ order.oderID }}</td>
                 <td>{{ order.userName }}</td>
                 <td>{{ order.totalQuantity }}</td>
-                <td>{{ order.orderDate | date: 'dd/MM/yyyy' }}</td>               
+                <td>{{ order.orderDate | date: 'dd/MM/yyyy' }}</td>
                 <td>{{order.totalPrice| number:'1.0-0'}} VND</td>
                 <td>{{ getStatusLabel(order.status) }}</td>
                 <td>
@@ -47,9 +47,9 @@
                     <button class="btn btn-warning btn-sm" (click)="openEditOrderModal(order.id)" style="margin-left: 4px;">
                         <i class='bx bx-edit'></i>
                       </button>
-                      
-             
-                      <app-edit-orders 
+
+
+                      <app-edit-orders
                         *ngIf="showModalEdit"
                         [showModalEdit]="showModalEdit"
                         [order]="selectedOrderIdEdit"
@@ -75,11 +75,12 @@
 <div class="table-container">
     <!-- Tìm kiếm đơn hàng -->
     <div class="mb-3 search-container">
-        <input 
-            type="text" 
-            class="form-control" 
-            [(ngModel)]="searchTerm" 
-            placeholder="Tìm kiếm đơn hàng..." 
+        <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="searchTerm"
+            name="searchTerm"
+            placeholder="Tìm kiếm đơn hàng..."
             (input)="filterOrders()">
         <i class='bx bx-search search-icon'></i>
     </div>
@@ -103,7 +104,7 @@
                 <td>{{ order.oderID }}</td>
                 <td>{{ order.userName }}</td>
                 <td>{{ order.totalQuantity }}</td>
-                <td>{{ order.orderDate | date: 'dd/MM/yyyy' }}</td>               
+                <td>{{ order.orderDate | date: 'dd/MM/yyyy' }}</td>
                 <td>{{ order.totalPrice | number: '1.0-0' }} VND</td>
                 <td>{{ getStatusLabel(order.status) }}</td>
                 <td>
@@ -125,9 +126,9 @@
                     <button class="btn btn-warning btn-sm" (click)="openEditOrderModal(order.id)" style="margin-left: 4px;">
                         <i class='bx bx-edit'></i> Chỉnh sửa
                     </button>
-                    
+
                     <!-- Modal chỉnh sửa đơn hàng -->
-                    <app-edit-orders 
+                    <app-edit-orders
                         *ngIf="showModalEdit"
                         [showModalEdit]="showModalEdit"
                         [order]="order"

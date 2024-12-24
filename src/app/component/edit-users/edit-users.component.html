@@ -1,4 +1,4 @@
-<div class="head-title">
+<!-- <div class="head-title">
     <div class="left">
         <h1>Users</h1>
         <ul class="breadcrumb">
@@ -50,4 +50,57 @@
             <i class='bx bxs-x-circle'></i> Hủy
         </button>
     </div>
+</div> -->
+<div class="head-title">
+  <div class="left">
+      <h1>Users</h1>
+      <ul class="breadcrumb">
+          <li><a>Users</a></li>
+          <li><i class='bx bx-chevron-right'></i></li>
+          <li><a class="active">Chỉnh Sửa Thông Tin</a></li>
+      </ul>
+  </div>
+</div>
+<div class="carte">
+  <div class="image-upload">
+    <img id="profileImage" src="" alt="Ảnh Người Dùng" style="display: none;">
+    <i class='bx bx-user' id="defaultIcon" style="font-size: 50px; color: var(--grey); margin-bottom: 10px;"></i>
+    <label for="fileInput">Chọn Ảnh</label>
+    <input type="file" id="fileInput" accept="image/*" (change)="previewImage($event)" style="display:none;">
+</div>
+  <div class="row">
+      <div class="col">
+          <label for="fullName">Họ Tên</label>
+          <input type="text" id="fullName" class="form-control" placeholder="Nhập họ tên" [(ngModel)]="user.fullName">
+      </div>
+      <div class="col">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Nhập email" [(ngModel)]="user.email">
+      </div>
+  </div>
+  <div class="row">
+      <div class="col">
+          <label for="phone">Số Điện Thoại</label>
+          <input type="tel" id="phone" class="form-control" placeholder="Nhập số điện thoại" [(ngModel)]="user.phone">
+      </div>
+      <div class="col">
+          <label for="role">Ủy Quyền</label>
+          <select id="role" class="form-select" [(ngModel)]="user.role">
+              <option value="Khách Hàng">Khách Hàng</option>
+              <option value="Quản Trị Viên">Quản Trị Viên</option>
+          </select>
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="address">Địa Chỉ</label>
+      <input type="text" id="address" class="form-control" placeholder="Nhập địa chỉ" [(ngModel)]="user.address">
+  </div>
+  <div class="actions">
+      <button class="btn btn-save" (click)="saveChanges()">
+          <i class='bx bxs-save'></i> Lưu Thay Đổi
+      </button>
+      <button class="btn btn-cancel" (click)="cancelChanges()">
+          <i class='bx bxs-x-circle'></i> Hủy
+      </button>
+  </div>
 </div>
