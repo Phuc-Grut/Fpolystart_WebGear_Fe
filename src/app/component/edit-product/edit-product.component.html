@@ -1,7 +1,7 @@
-<!-- <div *ngIf="showModal" class="modal-overlay">
+<!-- <!-- <div *ngIf="showModal" class="modal-overlay">
     <div class="modal-content">
         <button class="close-btn" (click)="closeModal()">×</button>
-    
+
 <div class="carte">
     <h1>Thông Tin Sản Phẩm</h1>
     <div class="image-upload">
@@ -86,15 +86,15 @@
     </div>
 </div>
 </div>
-</div> -->
-<!-- app-edit-product.component.html -->
+</div>
+ app-edit-product.component.html
 <div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
-    <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Ngừng sự kiện click để ngăn modal đóng -->
+    <div class="modal-content" (click)="$event.stopPropagation()"> Ngừng sự kiện click để ngăn modal đóng
       <button class="close-btn" (click)="closeModal()">×</button>
-  
+
       <div class="carte">
         <h1>Cập nhật thông tin sản phẩm</h1>
-        <!-- Upload Image Section -->
+         Upload Image Section
         <div class="row">
           <div class="col-sm-5">
             <div class="image-upload">
@@ -118,7 +118,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="row">
           <div class="col">
             <label for="price">Price </label>
@@ -137,7 +137,7 @@
             </select>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col">
             <label for="view">View </label>
@@ -155,7 +155,7 @@
             </select>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col">
             <label for="batteryCapacity">BatteryCapacity</label>
@@ -170,8 +170,8 @@
           <label for="description">Mô Tả</label>
           <textarea [(ngModel)]="product.description" id="description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm"></textarea>
         </div>
-        
-        <!-- Action Buttons -->
+
+        Action Buttons
         <div class="actions">
           <button class="btn btn-save" (click)="saveProduct()">
             <i class='bx bxs-save'></i> Cập nhật Sản Phẩm
@@ -180,4 +180,101 @@
       </div>
     </div>
   </div>
-  
+   -->
+
+  <!-- app-edit-product.component.html -->
+<div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Ngừng sự kiện click để ngăn modal đóng -->
+    <button class="close-btn" (click)="closeModal()">×</button>
+
+    <div class="carte">
+      <h1>Cập nhật thông tin sản phẩm</h1>
+
+      <!-- Upload Image Section -->
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="image-upload">
+            <img id="productImage" [src]="product.image || ''" alt="Ảnh Sản Phẩm" *ngIf="product.image" style="display: block;">
+            <i class='bx bx-image' id="defaultIcon" style="font-size: 50px; color: var(--grey); margin-bottom: 10px;" *ngIf="!product.image"></i>
+            <label for="fileInput">Chọn Ảnh</label>
+            <input type="file" id="fileInput" accept="image/*" (change)="previewImage($event)" style="display:none;">
+          </div>
+        </div>
+        <div class="col-sm-7">
+          <div class="co-1">
+            <label for="productName">Tên Sản Phẩm</label>
+            <input type="text" [(ngModel)]="product.productName" id="productName" class="form-control" placeholder="Nhập tên sản phẩm" name="productName" required>
+          </div>
+          <div class="co-1">
+            <label for="category">Danh Mục</label>
+            <select [(ngModel)]="product.category" id="category" class="form-select" name="category" required>
+              <option value="chuột">Chuột</option>
+              <option value="bàn phím">Bàn Phím</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="price">Giá</label>
+          <input type="number" [(ngModel)]="product.price" id="price" class="form-control" placeholder="Nhập giá" name="price" required>
+        </div>
+        <div class="col">
+          <label for="quantity">Số Lượng</label>
+          <input type="number" [(ngModel)]="product.quantity" id="quantity" class="form-control" placeholder="Nhập số lượng" name="quantity" required>
+        </div>
+        <div class="col">
+          <label for="size">Kích Thước</label>
+          <select [(ngModel)]="product.size" id="size" class="form-select" name="size" required>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="view">Lượt Xem</label>
+          <input type="number" [(ngModel)]="product.view" id="view" class="form-control" placeholder="Nhập lượt xem" name="view" required>
+        </div>
+        <div class="col">
+          <label for="weight">Cân Nặng</label>
+          <input type="number" [(ngModel)]="product.weight" id="weight" class="form-control" placeholder="Nhập cân nặng" name="weight" required>
+        </div>
+        <div class="col">
+          <label for="led">LED</label>
+          <select [(ngModel)]="product.led" id="led" class="form-select" name="led" required>
+            <option value="Có">Có</option>
+            <option value="Không">Không</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="batteryCapacity">Dung Lượng Pin</label>
+          <input type="number" [(ngModel)]="product.batteryCapacity" id="batteryCapacity" class="form-control" placeholder="Nhập dung lượng pin" name="batteryCapacity" required>
+        </div>
+        <div class="col">
+          <label for="category">Danh Mục</label>
+          <input type="text" [(ngModel)]="product.category" id="category" class="form-control" placeholder="Nhập danh mục" name="category" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Mô Tả</label>
+        <textarea [(ngModel)]="product.description" id="description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm" name="description" required></textarea>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions">
+        <button class="btn btn-save" (click)="saveProduct()">
+          <i class='bx bxs-save'></i> Cập nhật Sản Phẩm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,4 +1,4 @@
-<div *ngIf="showModal" class="modal-overlay"(click)="onOverlayClick($event)">
+<!-- <div *ngIf="showModal" class="modal-overlay"(click)="onOverlayClick($event)">
     <div class="modal-content">
         <button class="close-btn" (click)="closeModal()">×</button>
 <div class="container">
@@ -28,4 +28,68 @@
         </form>
     </div>
 </div>
+</div> -->
+<div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <div class="container">
+      <div class="form-container">
+        <h2>Thêm Mã Giảm Giá</h2>
+        <form (ngSubmit)="onSubmit()" #discountForm="ngForm">
+          <div class="mb-3">
+            <label for="discountCode" class="form-label">Mã Giảm Giá</label>
+            <input
+              type="text"
+              class="form-control"
+              id="discountCode"
+              [(ngModel)]="discount.code"
+              name="discountCode"
+              required
+              placeholder="Nhập mã giảm giá">
+          </div>
+          <div class="mb-3">
+            <label for="startDate" class="form-label">Ngày Bắt Đầu</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              [(ngModel)]="discount.startDate"
+              name="startDate"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="endDate" class="form-label">Ngày Kết Thúc</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              [(ngModel)]="discount.endDate"
+              name="endDate"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="discountPercentage" class="form-label">Giảm Giá (%)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="discountPercentage"
+              [(ngModel)]="discount.percentage"
+              name="discountPercentage"
+              required
+              min="0"
+              max="100"
+              placeholder="Nhập phần trăm giảm giá">
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn btn-success">
+              <i class='bx bxs-save'></i> Lưu Mã Giảm Giá
+            </button>
+            <button type="button" class="btn btn-danger" (click)="closeModal()">
+              <i class='bx bxs-x-circle'></i> Thoát
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

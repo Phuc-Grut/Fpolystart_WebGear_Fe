@@ -1,0 +1,31 @@
+<div class="resend-section">
+  <!-- Hiển thị thời gian đếm ngược nếu countdown còn > 0 -->
+  <p *ngIf="countdown > 0">
+    Vui lòng đợi <strong>{{ countdown }}</strong> giây để gửi lại mã.
+  </p>
+
+  <!-- Hiển thị nút "Gửi lại mã" khi có thể gửi lại mã -->
+  <button
+    *ngIf="canResend"
+    (click)="resendCode()"
+    [disabled]="isLoading"
+    class="resend-button"
+  >
+    Gửi lại mã
+  </button>
+
+  <!-- Hiển thị thông báo đang xử lý khi isLoading là true -->
+  <div *ngIf="isLoading" class="loading-spinner">
+    <i class="fas fa-spinner fa-spin"></i> Đang xử lý...
+  </div>
+
+  <!-- Hiển thị thông báo lỗi nếu có -->
+  <p *ngIf="errorMessage" class="error-message">
+    <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+  </p>
+
+  <!-- Hiển thị thông báo thành công nếu có -->
+  <p *ngIf="successMessage" class="success-message">
+    <i class="fas fa-check-circle"></i> {{ successMessage }}
+  </p>
+</div>
