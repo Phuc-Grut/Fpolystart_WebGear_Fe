@@ -1,15 +1,44 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CategoryService } from 'src/app/service/category.service';
+
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.css']
+  styleUrls: ['./edit-product.component.css'],
 })
-export class EditProductComponent {
-  @Input() product: any;  // Nhận thông tin sản phẩm từ parent component (ProductComponent)
-  @Input() showModal: boolean = false;  // Kiểm tra modal có hiển thị không
-  @Output() close = new EventEmitter<void>();  // Đóng modal khi cập nhật xong
+export class EditProductComponent implements OnInit {
+  @Input() product: any;
+  @Input() showModal: boolean = false;
+  @Output() close = new EventEmitter<void>();
+  baseUrl: string = 'https://lacdau.com';
 
-  // Xử lý thay đổi hình ảnh
+  categories: any[] = [];
+
+  constructor(private categoryService: CategoryService) {}
+
+  ngOnInit(): void {
+    console.log('Component EditProductComponent được khởi tạo');
+    // if (!this.product) {
+    //   console.error('Sản phẩm không tồn tại');
+    //   return;
+    // }
+
+    this.categoryService.getCategories().subscribe(
+      (data: any[]) => {
+        console.log('Danh mục:', data);
+        this.categories = data;
+        console.log('Danh mục hiện tại của sản phẩm:', this.product.categoryID)
+      },
+      (error) => {
+        console.error('Lỗi khi tải danh mục:', error);
+      }
+    );
+  }
+
+  onCategoryChange(event: any) {
+    console.log('Danh mục được chọn:', this.product.categoryID); // Log danh mục hiện tại
+  }
+
   previewImage(event: any) {
     const image = document.getElementById('productImage') as HTMLImageElement;
     const defaultIcon = document.getElementById('defaultIcon') as HTMLElement;
@@ -19,30 +48,31 @@ export class EditProductComponent {
     defaultIcon.style.display = 'none';
   }
 
-  // Lưu thông tin sản phẩm sau khi chỉnh sửa
-  saveProduct() {
-    // Gọi API hoặc xử lý lưu dữ liệu ở đây
+  onSubmit() {
     alert('Sản phẩm đã được cập nhật!');
-    this.closeModal();  // Đóng modal sau khi lưu thành công
+    this.closeModal();
   }
 
-  // Hủy chỉnh sửa và đóng modal
   cancelEditProduct() {
-    const confirmation = confirm("Bạn có chắc chắn muốn hủy chỉnh sửa sản phẩm không?");
+    const confirmation = confirm(
+      'Bạn có chắc chắn muốn hủy chỉnh sửa sản phẩm không?'
+    );
     if (confirmation) {
-      this.closeModal();  // Đóng modal
+      this.closeModal();
     }
   }
 
-  // Đóng modal
   closeModal() {
     this.close.emit();
   }
 
-  // Nếu người dùng click vào overlay, modal sẽ đóng
   onOverlayClick(event: MouseEvent) {
     if ((event.target as HTMLElement).classList.contains('modal-overlay')) {
       this.closeModal();
     }
+  }
+
+  removeDetail(index: number) {
+    this.product.productDetail.splice(index, 1);
   }
 }

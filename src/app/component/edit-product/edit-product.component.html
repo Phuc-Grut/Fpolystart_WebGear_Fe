@@ -1,183 +1,189 @@
-<!-- <div *ngIf="showModal" class="modal-overlay">
-    <div class="modal-content">
-        <button class="close-btn" (click)="closeModal()">×</button>
-    
-<div class="carte">
-    <h1>Thông Tin Sản Phẩm</h1>
-    <div class="image-upload">
-        <img id="productImage" src="" alt="Ảnh Sản Phẩm" style="display: none;">
-        <i class='bx bx-image' id="defaultIcon" style="font-size: 50px; color: #AAAAAA; margin-bottom: 10px;"></i>
-        <label for="fileInput">Chọn Ảnh</label>
-        <input type="file" id="fileInput" accept="image/*" (change)="previewImage($event)" style="display:none;">
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="productName">Tên Sản Phẩm</label>
-            <input type="text" [(ngModel)]="product.name" id="productName" class="form-control" placeholder="Nhập tên sản phẩm">
-        </div>
-        <div class="col">
-            <label for="category">Danh Mục</label>
-            <select [(ngModel)]="product.category" id="category" class="form-select">
-                <option value="chuột">Chuột</option>
-                <option value="bàn phím">Bàn Phím</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="quantity">Số Lượng</label>
-            <input type="number" [(ngModel)]="product.quantity" id="quantity" class="form-control" placeholder="Nhập số lượng">
-        </div>
-        <div class="col">
-            <label for="dpi">DPI</label>
-            <input type="number" [(ngModel)]="product.dpi" id="dpi" class="form-control" placeholder="Nhập DPI">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="connection">Kết Nối</label>
-            <input type="text" [(ngModel)]="product.connection" id="connection" class="form-control" placeholder="Nhập loại kết nối">
-        </div>
-        <div class="col">
-            <label for="material">Chất Liệu</label>
-            <input type="text" [(ngModel)]="product.material" id="material" class="form-control" placeholder="Nhập chất liệu">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="frequency">Tần Số Quét</label>
-            <input type="number" [(ngModel)]="product.frequency" id="frequency" class="form-control" placeholder="Nhập tần số quét">
-        </div>
-        <div class="col">
-            <label for="buttonCount">Số Nút Bấm</label>
-            <input type="number" [(ngModel)]="product.buttonCount" id="buttonCount" class="form-control" placeholder="Nhập số nút bấm">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="batteryCapacity">Dung Lượng Pin</label>
-            <input type="text" [(ngModel)]="product.batteryCapacity" id="batteryCapacity" class="form-control" placeholder="Nhập dung lượng pin">
-        </div>
-        <div class="col">
-            <label for="led">LED</label>
-            <select [(ngModel)]="product.led" id="led" class="form-select">
-                <option value="Có">Có</option>
-                <option value="Không">Không</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="switchType">Switch</label>
-            <input type="text" [(ngModel)]="product.switchType" id="switchType" class="form-control" placeholder="Nhập loại switch">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="description">Mô Tả</label>
-        <textarea [(ngModel)]="product.description" id="description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm"></textarea>
-    </div>
-    <div class="actions">
-        <button class="btn btn-save" (click)="saveProduct()">
-            <i class='bx bxs-save'></i> Lưu Sản Phẩm
-        </button>
-        <button class="btn btn-cancel" (click)="cancelEditProduct()">
-            <i class='bx bxs-x-circle'></i> Hủy
-        </button>
-    </div>
-</div>
-</div>
-</div> -->
-<!-- app-edit-product.component.html -->
 <div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
-    <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Ngừng sự kiện click để ngăn modal đóng -->
-      <button class="close-btn" (click)="closeModal()">×</button>
-  
-      <div class="carte">
-        <h1>Cập nhật thông tin sản phẩm</h1>
-        <!-- Upload Image Section -->
-        <div class="row">
-          <div class="col-sm-5">
-            <div class="image-upload">
-              <img id="productImage" [src]="product.image || ''" alt="Ảnh Sản Phẩm" *ngIf="product.image" style="display: block;">
-              <i class='bx bx-image' id="defaultIcon" style="font-size: 50px; color: var(--grey); margin-bottom: 10px;" *ngIf="!product.image"></i>
-              <label for="fileInput">Chọn Ảnh</label>
-              <input type="file" id="fileInput" accept="image/*" (change)="previewImage($event)" style="display:none;">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">×</button>
+
+    <div *ngIf="product" class="product-detail-container">
+      <h2>Cập nhật sản phẩm</h2>
+
+      <form (ngSubmit)="onSubmit()">
+        <div class="product-detail">
+          <!-- Ảnh và thông tin chung -->
+          <div class="product-image">
+            <img [src]="baseUrl + product.avatarProduct || 'path_to_placeholder_image'" alt="Product Image" />
+          </div>
+          <div class="product-info">
+            <div class="info-row">
+              <div>
+                <strong>Mã sản phẩm:</strong>
+                <input style="background-color: darkgrey;" type="text" [(ngModel)]="product.productCode" name="productCode" readonly />
+              </div>
+              <div>
+                <strong>Tên sản phẩm:</strong>
+                <input type="text" [(ngModel)]="product.productName" name="productName" required />
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-row">
+                <!-- Hiển thị danh mục dưới dạng dropdown -->
+                <div>
+                  <strong>Danh mục sản phẩm:</strong>
+                  <select [(ngModel)]="product.categoryID" (change)="onCategoryChange($event)">
+                    <option *ngFor="let category of categories" [value]="category.categoryID">
+                      {{ category.categoryName }}
+                    </option>
+                  </select>
+                </div>                
+              
+                <!-- Hiển thị danh mục con dưới dạng checkbox -->
+                <!-- <div>
+                  <strong>Danh mục con:</strong>
+                  <div *ngFor="let subCategory of filteredSubCategories">
+                    <label>
+                      <input
+                        type="checkbox"
+                        [value]="subCategory.subCategoryID"
+                        [(ngModel)]="selectedSubCategoryIds"
+                        (change)="onSubCategoryChange(subCategory.subCategoryID, $event)"
+                      />
+                      {{ subCategory.subCategoryName }}
+                    </label>
+                  </div>
+                </div> -->
+              </div>
+              
+              <div>
+                <strong>Giảm giá (%):</strong>
+                <input type="number" [(ngModel)]="product.salePercent" name="salePercent" />
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div>
+                <strong>Brand:</strong>
+                <input type="text" [(ngModel)]="product.brandName" name="brandName" />
+              </div>
+              <div>
+                <strong>Mô tả:</strong>
+                <textarea [(ngModel)]="product.description" name="description"></textarea>
+              </div>
+            </div>
+            <div>
+              <strong>Hình ảnh bổ sung:</strong>
+              <div *ngIf="product.imageProduct?.length > 0" class="additional-images">
+                <img *ngFor="let image of product.imageProduct" [src]="baseUrl + image" alt="Additional Product Image"
+                  class="additional-image" />
+              </div>
+              <span *ngIf="!product.imageProduct || product.imageProduct.length === 0">Không có hình ảnh bổ sung</span>
             </div>
           </div>
-          <div class="col-sm-7">
-            <div class="co-1">
-              <label for="productName">Tên Sản Phẩm</label>
-              <input type="text" [(ngModel)]="product.productName" id="productName" class="form-control" placeholder="Nhập tên sản phẩm">
-            </div>
-            <div class="co-1">
-              <label for="category">Danh Mục</label>
-              <select [(ngModel)]="product.category" id="category" class="form-select">
-                <option value="chuột">Chuột</option>
-                <option value="bàn phím">Bàn Phím</option>
-              </select>
-            </div>
+        </div>
+
+
+        <div *ngIf="product" class="product-detail-list">
+          <h4 style="margin-top: 15px; margin-bottom: -10px;">Chi tiết sản phẩm</h4>
+
+          <!-- Nếu sản phẩm là Chuột -->
+          <div *ngIf="product.categoryID === 1" class="table-responsive">
+            <table class="detail-table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Màu</th>
+                  <th>Giá</th>
+                  <th>Switch</th>
+                  <th>DPI</th>
+                  <th>Kết nối</th>
+                  <th>Chất liệu</th>
+                  <th>LED</th>
+                  <th>Size</th>
+                  <th>Tần số quét</th>
+                  <th>Phần mềm hỗ trợ</th>
+                  <th>Dung lượng pin (mhw)</th>
+                  <th>Trọng lượng (gam)</th>
+                  <th>Số lượng</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let detail of product.productDetail; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td><input type="text" [(ngModel)]="detail.color" [name]="'color' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.price" [name]="'price' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.switch" [name]="'switch' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.dpi" [name]="'dpi' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.connectivity" [name]="'connectivity' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.material" [name]="'material' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.led" [name]="'led' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.dimensions" [name]="'dimensions' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.eyeReading" [name]="'eyeReading' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.ss" [name]="'ss' + i" /></td>
+                  <td><input type="number" [(ngModel)]="detail.batteryCapacity" [name]="'batteryCapacity' + i" /></td>
+                  <td><input type="number" [(ngModel)]="detail.weight" [name]="'weight' + i" /></td>
+                  <td><input type="number" [(ngModel)]="detail.quantity" [name]="'quantity' + i" /></td>
+                  <td>
+                    <button type="button" (click)="removeDetail(i)">Xóa</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Nếu sản phẩm là Bàn phím -->
+          <div *ngIf="product.categoryID === 2" class="table-responsive">
+            <table class="detail-table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Màu</th>
+                  <th>Giá</th>
+                  <th>LED</th>
+                  <th>Chất liệu keycap</th>
+                  <th>Chất liệu switch</th>
+                  <th>PCB</th>
+                  <th>Layout</th>
+                  <th>Chất liệu</th>
+                  <th>Switch</th>
+                  <th>Tuổi thọ</th>
+                  <th>Phần mềm hỗ trợ</th>
+                  <th>Kích thước</th>
+                  <th>Trọng lượng (gam)</th>
+                  <th>Số lượng</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let detail of product.productDetail; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td><input type="text" [(ngModel)]="detail.color" [name]="'color' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.price" [name]="'price' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.led" [name]="'led' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.keycapMaterial" [name]="'keycapMaterial' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.switchMaterial" [name]="'switchMaterial' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.pcb" [name]="'pcb' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.layout" [name]="'layout' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.case" [name]="'case' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.switch" [name]="'switch' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.switchLife" [name]="'switchLife' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.ss" [name]="'ss' + i" /></td>
+                  <td><input type="text" [(ngModel)]="detail.size" [name]="'size' + i" /></td>
+                  <td><input type="number" [(ngModel)]="detail.weight" [name]="'weight' + i" /></td>
+                  <td><input type="number" [(ngModel)]="detail.quantity" [name]="'quantity' + i" /></td>
+                  <td>
+                    <button type="button" (click)="removeDetail(i)">Xóa</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-  
-        <div class="row">
-          <div class="col">
-            <label for="price">Price </label>
-            <input type="number" [(ngModel)]="product.price" id="price" class="form-control" placeholder="Nhập price">
-          </div>
-          <div class="col">
-            <label for="quantity">Quantity </label>
-            <input type="number" [(ngModel)]="product.quantity" id="quantity" class="form-control" placeholder="Nhập quantity">
-          </div>
-          <div class="col">
-            <label for="size">Size</label>
-            <select [(ngModel)]="product.size" id="size" class="form-select">
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-            </select>
-          </div>
+
+        <!-- Nút hành động -->
+        <div class="action-buttons">
+          <button type="submit" class="action-btn">Lưu thay đổi</button>
+          <button type="button" class="cancel-btn" (click)="closeModal()">Hủy</button>
         </div>
-        
-        <div class="row">
-          <div class="col">
-            <label for="view">View </label>
-            <input type="number" [(ngModel)]="product.view" id="view" class="form-control" placeholder="Nhập view">
-          </div>
-          <div class="col">
-            <label for="weight">Weight</label>
-            <input type="number" [(ngModel)]="product.weight" id="weight" class="form-control" placeholder="Nhập weight">
-          </div>
-          <div class="col">
-            <label for="led">LED</label>
-            <select [(ngModel)]="product.led" id="led" class="form-select">
-              <option value="Có">Có</option>
-              <option value="Không">Không</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col">
-            <label for="batteryCapacity">BatteryCapacity</label>
-            <input type="number" [(ngModel)]="product.batteryCapacity" id="batteryCapacity" class="form-control" placeholder="Nhập batteryCapacity">
-          </div>
-          <div class="col">
-            <label for="category">Category</label>
-            <input type="text" [(ngModel)]="product.category" id="category" class="form-control" placeholder="Nhập category">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="description">Mô Tả</label>
-          <textarea [(ngModel)]="product.description" id="description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm"></textarea>
-        </div>
-        
-        <!-- Action Buttons -->
-        <div class="actions">
-          <button class="btn btn-save" (click)="saveProduct()">
-            <i class='bx bxs-save'></i> Cập nhật Sản Phẩm
-          </button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
-  
+</div>
