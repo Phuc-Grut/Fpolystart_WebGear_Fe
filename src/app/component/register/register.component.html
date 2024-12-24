@@ -1,17 +1,64 @@
-<form (submit)="register()">
-    <h1>Đăng kí</h1>
-    <div class="social-icons">
-        <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
-        <a href="#" class="icon"><i class='bx bxl-tiktok'></i></a>
-        <a href="#" class="icon"><i class='bx bxs-shopping-bag-alt'></i></a>
-        <a href="#" class="icon"><i class='bx bxl-shopify'></i></a>
-    </div>
-    <span>hoặc sử dụng email của bạn để đăng ký</span>
-    <input  name="username" [(ngModel)]="user.username" placeholder="Tên đăng nhập" required />
-    <input  name="password" [(ngModel)]="user.password" placeholder="Mật khẩu" required />
-    <input  name="email" [(ngModel)]="user.email" placeholder="Email" required />
-    <input  name="phone" [(ngModel)]="user.phone" placeholder="Số điện thoại" required />
-    <input  name="name" [(ngModel)]="user.name" placeholder="Tên" required />
-    <button type="submit">Đăng kí</button>
-  </form>
-  
+<form (submit)="register()" class="register-form">
+  <h1>Đăng ký</h1>
+  <div class="social-icons">
+    <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
+    <a href="#" class="icon"><i class='bx bxl-tiktok'></i></a>
+    <a href="#" class="icon"><i class='bx bxs-shopping-bag-alt'></i></a>
+    <a href="#" class="icon"><i class='bx bxl-shopify'></i></a>
+  </div>
+  <span>Hoặc sử dụng email của bạn để đăng ký</span>
+
+  <!-- Tên đăng nhập -->
+  <input
+    name="userName"
+    [(ngModel)]="user.userName"
+    placeholder="Tên đăng nhập"
+    required
+  />
+
+  <!-- Mật khẩu -->
+  <div class="password-container">
+    <input
+      name="password"
+      [(ngModel)]="user.password"
+      [type]="showPassword ? 'text' : 'password'"
+      placeholder="Mật khẩu"
+      required
+    />
+    <i
+      class="eye-icon"
+      (click)="togglePasswordVisibility()"
+      [class.show]="showPassword"
+    >
+      <i class="bx" [class.bxs-eye]="!showPassword" [class.bxs-eye-off]="showPassword"></i>
+    </i>
+  </div>
+
+  <!-- Email -->
+  <input
+    name="email"
+    [(ngModel)]="user.email"
+    type="email"
+    placeholder="Email"
+    required
+  />
+
+  <!-- Số điện thoại -->
+  <input
+    name="phoneNumber"
+    [(ngModel)]="user.phoneNumber"
+    placeholder="Số điện thoại"
+    required
+  />
+
+  <!-- Tên -->
+  <input
+    name="name"
+    [(ngModel)]="user.name"
+    placeholder="Tên"
+    required
+  />
+
+  <!-- Nút đăng ký -->
+  <button type="submit">Đăng ký</button>
+</form>

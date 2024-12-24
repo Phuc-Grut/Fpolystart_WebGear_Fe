@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,31 +8,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  user = {
-    username: '',
+  user: any = {
+    userName: '',
     password: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     name: ''
   };
 
+  showPassword: boolean = false;  // Biến kiểm soát việc hiển thị mật khẩu
+
   constructor(private http: HttpClient, private router: Router) {}
 
-  register() {
-    this.http.post('https://localhost:7249/api/User/register', this.user)
-      .subscribe(
-        response => {
-          alert('Đăng ký thành công! Kiểm tra email để xác thực.');
-          this.router.navigate(['/login']);
-        },
-        error => {
-          console.error('Error response:', error);
-          const errorMessage = error.error?.error || 'Vui lòng thử lại.';
-          alert(`Đăng ký thất bại. Lỗi: ${errorMessage}`);
-        }
-      );
+  // Phương thức để bật/tắt hiển thị mật khẩu
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
-  
-}
-  
 
+  register() {
+    this.http.post('https://localhost:7249/api/user/Account/register', this.user).subscribe(
+      (response) => {
+        alert('Đăng ký thành công. Vui lòng kiểm tra email để lấy mã xác thực.');
+        // Điều hướng sang trang verify-code và truyền email
+        localStorage.setItem('email', this.user.email);
+        this.router.navigate(['/verify-code'], { queryParams: { email: this.user.email } });
+      },
+      (error) => {
+        console.error('Lỗi đăng ký:', error);
+        alert('Đăng ký thất bại.');
+      }
+    );
+  }
+}

@@ -1,15 +1,17 @@
 <form (submit)="login()">
-    <h1>Đăng nhập</h1>
-    <div class="social-icons">
-        <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
-        <a href="#" class="icon"><i class='bx bxl-tiktok'></i></a>
-        <a href="#" class="icon"><i class='bx bxs-shopping-bag-alt'></i></a>
-        <a href="#" class="icon"><i class='bx bxl-shopify'></i></a>
-    </div>
-    <span>hoặc sử dụng email và mật khẩu của bạn</span>
-    <input [(ngModel)]="credentials.username" name="username" placeholder="Username" required />
-    <input [(ngModel)]="credentials.password" name="password" placeholder="Password" type="password" required />
-    <a routerLink="">Quên mật khẩu?</a>
-    <button type="submit">Đăng nhập</button>
-  </form>
-  
+  <h1>Đăng nhập</h1>
+  <div class="social-icons">
+    <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
+    <a href="#" class="icon"><i class='bx bxl-tiktok'></i></a>
+    <a href="#" class="icon"><i class='bx bxs-shopping-bag-alt'></i></a>
+    <a href="#" class="icon"><i class='bx bxl-shopify'></i></a>
+  </div>
+  <span>hoặc sử dụng email và mật khẩu của bạn</span>
+  <input [(ngModel)]="credentials.username" name="username" placeholder="Username" required />
+  <input [(ngModel)]="credentials.password" name="password" placeholder="Password" type="password" required />
+  <a routerLink="/forgot-password">Quên mật khẩu?</a>
+  <button type="submit">Đăng nhập</button>
+</form>
+<div>
+  <span>Chưa có tài khoản? <a routerLink="/register">Đăng ký ngay</a></span>
+</div>

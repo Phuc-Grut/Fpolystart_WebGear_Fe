@@ -11,11 +11,11 @@
 
 <div class="mb-4" style="max-width: 100px; margin-left: 986px;"> <!-- Adjusted width -->
     <label for="monthSelect" class="form-label" style="font-size: 14px;">Chọn Tháng</label>
-    <select id="monthSelect" class="form-select" [(ngModel)]="selectedMonth" (change)="updateStats()" style="font-size: 14px; height: 30px;">
+    <select id="monthSelect" class="form-select" [(ngModel)]="selectedMonth" name="selectMonth" (change)="updateStats()" style="font-size: 14px; height: 30px;">
         <option value="0">Tất cả</option>
         <option *ngFor="let month of [1,2,3,4,5,6,7,8,9,10,11,12]" [value]="month">Tháng {{ month }}</option>
     </select>
-    
+
 </div>
 
 <div class="mb-4" style="background-color: white;margin-left: 15px;margin-right: 15px;border-radius: 15px;">
