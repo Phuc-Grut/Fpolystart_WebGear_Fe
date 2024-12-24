@@ -117,20 +117,12 @@
     
     <!-- Tiêu đề và các nút điều hướng -->
     <div style="display: flex; justify-content: space-between; align-items: center;">
-      <!-- Tiêu đề GAMMING GEAR ở bên trái -->
-      <h3 style="font-size: 24px; color: #333; margin: 0;">GAMMING GEAR</h3>
+      <h3 style="font-size: 24px; color: #333; margin: 0;">GAMING GEAR</h3>
       
-      <!-- Các nút bên phải, được căn chỉnh ngang nhau -->
       <ul style="display: flex; gap: 20px; padding: 0; list-style: none; margin: 0;">
-        <li>
-          <button style="background-color: rgb(203, 199, 199); border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; color: white; cursor: pointer; font-size: 14px; height: 40px;" class="key-text">BÀN PHÍM GAMMING</button>
-        </li>
-        <li>
-          <button style="background-color: rgb(203, 199, 199); border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; color: white; cursor: pointer; font-size: 14px; height: 40px;" class="mouse-text">CHUỘT GAMING</button>
-        </li>
-        <li>
-          <span style="font-size: 15px; color: rgb(29, 26, 26); cursor: pointer; height: 40px; display: flex; align-items: center;" class="keymouse-text">Xem thêm</span>
-        </li>
+        <li><button style="background-color: rgb(203, 199, 199); border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; color: white; cursor: pointer; font-size: 14px; height: 40px;" class="key-text">BÀN PHÍM GAMMING</button></li>
+        <li><button style="background-color: rgb(203, 199, 199); border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; color: white; cursor: pointer; font-size: 14px; height: 40px;" class="mouse-text">CHUỘT GAMING</button></li>
+        <li><span style="font-size: 15px; color: rgb(29, 26, 26); cursor: pointer; height: 40px; display: flex; align-items: center;" class="keymouse-text">Xem thêm</span></li>
       </ul>
     </div>
 
@@ -138,26 +130,49 @@
 
     <!-- Sản phẩm hiển thị trong các hàng -->
     <div class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: flex-start;">
-      <div class="card" *ngFor="let product of products" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
-        <div class="card-image">
-          <img [src]="baseUrl + product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
-        </div>
-        <div class="card-body" style="padding: 12px;">
-          <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-            <div class="product-code" style="font-weight: bold; font-size: 14px;">{{ product.productName }}</div>
-            <div class="product-status" style="font-size: 12px; color: green;">{{ product.status }}</div>
+      <div *ngFor="let row of paginatedItems" class="row" style="display: flex; width: 100%; gap: 16px;">
+        <div *ngFor="let product of row" class="card" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+          <div class="card-image">
+            <img [src]="baseUrl + product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
           </div>
-          <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-            <div class="price" style="font-size: 16px; font-weight: bold;">{{ product.price | number : '1.0-0' }}đ</div>
-            <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;">
-              <i class="fas fa-shopping-cart"></i>
-            </button>
+          <div class="card-body" style="padding: 12px;">
+            <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <div class="product-code" style="font-weight: bold; font-size: 14px;">{{ product.productName }}</div>
+              <div class="product-status" style="font-size: 12px; color: green;">{{ product.status }}</div>
+            </div>
+            <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+              <div class="price" style="font-size: 16px; font-weight: bold;">{{ product.price | number : '1.0-0' }}đ</div>
+              <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Pagination Buttons -->
+    <div style="display: flex; justify-content: center;">
+      <!-- Nút "Previous" -->
+      <button (click)="loadPreviousPage()" [disabled]="currentPage === 1" style="border-radius: 12px; padding: 8px 12px;"> < </button>
+
+      <!-- Hiển thị các số trang -->
+      <ng-container *ngFor="let page of pageNumbers()">
+        <button (click)="goToPage(page)" 
+                [class.active]="currentPage === page" 
+                style="border-radius: 12px; padding: 8px 12px; margin: 0 5px;">
+          {{ page }}
+        </button>
+      </ng-container>
+
+      <!-- Nút "Next" -->
+      <button (click)="loadNextPage()" [disabled]="currentPage === totalPages" style="border-radius: 12px; padding: 8px 12px;"> ></button>
+    </div>
   </div>
 </main>
+
+
+
 <!-- =================================== -->
 <section style="background-color: #F5F5F5; padding: 20px; height: auto;">
   <!-- Section Title -->
@@ -231,12 +246,10 @@
 <main style="background-color: #F5F5F5; padding: 20px; height: auto;">
   <!-- Section Wrapper -->
   <div style="margin: 0 auto; width: 85%; background-color: white; border-radius: 15px; border: 2px solid #ccc; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
-    
     <!-- Tiêu đề và các nút điều hướng -->
     <div style="display: flex; justify-content: space-between; align-items: center;">
       <!-- Tiêu đề BÀN PHÍM GAMING -->
       <h3 style="font-size: 24px; color: #333; margin: 0;">BÀN PHÍM GAMING</h3>
-      
       <!-- Các nút bên phải, được căn chỉnh ngang nhau -->
       <ul style="display: flex; gap: 20px; padding: 0; list-style: none; margin: 0;">
         <li>
@@ -256,11 +269,9 @@
         </li>
       </ul>
     </div>
-
     <hr style="border: 1px solid #ccc; margin: 0;">
-
     <!-- Sản phẩm hiển thị trong các hàng -->
-    <div *ngFor="let row of groupedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
+    <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
       <div class="card" *ngFor="let item of row" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
         <div class="card-image">
           <img [src]="item.imageUrl" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
@@ -323,7 +334,7 @@
     <hr style="border: 1px solid #ccc; margin: 0;">
 
     <!-- Sản phẩm hiển thị trong các hàng -->
-    <div *ngFor="let row of groupedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
+    <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
       <div class="card" *ngFor="let product of products" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
         <div class="card-image">
           <img
@@ -353,7 +364,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
       <!-- Nút "Trang trước" bên trái -->
       <button *ngIf="currentPage > 1" style="background-color: rgb(203, 199, 199); border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; color: white; cursor: pointer; font-size: 14px;" (click)="loadPreviousPage()">
-        Trang trước
+        <<
       </button>
 
       <!-- Số trang bên phải -->
@@ -361,7 +372,7 @@
       
       <!-- Nút "Trang tiếp theo" bên phải -->
       <button *ngIf="showNextPageButton" style="background-color: rgb(203, 199, 199); border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; color: white; cursor: pointer; font-size: 14px;" (click)="loadNextPage()">
-        Trang tiếp theo
+        >>
       </button>
     </div>
   </div>
