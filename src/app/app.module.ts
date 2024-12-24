@@ -87,6 +87,6 @@ import { ResendVerificationCodeComponent } from './component/resend-verification
 
   ],
   providers: [],
-  bootstrap: [DashboardComponent]
+  bootstrap: [UserHomeComponent]
 })
 export class AppModule { }

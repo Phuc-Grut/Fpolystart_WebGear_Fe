@@ -125,3 +125,38 @@
 .product-table td {
     vertical-align: middle; /* Canh dọc các ô, tránh lệch các nội dung */
 }
+
+/* Căn chỉnh và kiểu dáng cho các nút phân trang */
+.pagination button {
+    background-color: transparent;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 0 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+    outline: none;
+  }
+  
+  /* Nút phân trang khi hover */
+  .pagination button:hover {
+    background-color: #29A07E; /* Màu nền khi hover */
+    color: white; /* Màu chữ khi hover */
+  }
+  
+  /* Nút phân trang đang được chọn */
+  .pagination button.active {
+    background-color: #29A07E; /* Màu nền khi chọn */
+    color: white; /* Màu chữ khi chọn */
+    border-color: #29A07E; /* Màu viền khi chọn */
+  }
+  
+  /* Vô hiệu hóa nút "Previous" và "Next" khi ở trang đầu hoặc trang cuối */
+  .pagination button:disabled {
+    background-color: #f1f1f1;
+    color: #bbb;
+    border-color: #ccc;
+    cursor: not-allowed;
+  }
+  
