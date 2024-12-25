@@ -7,8 +7,9 @@ header {
     display: flex;
     align-items: center;
     padding: 1rem;
-    margin: 30px;
+    background-color: white;
     z-index: 1000;
+    width: 100%;
   }
   .navbar-brand img {
     height: 70px;
@@ -387,3 +388,4 @@ button:disabled {
 button:hover {
   background-color: #f1f1f1;
 }
+
