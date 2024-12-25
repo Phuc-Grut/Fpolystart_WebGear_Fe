@@ -28,15 +28,17 @@ import { EditOrdersComponent } from './component/edit-orders/edit-orders.compone
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
+import { UserHomeComponent } from './component/user-home/user-home.component';
+
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'app-login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'email', component: EmailComponent },
   { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'orders', component: OrdersComponent },
@@ -58,7 +60,8 @@ const routes: Routes = [
   { path: 'orders/:id', component: DetailOrdersComponent },
   { path: 'edit-orders/:id', component: EditOrdersComponent },
   {path : 'verify-code',component: VerifyCodeComponent},
-  {path: 'resend-verification-code',component: ResendVerificationCodeComponent}
+  {path: 'resend-verification-code',component: ResendVerificationCodeComponent},
+  {path: 'app-user-home', component: UserHomeComponent}
 ];
 
 @NgModule({

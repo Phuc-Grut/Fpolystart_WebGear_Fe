@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductService } from '../service/product.service';
-
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductService } from 'src/app/service/product.service';
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
   styleUrls: ['./user-home.component.css'],
 })
-export class UserHomeComponent implements OnInit, OnDestroy {
+export class UserHomeComponent implements OnInit, OnDestroy,AfterViewInit {
   images: string[] = [
     'https://lacdau.com/media/banner/04_Jul4b2820f0c4fe29e2d289589b90e47f4c.png',
     'https://lacdau.com/media/banner/09_Jul9860edbd0f637428e39fde95121313ed.png',
@@ -16,14 +16,19 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   currentIndex: number = 0;
   autoplayInterval: any;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private route: Router) {}
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
   baseUrl: string = 'https://lacdau.com';
   products: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10; // 10 products per page (2 rows of 5 products)
   totalPages: number = 0;
   paginatedItems: any[] = [];
-
+ navigate(){
+  this.route.navigate(['/login'])
+ }
   ngOnInit(): void {
     this.startAutoplay();
     // this.groupItems();
