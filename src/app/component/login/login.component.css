@@ -1,89 +1,121 @@
-form {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    float: left;
-    margin-top: 15px;
-}
-
-h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-    text-align: center;
+/* .login-form {
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
 
 .social-icons {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
 }
 
-.social-icons .icon {
-    border: 1px solid #363131;
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
-    width: 40px;
-    height: 40px;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s;
-}
-
-.social-icons .icon:hover {
-    background-color: #f0f0f0;
-}
-
-span {
-    font-size: 14px;
-    color: #666;
-    margin: 10px 0;
+.icon {
+  font-size: 24px;
+  color: #333;
 }
 
 input {
-    background-color: #eee;
-    border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 8px;
-    width: 100%;
-    outline: none;
-    transition: border 0.3s;
+  width: 700%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-input:focus {
-    border: 2px solid #512da8; 
+.forgot-password {
+  display: block;
+  margin: 10px 0;
+  text-align: right;
 }
 
-a {
-    color: #512da8;
-    text-decoration: none;
-    margin-top: 10px;
-    font-size: 14px;
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-a:hover {
-    text-decoration: underline;
+.register-prompt {
+  text-align: center;
+  margin-top: 20px;
+} */
+
+
+/* Căn giữa toàn bộ khối chứa phần đăng nhập và đăng ký */
+.auth-wrapper {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center;
+  width: 145vh; /* Căn giữa theo chiều dọc */
+  height: 70vh; /* Chiếm toàn bộ chiều cao của màn hình */
+  background-color: #f0f0f0; /* Có thể tùy chỉnh màu nền cho trang */
+  margin-left: 100px;
 }
 
-button {
-    background-color: #E9FDFF;
-    color: #282323;
-    font-size: 14px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.auth-container {
+  display: flex;
+  justify-content: space-between;
+  
 }
 
-button:hover {
-    background-color: cadetblue; /* Darker shade on hover */
+.login-form {
+  flex: 3; /* Đăng nhập chiếm 3 phần */
+  display: flex;
+  flex-direction: column; /* Các trường dọc */
+  gap: 8px;
+  padding: 10px;
+  width: 100%;
+}
+
+.login-form h3 {
+  text-align: center;
+}
+
+.login-form input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-form a {
+  color: #007bff;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.login-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}
+
+.register-section {
+  flex: 2; /* Đăng ký chiếm 2 phần */
+  display: flex;
+  flex-direction: column; /* Các trường dọc */
+  gap: 25px;
+  padding: 25px;
+  width: 100%;
+  margin-top: 70px;
+}
+
+.register-section a {
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 10px;
 }

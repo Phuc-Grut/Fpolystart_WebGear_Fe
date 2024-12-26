@@ -1,88 +1,202 @@
+/* 
 form {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    float: right;
-    margin-top: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 24px;
-    color: #333;
-    text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .social-icons {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
 }
 
 .social-icons .icon {
-    border: 1px solid #332f2f;
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
-    width: 40px;
-    height: 40px;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s;
+  border: 2px solid #512da8;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  width: 40px;
+  height: 40px;
+  text-decoration: none;
+  color: #512da8;
+  transition: all 0.3s ease;
 }
 
 .social-icons .icon:hover {
-    background-color: #f0f0f0;
+  background-color: #512da8;
+  color: #fff;
+  transform: scale(1.1);
 }
 
 span {
-    font-size: 14px;
-    color: #666;
-    margin: 10px 0;
+  font-size: 14px;
+  color: #777;
+  margin: 10px 0;
+  text-align: center;
 }
 
 input {
-    background-color: #eee;
-    border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 8px;
-    width: 100%;
-    outline: none;
-    transition: border 0.3s;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin: 12px 0;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 input:focus {
-    border: 2px solid #512da8; 
+  border-color: #512da8;
+  box-shadow: 0 0 10px rgba(81, 45, 168, 0.3);
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #aaa;
+  transition: color 0.3s;
+}
+
+.eye-icon:hover {
+  color: #512da8;
 }
 
 a {
-    color: #512da8;
-    text-decoration: none;
-    margin-top: 10px;
-    font-size: 14px;
+  color: #512da8;
+  text-decoration: none;
+  margin-top: 10px;
+  font-size: 14px;
+  display: block;
+  text-align: center;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 button {
-    background-color:#BED5F0;
-    color: #2d2a2a;
-    font-size: 14px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #512da8;
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 100%;
 }
 
 button:hover {
-    background-color: cadetblue; /* Darker shade on hover */
+  background-color: #3e1f8b;
+  transform: scale(1.05);
 }
+
+button:active {
+  transform: scale(1);
+}
+
+input[type="email"]:invalid {
+  border-color: #ff4d4d;
+}
+
+input[type="email"]:valid {
+  border-color: #4caf50;
+}
+
+form:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+} */
+
+
+.register-form {
+  flex: 3; /* Đảm bảo phần đăng ký chiếm 3 phần */
+  display: flex;
+  flex-direction: column; /* Các trường dọc */
+  gap: 15px; /* Khoảng cách giữa các trường */
+  padding: 20px;
+  background-color: #f0f0f0;
+  width: 145vh; /* Căn giữa theo chiều dọc */
+  height: 80vh;
+  margin-left: 100px;
+}
+
+.register-form h3 {
+  text-align: center;
+}
+
+.register-form span {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.register-form input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  padding-right: 30px; /* Tạo không gian cho biểu tượng mắt */
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye-icon i {
+  font-size: 18px;
+}
+
+.register-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-form button:hover {
+  background-color: #0056b3;
+}
+

@@ -7,8 +7,9 @@ header {
     display: flex;
     align-items: center;
     padding: 1rem;
-    margin: 30px;
+    background-color: white;
     z-index: 1000;
+    width: 100%;
   }
   .navbar-brand img {
     height: 70px;
@@ -249,7 +250,7 @@ button:hover {
 }
 
 .prev i, .next i {
-  color: white;
+  color: rgb(7, 7, 7);
 }
 
 
@@ -363,6 +364,28 @@ button:hover {
   color: #0056b3;
 }
 
+/* Căn chỉnh và kiểu dáng cho các nút phân trang */
+button {
+  background-color: #29A07E;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
 
+button.active {
+  background-color: #29A07E;
+  color: rgb(14, 14, 14);
+}
 
-/* ============icon product=============== */
+button:disabled {
+  background-color: #29A07E;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background-color: #f1f1f1;
+}
+

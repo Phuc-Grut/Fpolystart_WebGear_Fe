@@ -16,61 +16,73 @@
     [showModal]="showModalAdd"
     (close)="closeModalAdd()" 
   ></app-add-products>
-  <!-- <div *ngIf="products.length > 0" class="product-table-wrapper"> -->
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ProductId</th>
-          <th>Image</th>
-          <th>Product Name</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Sale</th>
-          <th>Thao Tác</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products">
-          <td>{{ product.productCode }}</td>
-          <td>
-            <img
-              [src]="baseUrl + product.avatarProduct"
-              alt="{{ product.productName }}"
-              class="product-image"
-              style="width: 80px; height: auto;"
-            />
-          </td>
-          <td>{{ product.productName }}</td>
-          <td>{{ product.price | number : "1.0-0" }} VND</td>
-          <td>{{ product.quantity }}</td>
-          <td>%</td>
-          <td class="action-icons">
-            <!-- <i class='bx bx-show' (click)="viewProductDetail(product.productID)"></i>  -->
-            <!-- chưa hiển thị lên được chi tiết sản phẩm -->
-            <i
-              class="bx bx-show"
-              (click)="openModalDetail(product.productID)"
-            ></i>
 
-            <app-detail-product
-              [showModal]="showModalDetail"
-              [product]="productDetail"
-              (close)="closeModalDetail()"
-            ></app-detail-product>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ProductId</th>
+        <th>Image</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sale</th>
+        <th>Thao Tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of pagedProducts">
+        <td>{{ product.productCode }}</td>
+        <td>
+          <img
+            [src]="baseUrl + product.avatarProduct"
+            alt="{{ product.productName }}"
+            class="product-image"
+            style="width: 80px; height: auto;"
+          />
+        </td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.price | number : '1.0-0' }} VND</td>
+        <td>{{ product.quantity }}</td>
+        <td>%</td>
+        <td class="action-icons">
+          <i
+            class="bx bx-show"
+            (click)="openModalDetail(product.productID)"
+          ></i>
 
-            <i
-              class="bx bx-edit"
-              (click)="openModalEdit(product.productID)"
-            ></i>
-            <app-edit-product
-              [showModal]="showModalEdit"
-              [product]="selectedProduct"
-              (close)="closeModalEdit()"
-            >
-            </app-edit-product>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  <!-- </div> -->
+          <app-detail-product
+            [showModal]="showModalDetail"
+            [product]="productDetail"
+            (close)="closeModalDetail()"
+          ></app-detail-product>
+
+          <i
+            class="bx bx-edit"
+            (click)="openModalEdit(product.productID)"
+          ></i>
+          <app-edit-product
+            [showModal]="showModalEdit"
+            [product]="selectedProduct"
+            (close)="closeModalEdit()"
+          >
+          </app-edit-product>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Controls -->
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"> << </button>
+  
+    <!-- Hiển thị các nút trang -->
+    <button 
+      *ngFor="let page of pageNumbers()" 
+      (click)="changePage(page)" 
+      [class.active]="currentPage === page">
+      {{ page }}
+    </button>
+  
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages"> >> </button>
+  </div>
 </div>

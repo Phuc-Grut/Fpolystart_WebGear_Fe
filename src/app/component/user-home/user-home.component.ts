@@ -1,32 +1,44 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductService } from '../service/product.service';
-
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductService } from 'src/app/service/product.service';
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
   styleUrls: ['./user-home.component.css'],
 })
-export class UserHomeComponent implements OnInit, OnDestroy {
+export class UserHomeComponent implements OnInit, OnDestroy,AfterViewInit {
   images: string[] = [
     'https://lacdau.com/media/banner/04_Jul4b2820f0c4fe29e2d289589b90e47f4c.png',
     'https://lacdau.com/media/banner/09_Jul9860edbd0f637428e39fde95121313ed.png',
     'https://lacdau.com/media/banner/09_Jul9860edbd0f637428e39fde95121313ed.png',
   ];
+  
   currentIndex: number = 0;
   autoplayInterval: any;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private route: Router) {}
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
   baseUrl: string = 'https://lacdau.com';
   products: any[] = [];
-
+  currentPage: number = 1;
+  itemsPerPage: number = 10; // 10 products per page (2 rows of 5 products)
+  totalPages: number = 0;
+  paginatedItems: any[] = [];
+ navigate(){
+  this.route.navigate(['/login'])
+ }
   ngOnInit(): void {
     this.startAutoplay();
     // this.groupItems();
-    this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
+
     this.updatePagination();
     this.productService.getAllProducts().subscribe(
       (data) => {
         this.products = data;
+        this.totalPages = Math.ceil(this.products.length / this.itemsPerPage);
+        this.updatePagination();
       },
       (error) => {
         console.error('Lỗi khi gọi API:', error);
@@ -76,15 +88,15 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   // ];
 
   // Mỗi nhóm sẽ chứa 5 sản phẩm
-  groupedItems: any[] = [];
+  // groupedItems: any[] = [];
 
-   groupItems() {
-     const itemsPerRow = 5;
-     this.groupedItems = [];
-     for (let i = 0; i < this.products.length; i += itemsPerRow) {
-      this.groupedItems.push(this.products.slice(i, i + itemsPerRow));
-     }
-   }
+  //  groupItems() {
+  //    const itemsPerRow = 5;
+  //    this.groupedItems = [];
+  //    for (let i = 0; i < this.products.length; i += itemsPerRow) {
+  //     this.groupedItems.push(this.products.slice(i, i + itemsPerRow));
+  //    }
+  //  }
 
   items = [
     {
@@ -180,26 +192,16 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     // thêm các sản phẩm khác vào đây
   ];
 
-  currentPage: number = 1;
-  itemsPerPage: number = 9;
-  totalPages: number = 0;
-  paginatedItems: any[] = [];
+  
   showNextPageButton: boolean = false;
 
   updatePagination() {
-    // Cập nhật danh sách sản phẩm theo trangs
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedItems = this.chunkArray(
-      this.items.slice(startIndex, endIndex),
-      5
-    );
-
-    // Kiểm tra xem có cần hiển thị nút "Trang tiếp theo" không
-    this.showNextPageButton = this.currentPage < this.totalPages;
+    this.paginatedItems = this.chunkArray(this.products.slice(startIndex, endIndex), 5); // Mỗi hàng có 5 sản phẩm
   }
 
-  // Chia các sản phẩm thành từng hàng (tối đa 5 sản phẩm mỗi hàng)
+  // Chia sản phẩm thành các nhóm (5 sản phẩm mỗi nhóm)
   chunkArray(arr: any[], size: number): any[] {
     const result = [];
     for (let i = 0; i < arr.length; i += size) {
@@ -208,6 +210,15 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     return result;
   }
 
+  // Nút "Previous"
+  loadPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
+  }
+
+  // Nút "Next"
   loadNextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
@@ -215,11 +226,19 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadPreviousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePagination();
+  // Tạo một danh sách các số trang
+  pageNumbers(): number[] {
+    const pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      pages.push(i);
     }
+    return pages;
+  }
+
+  // Chuyển đến trang cụ thể khi người dùng nhấp vào số trang
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.updatePagination();
   }
 
   isFocused = false;

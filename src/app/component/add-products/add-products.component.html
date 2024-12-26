@@ -1,4 +1,4 @@
-<div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+ <!-- <div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
   <div class="modal-content">
     <button class="close-btn" (click)="closeModal()">×</button>
     <div class="carte">
@@ -17,7 +17,7 @@
             <div class="col-sm-7">
               <div class="co-1">
                 <label for="category">Danh Mục</label>
-                <select [(ngModel)]="product.categoryID" id="category" class="form-select" (change)="onCategoryChange()">
+                <select [(ngModel)]="product.categoryID" name="categoryID" id="category" class="form-select" (change)="onCategoryChange()">
                   <option *ngFor="let category of categories" [value]="category.categoryID">
                     {{ category.categoryName }}
                   </option>
@@ -26,31 +26,31 @@
             </div>
           </div>
 
-          <!-- Các trường chung cho tất cả các loại sản phẩm -->
-          <div class="row">
+           Các trường chung cho tất cả các loại sản phẩm
+           <div class="row">
             <div class="col">
               <label for="productId">Product ID</label>
-              <input type="number" [(ngModel)]="product.productID" id="productId" class="form-control" placeholder="Nhập mã sản phẩm" required />
+              <input type="number" [(ngModel)]="product.productID" name="productID" id="productId" class="form-control" placeholder="Nhập mã sản phẩm" required />
             </div>
             <div class="col">
               <label for="color">Color</label>
-              <input type="text" [(ngModel)]="product.color" id="color" class="form-control" placeholder="Nhập màu sắc" required />
+              <input type="text" [(ngModel)]="product.color" name="productcolor" id="color" class="form-control" placeholder="Nhập màu sắc" required />
             </div>
             <div class="col">
               <label for="led">Led</label>
-              <input type="text" [(ngModel)]="product.led" id="led" class="form-control" placeholder="Nhập đèn" required />
+              <input type="text" [(ngModel)]="product.led" name="productled" id="led" class="form-control" placeholder="Nhập đèn" required />
             </div>
             <div class="col">
               <label for="ss">SS</label>
-              <input type="text" [(ngModel)]="product.ss" id="ss" class="form-control" placeholder="Nhập SS" required />
+              <input type="text" [(ngModel)]="product.ss" name="productss" id="ss" class="form-control" placeholder="Nhập SS" required />
             </div>
           </div>
 
-          <!-- Các trường dành riêng cho chuột (categoryID = 1) -->
+         Các trường dành riêng cho chuột (categoryID = 1)
           <div *ngIf="product.categoryID === 1" class="row">
             <div class="col">
               <label for="mouseDetailID">Mouse Detail ID</label>
-              <input type="text" [(ngModel)]="mouseDetails.mouseDetailID" id="mouseDetailID" class="form-control" placeholder="Nhập mã chuột" required />
+              <input type="text" [(ngModel)]="mouseDetails.mouseDetailID"  id="mouseDetailID" class="form-control" placeholder="Nhập mã chuột" required />
             </div>
             <div class="col">
               <label for="dpi">DPI</label>
@@ -82,7 +82,7 @@
             </div>
           </div>
 
-          <!-- Các trường dành riêng cho bàn phím (categoryID = 2) -->
+          Các trường dành riêng cho bàn phím (categoryID = 2)
           <div *ngIf="product.categoryID === 2" class="row">
             <div class="col">
               <label for="keyboardDetailID">Keyboard Detail ID</label>
@@ -120,4 +120,129 @@
       </div>
     </div>
   </div>
+ </div>
+-->
+<div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <div class="carte">
+      <h1>Thêm sản phẩm mới</h1>
+      <div class="container">
+        <form (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm-5">
+              <div class="image-upload">
+                <img id="productImage" src="" alt="Ảnh Sản Phẩm" style="display: none" />
+                <i class="bx bx-image" id="defaultIcon" style="font-size: 50px; color: var(--grey); margin-bottom: 10px;"></i>
+                <label for="fileInput">Chọn Ảnh</label>
+                <input type="file" id="fileInput" accept="image/*" (change)="previewImage($event)" style="display: none" />
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <div class="co-1">
+                <label for="category">Danh Mục</label>
+                <select [(ngModel)]="product.categoryID" name="categoryID" id="category" class="form-select" (change)="onCategoryChange()">
+                  <option *ngFor="let category of categories" [value]="category.categoryID">
+                    {{ category.categoryName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Các trường chung cho tất cả các loại sản phẩm -->
+          <div class="row">
+            <div class="col">
+              <label for="productId">Product ID</label>
+              <input type="number" [(ngModel)]="product.productID" name="productID" id="productId" class="form-control" placeholder="Nhập mã sản phẩm" required />
+            </div>
+            <div class="col">
+              <label for="color">Color</label>
+              <input type="text" [(ngModel)]="product.color" name="color" id="color" class="form-control" placeholder="Nhập màu sắc" required />
+            </div>
+            <div class="col">
+              <label for="led">Led</label>
+              <input type="text" [(ngModel)]="product.led" name="led" id="led" class="form-control" placeholder="Nhập đèn" required />
+            </div>
+            <div class="col">
+              <label for="ss">SS</label>
+              <input type="text" [(ngModel)]="product.ss" name="ss" id="ss" class="form-control" placeholder="Nhập SS" required />
+            </div>
+          </div>
+
+          <!-- Các trường dành riêng cho chuột (categoryID = 1) -->
+          <div *ngIf="product.categoryID === 1" class="row">
+            <div class="col">
+              <label for="mouseDetailID">Mouse Detail ID</label>
+              <input type="text" [(ngModel)]="mouseDetails.mouseDetailID" name="mouseDetailID" id="mouseDetailID" class="form-control" placeholder="Nhập mã chuột" required />
+            </div>
+            <div class="col">
+              <label for="dpi">DPI</label>
+              <input type="number" [(ngModel)]="mouseDetails.dpi" name="dpi" id="dpi" class="form-control" placeholder="Nhập độ phân giải" required />
+            </div>
+            <div class="col">
+              <label for="connectivity">Connectivity</label>
+              <input type="text" [(ngModel)]="mouseDetails.connectivity" name="connectivity" id="connectivity" class="form-control" placeholder="Nhập kết nối" required />
+            </div>
+            <div class="col">
+              <label for="dimensions">Dimensions</label>
+              <input type="text" [(ngModel)]="mouseDetails.dimensions" name="dimensions" id="dimensions" class="form-control" placeholder="Nhập kích thước" required />
+            </div>
+            <div class="col">
+              <label for="weight">Weight</label>
+              <input type="text" [(ngModel)]="mouseDetails.weight" name="weight" id="weight" class="form-control" placeholder="Nhập trọng lượng" required />
+            </div>
+            <div class="col">
+              <label for="material">Material</label>
+              <input type="text" [(ngModel)]="mouseDetails.material" name="material" id="material" class="form-control" placeholder="Nhập vật liệu" required />
+            </div>
+            <div class="col">
+              <label for="eyeReading">EyeReading</label>
+              <input type="text" [(ngModel)]="mouseDetails.eyeReading" name="eyeReading" id="eyeReading" class="form-control" placeholder="Nhập tốc độ đọc" required />
+            </div>
+            <div class="col">
+              <label for="button">Button</label>
+              <input type="number" [(ngModel)]="mouseDetails.button" name="button" id="button" class="form-control" placeholder="Nhập số nút" required />
+            </div>
+          </div>
+
+          <!-- Các trường dành riêng cho bàn phím (categoryID = 2) -->
+          <div *ngIf="product.categoryID === 2" class="row">
+            <div class="col">
+              <label for="keyboardDetailID">Keyboard Detail ID</label>
+              <input type="text" [(ngModel)]="keyboardDetails.keyboardDetailID" name="keyboardDetailID" id="keyboardDetailID" class="form-control" placeholder="Nhập mã bàn phím" required />
+            </div>
+            <div class="col">
+              <label for="layout">Layout</label>
+              <input type="text" [(ngModel)]="keyboardDetails.layout" name="layout" id="layout" class="form-control" placeholder="Nhập layout" required />
+            </div>
+            <div class="col">
+              <label for="case">Case</label>
+              <input type="text" [(ngModel)]="keyboardDetails.case" name="case" id="case" class="form-control" placeholder="Nhập vỏ bàn phím" required />
+            </div>
+            <div class="col">
+              <label for="switch">Switch</label>
+              <input type="text" [(ngModel)]="keyboardDetails.switch" name="switch" id="switch" class="form-control" placeholder="Nhập switch" required />
+            </div>
+            <div class="col">
+              <label for="switchLife">Switch Life</label>
+              <input type="number" [(ngModel)]="keyboardDetails.switchLife" name="switchLife" id="switchLife" class="form-control" placeholder="Nhập tuổi thọ switch" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Mô Tả</label>
+            <textarea [(ngModel)]="product.description" name="description" id="description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm"></textarea>
+          </div>
+
+          <div class="button-container">
+            <button type="submit" class="btn btn-primary">
+              <i class="bx bxs-save"></i>Thêm mới sản phẩm
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
