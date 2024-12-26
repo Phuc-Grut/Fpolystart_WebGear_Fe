@@ -1,12 +1,12 @@
 export interface SubCategory {
-    subCategoryID: number; // Tương ứng với SubCategoryDto
+    subCategoryID: number;
     subCategoryName: string;
     categoryID: number;
   }
   
   export interface Category {
-    categoryID: number; // Tương ứng với CategoryDto
+    categoryID: number;
     categoryName: string;
-    subCategories: SubCategory[]; // Mảng các SubCategory
+    subCategories: SubCategory[];
   }
   
