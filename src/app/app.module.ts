@@ -38,6 +38,11 @@ import { FeedbackComponent } from './component/feedback/feedback.component';
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
 import { UserHomeComponent } from './component/user-home/user-home.component';
+ import { CartComponent } from './component/cart/cart.component';
+import { ModalComponent } from './modal/modal.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -70,11 +75,14 @@ import { UserHomeComponent } from './component/user-home/user-home.component';
     AddCategoryComponent,
     DetailOrdersComponent,
     EditOrdersComponent,
-    HomeComponent,
     UserHomeComponent,
     NavUserHomeComponent,
     VerifyCodeComponent,
-    ResendVerificationCodeComponent
+    ResendVerificationCodeComponent,
+    CartComponent,
+    UserHomeComponent,
+    ModalComponent
+
 
   ],
   imports: [
@@ -84,7 +92,6 @@ import { UserHomeComponent } from './component/user-home/user-home.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-
   ],
   providers: [],
   bootstrap: [UserHomeComponent]

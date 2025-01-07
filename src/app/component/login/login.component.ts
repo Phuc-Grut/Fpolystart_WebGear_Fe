@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 interface LoginResponse {
   token: string;
   refreshToken: string;
+  user : any
 }
 
 @Component({
@@ -12,7 +13,6 @@ interface LoginResponse {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent {
   credentials = {
     username: '',
@@ -21,15 +21,18 @@ export class LoginComponent {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  // Phương thức đăng nhập
   login() {
     this.http.post<LoginResponse>('https://localhost:7249/api/Login/login', this.credentials)
       .subscribe(response => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user))
         alert('Đăng nhập thành công!');
-        this.router.navigate(['dashboard']);
+
       }, error => {
         console.error(error);
         alert('Đăng nhập thất bại.');
       });
   }
+
 }
