@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/service/product.service';
 import { CartDeatail, CartService } from 'src/app/service/cart.service';
+import * as toastr from 'toastr';
+
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
@@ -254,9 +256,19 @@ addToCart(data : any ): void {
       unitPrice : data?.unitPrice,
     }
 
-  this.cartService.handleAddCart(_data as unknown as CartDeatail).subscribe(() => {
-    this.handlegetNumberNotifi()
-  })
+  // this.cartService.handleAddCart(_data as unknown as CartDeatail).subscribe(() => {
+  //   this.handlegetNumberNotifi()
+  // })
+  this.cartService.handleAddCart(_data as unknown as CartDeatail).subscribe(
+    () => {
+      this.handlegetNumberNotifi();
+      toastr.success('Sản phẩm đã được thêm vào giỏ hàng thành công!');
+    },
+    (error) => {
+      toastr.error('Có lỗi xảy ra khi thêm vào giỏ hàng.', 'Lỗi');
+      console.error('Error:', error); // Kiểm tra thêm lỗi
+    }
+  );
 }
 
 handlegetNumberNotifi() {
@@ -275,6 +287,7 @@ handlegetNumberNotifi() {
   })
 }
 redirectToCart() {
-  this.route.navigate(['/cart']); // Thay '/cart' bằng URL trang giỏ hàng của bạn
+  this.route.navigate(['/cart'], { queryParamsHandling: 'preserve',replaceUrl: true, });
+// Thay '/cart' bằng URL trang giỏ hàng của bạn
 }
 }
