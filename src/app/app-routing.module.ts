@@ -21,24 +21,27 @@ import { EditUsersComponent } from './component/edit-users/edit-users.component'
 import { AddVouchersComponent } from './component/add-vouchers/add-vouchers.component';
 import { EditVouchersComponent } from './component/edit-vouchers/edit-vouchers.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { DetailProductComponent } from './component/detail-product/detail-product.component';
 import { CategoryComponent } from './component/category/category.component';
 import { DetailOrdersComponent } from './component/detail-orders/detail-orders.component';
 import { EditOrdersComponent } from './component/edit-orders/edit-orders.component';
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
-import { UserHomeComponent } from './component/user-home/user-home.component';
+import { UserHomeComponent } from './user/user-home/user-home.component';
+import { ProductDetailUserComponent } from './user/product-detail-user/product-detail-user.component';
+import { DetailProductComponent } from './component/detail-product/detail-product.component';
+
 
 const routes: Routes = [
-  { path: 'app-login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'email', component: EmailComponent },
   { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  // { path: '', redirectTo: '/login', pathMatch: 'full' },
+  
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'orders', component: OrdersComponent },
@@ -61,7 +64,11 @@ const routes: Routes = [
   { path: 'edit-orders/:id', component: EditOrdersComponent },
   {path : 'verify-code',component: VerifyCodeComponent},
   {path: 'resend-verification-code',component: ResendVerificationCodeComponent},
-  {path: 'app-user-home', component: UserHomeComponent}
+  {path: 'app-user-home', component: UserHomeComponent},
+  {path: 'app-product-detail-user', component: ProductDetailUserComponent},
+
+
+  
 ];
 
 @NgModule({

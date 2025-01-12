@@ -24,21 +24,19 @@ import { AddUsersComponent } from './component/add-users/add-users.component';
 import { EditUsersComponent } from './component/edit-users/edit-users.component';
 import { AddVouchersComponent } from './component/add-vouchers/add-vouchers.component';
 import { EditVouchersComponent } from './component/edit-vouchers/edit-vouchers.component';
-import { HomeuserComponent } from './user/homeuser/homeuser.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DetailProductComponent } from './component/detail-product/detail-product.component';
 import { CategoryComponent } from './component/category/category.component';
 import { AddCategoryComponent } from './component/add-category/add-category.component';
 import { DetailOrdersComponent } from './component/detail-orders/detail-orders.component';
 import { EditOrdersComponent } from './component/edit-orders/edit-orders.component';
 import { UsersComponent } from './component/users/users.component';
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
-import { NavUserHomeComponent } from './nav-user-home/nav-user-home.component';
 import { FeedbackComponent } from './component/feedback/feedback.component';
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
-import { UserHomeComponent } from './component/user-home/user-home.component';
-
+import { UserHomeComponent } from './user/user-home/user-home.component';
+import { DetailProductComponent } from './component/detail-product/detail-product.component';
+import { ProductDetailUserComponent } from './user/product-detail-user/product-detail-user.component';
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -64,7 +62,6 @@ import { UserHomeComponent } from './component/user-home/user-home.component';
     EditUsersComponent,
     AddVouchersComponent,
     EditVouchersComponent,
-    HomeuserComponent,
     DetailProductComponent,
     CategoryComponent,
     AddCategoryComponent,
@@ -72,10 +69,9 @@ import { UserHomeComponent } from './component/user-home/user-home.component';
     EditOrdersComponent,
     HomeComponent,
     UserHomeComponent,
-    NavUserHomeComponent,
     VerifyCodeComponent,
-    ResendVerificationCodeComponent
-
+    ResendVerificationCodeComponent,
+    ProductDetailUserComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +83,6 @@ import { UserHomeComponent } from './component/user-home/user-home.component';
 
   ],
   providers: [],
-  bootstrap: [UserHomeComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

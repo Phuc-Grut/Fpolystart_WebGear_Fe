@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  showSignIn = true;
+  // showSignIn = true;
 
-  toggleForm(form: string) {
-    this.showSignIn = form === 'login';
-  }
+  // toggleForm(form: string) {
+  //   this.showSignIn = form === 'login';
+  // }
 }

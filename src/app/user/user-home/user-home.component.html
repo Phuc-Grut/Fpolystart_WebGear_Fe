@@ -31,20 +31,43 @@
                 <i class="fas fa-bolt"></i>
                 <span>Tư vấn trực tiếp</span>
             </div>
-            <div class="cart-container">
+            <!-- <div class="cart-container">
               <i class="fas fa-shopping-cart"></i>
               <span class="cart-text">Giỏ hàng</span>
-          </div>
+          </div> -->
+          <!-- Hiển thị giỏ hàng -->
+<!-- Icon Giỏ Hàng -->
+<div class="cart-icon-container" (click)="toggleCart()">
+  <i class="fas fa-shopping-cart"></i>
+  <span class="cart-text">Giỏ hàng</span>
+  <!-- Hiển thị số lượng sản phẩm trong giỏ hàng -->
+  <span *ngIf="cartItems.length > 0" class="cart-count">{{ cartItems.length }}</span>
+</div>
+
+<!-- Hiển thị Giỏ Hàng -->
+<div *ngIf="isCartVisible" class="cart-container">
+  <h3>Giỏ hàng</h3>
+  <div *ngFor="let item of cartItems" class="cart-item">
+    <div>
+      <strong>{{ item.productName }}</strong> - {{ item.quantity }} x {{ item.price | number: '1.0-0' }} đ
+    </div>
+    <button (click)="removeFromCart(item.productID)">Xóa</button>
+  </div>
+  <div *ngIf="cartItems.length === 0">
+    <p>Giỏ hàng của bạn trống.</p>
+  </div>
+</div>
+
+
         </div>
       </div>
-      <a routerLink="/app-login" class="profile">
+      <a routerLink="/login" class="profile">
         <img src="../../assets/imager/student.png" style="width: 36px;
         height: 36px;
         object-fit: cover;
         border-radius: 50%;">
     </a>
     </div>
-    <router-outlet></router-outlet>
   </nav>
   
 
@@ -115,10 +138,10 @@
     <i class='bx bx-phone'></i>
 </div>
 <!-- ========================GAMMING GEAR============================ -->
-<main style="background-color: #F5F5F5; padding: 20px; height: auto;">
+<!-- <main style="background-color: #F5F5F5; padding: 20px; height: auto;" >
   <div style="margin: 0 auto; width: 85%; background-color: white; border-radius: 15px; border: 2px solid #ccc; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
     
-    <!-- Tiêu đề và các nút điều hướng -->
+    
     <div style="display: flex; justify-content: space-between; align-items: center;">
       <h3 style="font-size: 24px; color: #333; margin: 0;">GAMING GEAR</h3>
       
@@ -131,35 +154,41 @@
 
     <hr style="border: 1px solid #ccc; margin: 0;">
 
-    <!-- Sản phẩm hiển thị trong các hàng -->
-    <div class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: flex-start;">
-      <div *ngFor="let row of paginatedItems" class="row" style="display: flex; width: 100%; gap: 16px;">
-        <div *ngFor="let product of row" class="card" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
-          <div class="card-image">
-            <img [src]="baseUrl + product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
+    <div *ngFor="let row of paginatedItems"  class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;" >
+      <div class="card" *ngFor="let product of row" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;" (click)="viewProductDetail(product)" >
+        <div class="card-image">
+          <img [src]="baseUrl + product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
+        </div>
+        
+        <div class="card-body" style="padding: 12px;">
+          <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <div class="product-code" style="font-weight: bold; font-size: 14px;">{{ product.productName }}</div>
+            <div class="product-status" style="font-size: 12px; color: green;">{{ product.status }}</div>
           </div>
-          <div class="card-body" style="padding: 12px;">
-            <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-              <div class="product-code" style="font-weight: bold; font-size: 14px;">{{ product.productName }}</div>
-              <div class="product-status" style="font-size: 12px; color: green;">{{ product.status }}</div>
-            </div>
-            <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-              <div class="price" style="font-size: 16px; font-weight: bold;">{{ product.price | number : '1.0-0' }}đ</div>
-              <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
+          <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+            <div class="price" style="font-size: 16px; font-weight: bold;">{{ product.price | number : '1.0-0' }}đ</div>
+            <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;">
+              <i
+            class="bx bx-show"
+            (click)="openModalDetail(product.productID)"
+          ></i>
+
+          <app-product-detail-user
+  [product]="selectedProduct"
+  [showModal]="isModalOpen"
+  (close)="closeModal()">
+</app-product-detail-user>
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Pagination Buttons -->
     <div style="display: flex; justify-content: center;">
-      <!-- Nút "Previous" -->
+ 
       <button (click)="loadPreviousPage()" [disabled]="currentPage === 1" style="border-radius: 12px; padding: 8px 12px;"> < </button>
 
-      <!-- Hiển thị các số trang -->
+    
       <ng-container *ngFor="let page of pageNumbers()">
         <button (click)="goToPage(page)" 
                 [class.active]="currentPage === page" 
@@ -168,12 +197,76 @@
         </button>
       </ng-container>
 
-      <!-- Nút "Next" -->
+
+      <button (click)="loadNextPage()" [disabled]="currentPage === totalPages" style="border-radius: 12px; padding: 8px 12px;"> ></button>
+    </div>
+  </div>
+</main> -->
+<main style="background-color: #F5F5F5; padding: 20px; height: auto;">
+  <div style="margin: 0 auto; width: 85%; background-color: white; border-radius: 15px; border: 2px solid #ccc; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
+    
+    <!-- Header Section -->
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="font-size: 24px; color: #333; margin: 0;">GAMING GEAR</h3>
+      
+      <!-- Category Filters -->
+      <ul style="display: flex; gap: 20px; padding: 0; list-style: none; margin: 0;">
+        <li><button style="background-color: rgb(203, 199, 199); border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; color: white; cursor: pointer; font-size: 14px; height: 40px;" class="key-text">BÀN PHÍM GAMING</button></li>
+        <li><button style="background-color: rgb(203, 199, 199); border: 2px solid #ccc; border-radius: 15px; padding: 10px 20px; color: white; cursor: pointer; font-size: 14px; height: 40px;" class="mouse-text">CHUỘT GAMING</button></li>
+        <li><span style="font-size: 15px; color: rgb(29, 26, 26); cursor: pointer; height: 40px; display: flex; align-items: center;" class="keymouse-text">Xem thêm</span></li>
+      </ul>
+    </div>
+
+    <hr style="border: 1px solid #ccc; margin: 0;">
+
+    <!-- Card Rows -->
+    <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
+      <div class="card" *ngFor="let product of row" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;" (click)="viewProductDetail(product)">
+        
+        <!-- Card Image -->
+        <div class="card-image">
+          <img [src]="baseUrl + product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
+        </div>
+        
+        <!-- Card Body -->
+        <div class="card-body" style="padding: 12px;">
+          <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <div class="product-code" style="font-weight: bold; font-size: 14px;">{{ product.productName }}</div>
+            <div class="product-status" style="font-size: 12px; color: green;">{{ product.status }}</div>
+          </div>
+          
+          <!-- Card Footer -->
+          <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+            <div class="price" style="font-size: 16px; font-weight: bold;">{{ product.price | number : '1.0-0' }}đ</div>
+            <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;">
+              <i class="bx bx-cart-download" (click)="openModalDetail(product.productID)"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div style="display: flex; justify-content: center;">
+      <button (click)="loadPreviousPage()" [disabled]="currentPage === 1" style="border-radius: 12px; padding: 8px 12px;"> < </button>
+      
+      <ng-container *ngFor="let page of pageNumbers()">
+        <button (click)="goToPage(page)" [class.active]="currentPage === page" style="border-radius: 12px; padding: 8px 12px; margin: 0 5px;">
+          {{ page }}
+        </button>
+      </ng-container>
+
       <button (click)="loadNextPage()" [disabled]="currentPage === totalPages" style="border-radius: 12px; padding: 8px 12px;"> ></button>
     </div>
   </div>
 </main>
 
+<!-- Modal Detail Component -->
+<app-product-detail-user
+  [product]="selectedProduct"
+  [showModal]="isModalOpen"
+  (close)="closeModal()">
+</app-product-detail-user>
 
 
 <!-- =================================== -->
@@ -188,11 +281,11 @@
         <div style="display: flex; justify-content: space-between;">
           <!-- Image Left -->
           <div style="width: 50%; padding: 10px;">
-            <img src="assets/keyboard1.jpg" alt="Image 1" style="width: 100%; height: auto; border-radius: 8px;">
+            <img src="https://lacdau.com/media/lib/06-07-2022/group75.png" alt="Image 1" style="width: 100%; height: auto; border-radius: 8px;">
           </div>
           <!-- Image Right -->
           <div style="width: 50%; padding: 10px;">
-            <img src="assets/keyboard2.jpg" alt="Image 2" style="width: 100%; height: auto; border-radius: 8px;">
+            <img src="https://lacdau.com/media/lib/26-07-2022/1.png" alt="Image 2" style="width: 100%; height: auto; border-radius: 8px;">
           </div>
         </div>
         <div style="padding: 10px;">
@@ -217,16 +310,16 @@
         <div style="display: flex; justify-content: space-between;">
           <!-- Image Left -->
           <div style="width: 50%; padding: 10px;">
-            <img src="assets/keyboard3.jpg" alt="Image 3" style="width: 100%; height: auto; border-radius: 8px;">
+            <img src="https://lacdau.com/media/lib/26-07-2022/1.png" alt="Image 3" style="width: 100%; height: auto; border-radius: 8px;">
           </div>
           <!-- Image Right -->
           <div style="width: 50%; padding: 10px;">
-            <img src="assets/keyboard4.jpg" alt="Image 4" style="width: 100%; height: auto; border-radius: 8px;">
+            <img src="https://lacdau.com/media/lib/06-07-2022/group75.png" alt="Image 4" style="width: 100%; height: auto; border-radius: 8px;">
           </div>
         </div>
         <div style="padding: 10px;">
           <!-- Title -->
-          <h4 style="font-size: 16px; font-weight: bold;">Bàn phím Không Dây</h4>
+          <h4 style="font-size: 16px; font-weight: bold;">Chuột Gaming</h4>
   
           <!-- Description and Icon -->
           <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -274,7 +367,7 @@
     </div>
     <hr style="border: 1px solid #ccc; margin: 0;">
     <!-- Sản phẩm hiển thị trong các hàng -->
-    <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
+    <!-- <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
       <div class="card" *ngFor="let item of row" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
         <div class="card-image">
           <img [src]="item.imageUrl" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
@@ -292,8 +385,32 @@
           </div>
         </div>
       </div>
+    </div> -->
+    <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
+      <div class="card" *ngFor="let product of row" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;" (click)="viewProductDetail(product)">
+        
+        <!-- Card Image -->
+        <div class="card-image">
+          <img [src]="baseUrl + product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
+        </div>
+        
+        <!-- Card Body -->
+        <div class="card-body" style="padding: 12px;">
+          <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <div class="product-code" style="font-weight: bold; font-size: 14px;">{{ product.productName }}</div>
+            <div class="product-status" style="font-size: 12px; color: green;">{{ product.status }}</div>
+          </div>
+          
+          <!-- Card Footer -->
+          <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+            <div class="price" style="font-size: 16px; font-weight: bold;">{{ product.price | number : '1.0-0' }}đ</div>
+            <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;">
+              <i class="bx bx-cart-download" (click)="openModalDetail(product.productID)"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-
     <!-- Footer với số trang và các nút điều hướng -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
       <!-- Nút Trang trước -->
@@ -337,7 +454,7 @@
     <hr style="border: 1px solid #ccc; margin: 0;">
 
     <!-- Sản phẩm hiển thị trong các hàng -->
-    <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
+    <!-- <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
       <div class="card" *ngFor="let product of products" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
         <div class="card-image">
           <img
@@ -346,12 +463,11 @@
               class="product-image"
               style="width: 80px; height: auto;"
             />
-          <!-- <img [src]="product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;"> -->
         </div>
         <div class="card-body" style="padding: 12px;">
           <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
             <div class="product-code" style="font-weight: bold; font-size: 14px;">{{ product.productName }}</div>
-            <!-- <div class="product-status" style="font-size: 12px; color: green;">{{ product.status }}</div> -->
+
           </div>
           <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
             <div class="price" style="font-size: 16px; font-weight: bold;">{{ product.price | number : '1.0-0' }}đ</div>
@@ -361,8 +477,32 @@
           </div>
         </div>
       </div>
+    </div> -->
+    <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
+      <div class="card" *ngFor="let product of row" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;" (click)="viewProductDetail(product)">
+        
+        <!-- Card Image -->
+        <div class="card-image">
+          <img [src]="baseUrl + product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
+        </div>
+        
+        <!-- Card Body -->
+        <div class="card-body" style="padding: 12px;">
+          <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <div class="product-code" style="font-weight: bold; font-size: 14px;">{{ product.productName }}</div>
+            <div class="product-status" style="font-size: 12px; color: green;">{{ product.status }}</div>
+          </div>
+          
+          <!-- Card Footer -->
+          <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+            <div class="price" style="font-size: 16px; font-weight: bold;">{{ product.price | number : '1.0-0' }}đ</div>
+            <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;">
+              <i class="bx bx-cart-download" (click)="openModalDetail(product.productID)"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-
     <!-- Số trang và nút "Trang tiếp theo" -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
       <!-- Nút "Trang trước" bên trái -->

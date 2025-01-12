@@ -6,119 +6,67 @@
       <h2>Thông tin sản phẩm</h2>
 
       <div class="product-detail">
-        <!-- Ảnh và thông tin chung -->
+
         <div class="product-image">
           <img [src]="baseUrl + product.avatarProduct || 'path_to_placeholder_image'" alt="Product Image" />
+        </div>
+        <div>
+          <strong>Hình ảnh bổ sung:</strong>
+          <div *ngIf="product.imageProduct?.length > 0" class="additional-images">
+            <img *ngFor="let image of product.imageProduct" [src]="baseUrl + image" alt="Additional Product Image" class="additional-image" />
+          </div>
+          <span *ngIf="!product.imageProduct || product.imageProduct.length === 0">Không có hình ảnh bổ sung</span>
         </div>
         <div class="product-info">
           <div><strong>Mã sản phẩm:</strong> {{ product.productCode }}</div>
           <div><strong>Tên sản phẩm:</strong> {{ product.productName }}</div>
-          <div>
-            <div><strong>Danh mục sản phẩm: </strong> {{ product.subCategories || 'Không xác định' }}</div>
-          </div>
+          <div><strong>Danh mục sản phẩm:</strong> {{ product.subCategories || 'Không xác định' }}</div>
           <div><strong>Số lượng:</strong> {{ product.quantity || 'Không xác định' }}</div>
           <div><strong>Giảm giá:</strong> {{ product.salePercent }} %</div>
           <div><strong>Brand:</strong> {{ product.brandName || 'Không xác định' }}</div>
           <div><strong>Mô tả:</strong> {{ product.description || 'Không có mô tả' }}</div>
-          <div>
-            <strong>Hình ảnh bổ sung:</strong>
-            <div *ngIf="product.imageProduct?.length > 0" class="additional-images">
-              <img *ngFor="let image of product.imageProduct" [src]="baseUrl + image" alt="Additional Product Image"
-                class="additional-image" />
-            </div>
-            <span *ngIf="!product.imageProduct || product.imageProduct.length === 0">Không có hình ảnh bổ sung</span>
-          </div>
         </div>
       </div>
 
-      <div *ngIf="product" class="product-detail-list">
+    
+      <button (click)="showMoreDetails = !showMoreDetails" class="show-more-btn">
+        {{ showMoreDetails ? 'Thu gọn' : 'Xem thêm' }}
+      </button>
+
+
+      <div *ngIf="showMoreDetails && product" class="product-detail-list">
         <h4 style="margin-top: 15px; margin-bottom: -10px;">Chi tiết sản phẩm</h4>
-        <div *ngIf="product.categoryID === 1" class="table-responsive">
-          <table class="detail-table">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Màu</th>
-                <th>Giá</th>
-                <th>Switch</th>
-                <th>DPI</th>
-                <th>Kết nối</th>
-                <th>Chất liệu</th>
-                <th>LED</th>
-                <th>Size</th>
-                <th>Tần số quét</th>
-                <th>Phần mềm hỗ trợ</th>
-                <th>Dung lượng pin (mhw)</th>
-                <th>Trọng lượng (gam)</th>
-                <th>Số lượng</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let detail of product.productDetail; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ detail.color }}</td>
-                <td>{{ detail.price | number:'1.0-0' }} </td>
-                <td>{{ detail.switch }}</td>
-                <td>{{ detail.dpi }}</td>
-                <td>{{ detail.connectivity }}</td>
-                <td>{{ detail.material }}</td>
-                <td>{{ detail.led }}</td>
-                <td>{{ detail.dimensions }}</td>
-                <td>{{ detail.eyeReading }}</td>
-                <td>{{ detail.ss }}</td>
-                <td>{{ detail.batteryCapacity }}</td>
-                <td>{{ detail.weight }}</td>
-                <td>{{ detail.quantity }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
 
 
-        <!-- Nếu sản phẩm là Bàn phím -->
-        <div *ngIf="product.categoryID === 2" class="table-responsive">
-          <table class="detail-table">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Màu</th>
-                <th>Giá</th>
-                <th>LED</th>
-                <th>Chất liệu keycap</th>
-                <th>Chất liệu switch</th>
-                <th>PCB</th>
-                <th>Layout</th>
-                <th>Chất liệu</th>
-                <th>Switch</th>
-                <th>Tuổi thọ</th>
-                <th>Phần mềm hỗ trợ</th>
-                <th>Kích thước</th>
-                <th>Trọng lượng (gam)</th>
-                <th>Số lượng</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let detail of product.productDetail; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ detail.color }}</td>
-                <td>{{ detail.price }}</td>
-                <td>{{ detail.led }}</td>
-                <td>{{ detail.keycapMaterial }}</td>
-                <td>{{ detail.switchMaterial }}</td>
-                <td>{{ detail.pcb }}</td>
-                <td>{{ detail.switchLife }} (lần nhấn)</td>
-                <td>{{ detail.layout }}</td>
-                <td>{{ detail.case }}</td>
-                <td>{{ detail.switch }}</td>
-                <td>{{ detail.ss }}</td>
-                <td>{{ detail.size }}</td>
-                <td>{{ detail.weight }}</td>
-                <td>{{ detail.quantity }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div *ngIf="product.productDetail?.length > 0">
+          <h5>Chọn màu:</h5>
+          <ul>
+            <li *ngFor="let detail of product.productDetail">{{ detail.color }}</li>
+          </ul>
         </div>
+        
+    
+        <div class="content-detail">
+          <ul>
+            <li><strong>Giá:</strong> {{ product.productDetail[0]?.price | number:'1.0-0' }}</li>
+            <li><strong>Switch:</strong> {{ product.productDetail[0]?.switch }}</li>
+            <li><strong>DPI:</strong> {{ product.productDetail[0]?.dpi }}</li>
+            <li><strong>Kết nối:</strong> {{ product.productDetail[0]?.connectivity }}</li>
+            <li><strong>Chất liệu:</strong> {{ product.productDetail[0]?.material }}</li>
+            <li><strong>LED:</strong> {{ product.productDetail[0]?.led }}</li>
+            <li><strong>Size:</strong> {{ product.productDetail[0]?.dimensions }}</li>
+            <li><strong>Tần số quét:</strong> {{ product.productDetail[0]?.eyeReading }}</li>
+            <li><strong>Phần mềm hỗ trợ:</strong> {{ product.productDetail[0]?.ss }}</li>
+            <li><strong>Dung lượng pin (mhw):</strong> {{ product.productDetail[0]?.batteryCapacity }}</li>
+            <li><strong>Trọng lượng (gam):</strong> {{ product.productDetail[0]?.weight }}</li>
+            <li><strong>Số lượng:</strong> {{ product.productDetail[0]?.quantity }}</li>
+          </ul>
+        </div>  
       </div>
+    </div>
+    <div class="action-buttons">
+      <button class="buy-now-btn" (click)="buyNow()">Mua ngay</button>
+      <button class="add-to-cart-btn" (click)="addToCart()">Thêm vào giỏ hàng</button>
     </div>
   </div>
 </div>

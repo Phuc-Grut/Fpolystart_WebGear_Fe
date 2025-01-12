@@ -26,7 +26,7 @@ export class LoginComponent {
       .subscribe(response => {
         localStorage.setItem('token', response.token);
         alert('Đăng nhập thành công!');
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['app-user-home']);
       }, error => {
         console.error(error);
         alert('Đăng nhập thất bại.');

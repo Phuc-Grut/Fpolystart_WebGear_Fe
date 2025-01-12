@@ -1,0 +1,217 @@
+<!-- <div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeModal()">×</button>
+  
+      <div *ngIf="product" class="product-detail-container">
+        <h2>Thông tin sản phẩm</h2>
+  
+        <div class="product-detail">
+  
+          <div class="product-image">
+            <img [src]="baseUrl + product.avatarProduct || 'path_to_placeholder_image'" alt="Product Image" />
+          </div>
+          <div>
+            <strong>Hình ảnh bổ sung:</strong>
+            <div *ngIf="product.imageProduct?.length > 0" class="additional-images">
+              <img *ngFor="let image of product.imageProduct" [src]="baseUrl + image" alt="Additional Product Image" class="additional-image" />
+            </div>
+            <span *ngIf="!product.imageProduct || product.imageProduct.length === 0">Không có hình ảnh bổ sung</span>
+          </div>
+          <div class="product-info">
+            <div><strong>Mã sản phẩm:</strong> {{ product.productCode }}</div>
+            <div><strong>Tên sản phẩm:</strong> {{ product.productName }}</div>
+            <div><strong>Danh mục sản phẩm:</strong> {{ product.subCategories || 'Không xác định' }}</div>
+            <div><strong>Số lượng:</strong> {{ product.quantity || 'Không xác định' }}</div>
+            <div><strong>Giảm giá:</strong> {{ product.salePercent }} %</div>
+            <div><strong>Brand:</strong> {{ product.brandName || 'Không xác định' }}</div>
+            <div><strong>Mô tả:</strong> {{ product.description || 'Không có mô tả' }}</div>
+          </div>
+        </div>
+  
+      
+        <button (click)="showMoreDetails = !showMoreDetails" class="show-more-btn">
+          {{ showMoreDetails ? 'Thu gọn' : 'Xem thêm' }}
+        </button>
+  
+  
+        <div *ngIf="showMoreDetails && product" class="product-detail-list">
+          <h4 style="margin-top: 15px; margin-bottom: -10px;">Chi tiết sản phẩm</h4>
+  
+  
+          <div *ngIf="product.productDetail?.length > 0">
+            <h5>Chọn màu:</h5>
+            <ul>
+              <li *ngFor="let detail of product.productDetail">{{ detail.color }}</li>
+            </ul>
+          </div>
+          
+      
+          <div class="content-detail">
+            <ul>
+              <li><strong>Giá:</strong> {{ product.productDetail[0]?.price | number:'1.0-0' }}</li>
+              <li><strong>Switch:</strong> {{ product.productDetail[0]?.switch }}</li>
+              <li><strong>DPI:</strong> {{ product.productDetail[0]?.dpi }}</li>
+              <li><strong>Kết nối:</strong> {{ product.productDetail[0]?.connectivity }}</li>
+              <li><strong>Chất liệu:</strong> {{ product.productDetail[0]?.material }}</li>
+              <li><strong>LED:</strong> {{ product.productDetail[0]?.led }}</li>
+              <li><strong>Size:</strong> {{ product.productDetail[0]?.dimensions }}</li>
+              <li><strong>Tần số quét:</strong> {{ product.productDetail[0]?.eyeReading }}</li>
+              <li><strong>Phần mềm hỗ trợ:</strong> {{ product.productDetail[0]?.ss }}</li>
+              <li><strong>Dung lượng pin (mhw):</strong> {{ product.productDetail[0]?.batteryCapacity }}</li>
+              <li><strong>Trọng lượng (gam):</strong> {{ product.productDetail[0]?.weight }}</li>
+              <li><strong>Số lượng:</strong> {{ product.productDetail[0]?.quantity }}</li>
+            </ul>
+          </div>  
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="buy-now-btn" (click)="buyNow()">Mua ngay</button>
+        <button class="add-to-cart-btn" (click)="addToCart()">Thêm vào giỏ hàng</button>
+      </div>
+    </div>
+  </div>
+   -->
+<!-- ======================================= -->
+   <!-- <div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeModal()">×</button>
+  
+      <div *ngIf="product" class="product-detail-container">
+        <h2>Thông tin sản phẩm</h2>
+  
+
+        <div class="main-image-container">
+          <img [src]="baseUrl + product.avatarProduct || 'path_to_placeholder_image'" alt="Product Image" class="main-image" />
+        </div>
+
+        <div class="additional-images-container">
+          <button class="prev-btn" (click)="prevImage()">‹</button>
+          <div class="additional-images">
+            <img *ngFor="let image of product.imageProduct" [src]="baseUrl + image" alt="Additional Product Image" class="additional-image" (click)="changeMainImage(baseUrl + image)" />
+          </div>
+          <button class="next-btn" (click)="nextImage()">›</button>
+        </div>
+  
+        <div class="product-info" style="float: inline-end;">
+          <div><strong>Mã sản phẩm:</strong> {{ product.productCode }}</div>
+          <div><strong>Tên sản phẩm:</strong> {{ product.productName }}</div>
+          <div><strong>Danh mục sản phẩm:</strong> {{ product.subCategories || 'Không xác định' }}</div>
+          <div><strong>Số lượng:</strong> {{ product.quantity || 'Không xác định' }}</div>
+          <div><strong>Giảm giá:</strong> {{ product.salePercent }} %</div>
+          <div><strong>Brand:</strong> {{ product.brandName || 'Không xác định' }}</div>
+          <div><strong>Mô tả:</strong> {{ product.description || 'Không có mô tả' }}</div>
+        </div>
+  
+    
+        <button *ngIf="!showMoreDetails" (click)="toggleDetails(true)" class="show-more-btn">
+            Xem thêm
+        </button>
+        
+  
+
+        <div *ngIf="showMoreDetails && product" class="product-detail-list">
+          <h4>Chi tiết sản phẩm</h4>
+          <div *ngIf="product.productDetail?.length > 0">
+            <h5>Chọn màu:</h5>
+            <ul>
+              <li *ngFor="let detail of product.productDetail">{{ detail.color }}</li>
+            </ul>
+          </div>
+  
+          <div class="content-detail">
+            <ul>
+              <li><strong>Giá:</strong> {{ product.productDetail[0]?.price | number:'1.0-0' }}</li>
+              <li><strong>Switch:</strong> {{ product.productDetail[0]?.switch }}</li>
+              <li><strong>DPI:</strong> {{ product.productDetail[0]?.dpi }}</li>
+              <li><strong>Kết nối:</strong> {{ product.productDetail[0]?.connectivity }}</li>
+              <li><strong>Chất liệu:</strong> {{ product.productDetail[0]?.material }}</li>
+              <li><strong>LED:</strong> {{ product.productDetail[0]?.led }}</li>
+              <li><strong>Size:</strong> {{ product.productDetail[0]?.dimensions }}</li>
+              <li><strong>Tần số quét:</strong> {{ product.productDetail[0]?.eyeReading }}</li>
+              <li><strong>Phần mềm hỗ trợ:</strong> {{ product.productDetail[0]?.ss }}</li>
+              <li><strong>Dung lượng pin (mhw):</strong> {{ product.productDetail[0]?.batteryCapacity }}</li>
+              <li><strong>Trọng lượng (gam):</strong> {{ product.productDetail[0]?.weight }}</li>
+              <li><strong>Số lượng:</strong> {{ product.productDetail[0]?.quantity }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="showMoreDetails" (click)="toggleDetails(false)" class="show-more-btn">
+        Rút gọn
+    </button>
+
+<div class="action-buttons">
+    <button class="buy-now-btn" (click)="buyNow()">Mua ngay</button>
+    <button class="add-to-cart-btn" (click)="addToCart()">Thêm vào giỏ hàng</button>
+  </div>
+  
+    </div>
+  </div> -->
+  <div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeModal()">×</button>
+
+        <div *ngIf="product" class="product-detail-container">
+            <!-- Ảnh sản phẩm bên trái -->
+            <div class="main-image-container">
+                <img [src]="baseUrl + product.avatarProduct || 'path_to_placeholder_image'" alt="Product Image" class="main-image" />
+            </div>
+
+            <!-- Thông tin sản phẩm bên phải -->
+            <div class="product-info">
+                <h2>Thông tin sản phẩm</h2>
+                <div><strong>Mã sản phẩm:</strong> {{ product.productCode }}</div>
+                <div><strong>Tên sản phẩm:</strong> {{ product.productName }}</div>
+                <div><strong>Danh mục sản phẩm:</strong> {{ product.subCategories || 'Không xác định' }}</div>
+                <div><strong>Số lượng:</strong> {{ product.quantity || 'Không xác định' }}</div>
+                <div><strong>Giảm giá:</strong> {{ product.salePercent }} %</div>
+                <div><strong>Brand:</strong> {{ product.brandName || 'Không xác định' }}</div>
+                <div><strong>Mô tả:</strong> {{ product.description || 'Không có mô tả' }}</div>
+
+                <!-- Nút "Xem thêm" -->
+                <button *ngIf="!showMoreDetails" (click)="toggleDetails(true)" class="show-more-btn">
+                    Xem thêm
+                </button>
+
+                <!-- Chi tiết sản phẩm hiển thị khi nhấn "Xem thêm" -->
+                <div *ngIf="showMoreDetails && product" class="product-detail-list">
+                    <h4>Chi tiết sản phẩm</h4>
+                    <div *ngIf="product.productDetail?.length > 0">
+                        <h4>Chọn màu:</h4>
+                        <ul>
+                            <li *ngFor="let detail of product.productDetail">{{ detail.color }}</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-detail">
+                        <ul>
+                            <li><strong>Giá:</strong> {{ product.productDetail[0]?.price | number:'1.0-0' }}</li>
+                            <li><strong>Switch:</strong> {{ product.productDetail[0]?.switch }}</li>
+                            <li><strong>DPI:</strong> {{ product.productDetail[0]?.dpi }}</li>
+                            <li><strong>Kết nối:</strong> {{ product.productDetail[0]?.connectivity }}</li>
+                            <li><strong>Chất liệu:</strong> {{ product.productDetail[0]?.material }}</li>
+                            <li><strong>LED:</strong> {{ product.productDetail[0]?.led }}</li>
+                            <li><strong>Size:</strong> {{ product.productDetail[0]?.dimensions }}</li>
+                            <li><strong>Tần số quét:</strong> {{ product.productDetail[0]?.eyeReading }}</li>
+                            <li><strong>Phần mềm hỗ trợ:</strong> {{ product.productDetail[0]?.ss }}</li>
+                            <li><strong>Dung lượng pin (mhw):</strong> {{ product.productDetail[0]?.batteryCapacity }}</li>
+                            <li><strong>Trọng lượng (gam):</strong> {{ product.productDetail[0]?.weight }}</li>
+                            <li><strong>Số lượng:</strong> {{ product.productDetail[0]?.quantity }}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Nút "Rút gọn" -->
+                <button *ngIf="showMoreDetails" (click)="toggleDetails(false)" class="show-more-btn">
+                    Rút gọn
+                </button>
+
+                <!-- Các nút hành động (Mua ngay, Thêm vào giỏ hàng) -->
+                <div class="action-buttons">
+                    <button class="buy-now-btn" (click)="buyNow()">MUA NGAY</button>
+                    <button class="add-to-cart-btn" (click)="addToCart()">THÊM VÀO GIỎ HÀNG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

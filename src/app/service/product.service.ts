@@ -50,24 +50,25 @@ export class ProductService {
   getProductById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/get-by-id?id=${id}`);
   }
-
-  // Tạo mới sản phẩm
-  createProduct(request: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/create`, request);
-  }
-
-  // Cập nhật sản phẩm
-  updateProduct(id: number, request: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update`, request, {
-      params: { id: id.toString() }
-    });
-  }
   
 
-  // Xóa sản phẩm
-  deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/delete`, { params: { id: id.toString() } });
-  }
+  // Tạo mới sản phẩm
+  // createProduct(request: any): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/create`, request);
+  // }
+
+  // // Cập nhật sản phẩm
+  // updateProduct(id: number, request: any): Observable<any> {
+  //   return this.http.put(`${this.apiUrl}/update`, request, {
+  //     params: { id: id.toString() }
+  //   });
+  // }
+  
+
+  // // Xóa sản phẩm
+  // deleteProduct(id: number): Observable<any> {
+  //   return this.http.delete(`${this.apiUrl}/delete`, { params: { id: id.toString() } });
+  // }
   // private apiUrlKeyboards = 'https://localhost:7249/api/admin/KeyBoard/get-all'; 
   // private apiUrlMice = 'https://localhost:7249/api/admin/Mouse/get-all';
 

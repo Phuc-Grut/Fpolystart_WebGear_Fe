@@ -1,175 +1,102 @@
-.product-detail-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .product-detail {
-    display: flex; /* Sử dụng Flexbox để tạo layout hai cột */
-    gap: 30px; /* Khoảng cách giữa ảnh và thông tin */
-    align-items: flex-start; /* Căn chỉnh phần tử bên trong cùng bắt đầu ở cùng một điểm */
-  }
-  
-  .product-image {
-    flex: 1; /* Cột ảnh sẽ chiếm không gian 1 phần */
-  }
-  
-  .product-image img {
-    width: 100%; /* Đảm bảo ảnh chiếm hết chiều rộng cột */
-    max-width: 400px; /* Đặt kích thước tối đa cho ảnh (tùy chỉnh theo nhu cầu) */
-    height: auto; /* Giữ tỷ lệ của ảnh */
-    object-fit: cover; /* Ảnh sẽ bao phủ toàn bộ phần tử mà không bị biến dạng */
-  }
-  
-  .product-info {
-    flex: 2; /* Cột thông tin sản phẩm sẽ chiếm không gian gấp đôi so với ảnh */
-  }
-  
-  .product-info div {
-    margin-bottom: 10px; /* Khoảng cách giữa các thông tin */
-    font-size: 16px; /* Kích thước font chữ */
-  }
-  
-  .product-info strong {
-    font-weight: bold; /* Làm đậm các nhãn (label) */
-  }
-  
-  .product-info {
-    line-height: 1.5; /* Giãn dòng để thông tin dễ đọc hơn */
-  }
-  .modal-overlay {
-    position: fixed; /* Đảm bảo modal phủ toàn bộ màn hình */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.05); /* Màu nền mờ, có thể thay đổi opacity */
-    display: flex;
-    justify-content: center; /* Căn giữa modal */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    z-index: 9999; /* Đảm bảo modal nổi lên trên các thành phần khác */
-    overflow: auto
-  }
-  
-  /* Nội dung modal */
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
-    max-width: 90%;
-    max-height: 90%;
-    animation: fadeIn 0.3s ease-in-out;
-    overflow: auto;
-  }
-  
-  /* Hiệu ứng khi mở modal */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
-  /* Nút đóng modal */
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    color: #aaa;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .close-btn:hover {
-    color: red;
-  }
-  
-  /* Thêm phần nền mờ cho toàn bộ trang */
-  body.modal-open {
-    overflow: hidden; /* Ngừng cuộn khi modal mở */
-    position: fixed;
-    width: 90%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Màu nền mờ cho trang */
-  }
-  
-  @media (max-width: 768px) {
-    .product-detail {
-      flex-direction: column; /* Chuyển sang dạng cột khi màn hình nhỏ */
-      align-items: center; /* Căn giữa các phần tử */
-    }
-  
-    .product-image img {
-      max-width: 100%; /* Ảnh sẽ chiếm hết chiều rộng khi trên thiết bị nhỏ */
-    }
-  }
-
-  
-/* Căn chỉnh toàn bộ bảng */
-.detail-table {
-  width: 100%; /* Bảng sẽ chiếm toàn bộ chiều ngang */
-  border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
-  margin-top: 20px;
-  font-size: 14px;
-  text-align: left;
-  overflow-x: auto;
+/* Container chứa modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Giảm độ đậm của overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: auto;
 }
 
-/* Phong cách cho tiêu đề bảng */
-.detail-table thead th {
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
-  padding: 10px;
-  font-weight: bold;
-  text-align: center;
+/* Nội dung modal */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 90%;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  overflow: auto;
+  transform: scale(0.95);
+  opacity: 0;
 }
 
-.table-responsive {
-  overflow-x: auto; /* Kích hoạt cuộn ngang */
-  
-  margin-bottom: 20px; /* Khoảng cách phía dưới bảng */
+/* Khi modal mở */
+.modal-overlay .modal-content {
+  opacity: 1;
+  transform: scale(1);
 }
 
-/* Phong cách cho các dòng dữ liệu */
-.detail-table tbody td {
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-
-/* Dòng kẻ cho bảng */
-.detail-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9; /* Tô màu xen kẽ cho các dòng */
-}
-
-.detail-table tbody tr:hover {
-  background-color: #f1f1f1; /* Màu nền khi hover vào dòng */
-}
-
-/* Phong cách cho nút hành động */
-.action-btn {
-  background-color: #007bff;
-  color: white;
+/* Nút đóng */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: #aaa;
+  background: none;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-.action-btn:hover {
-  background-color: #0056b3;
+.close-btn:hover {
+  color: red;
 }
 
+/* Thông tin chi tiết sản phẩm */
+.product-detail-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Thay đổi thành column để dễ dàng căn chỉnh */
+  align-items: center;
+  justify-content: center;
+}
+
+.product-detail {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Cho phép các phần tử chồng lên nhau trên màn hình nhỏ */
+}
+
+.product-image {
+  flex: 1;
+  max-width: 400px; /* Giới hạn chiều rộng của hình ảnh */
+}
+
+.product-image img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info {
+  flex: 2;
+  max-width: 600px;
+}
+
+.product-info div {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.product-info strong {
+  font-weight: bold;
+}
+
+/* Thêm hình ảnh bổ sung */
 .additional-images {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  flex-wrap: wrap; /* Cho phép các hình ảnh hiển thị dưới nhau trên màn hình nhỏ */
 }
 
 .additional-image {
@@ -179,4 +106,78 @@
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-   
+
+/* Nút Xem thêm */
+.show-more-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.show-more-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Các nút hành động (Mua ngay, Thêm vào giỏ hàng) */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.buy-now-btn, .add-to-cart-btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 150px;
+}
+
+.buy-now-btn {
+  background-color: #28a745;
+}
+
+.buy-now-btn:hover {
+  background-color: #218838;
+}
+
+.add-to-cart-btn {
+  background-color: #007bff;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .product-detail {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-image img {
+    max-width: 100%;
+  }
+
+  .product-info {
+    flex: 1;
+    max-width: 100%;
+  }
+
+  .additional-images {
+    justify-content: center;
+  }
+
+  .additional-image {
+    width: 80px;
+    height: 80px;
+  }
+}
