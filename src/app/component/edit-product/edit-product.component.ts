@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CategoryService } from 'src/app/service/category.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { SubCategory } from 'src/app/Interface/ISubCategory'
+import { SubCategoryService } from 'src/app/service/subCategory.service'
 
 @Component({
   selector: 'app-edit-product',
@@ -12,31 +13,30 @@ export class EditProductComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
   baseUrl: string = 'https://lacdau.com';
 
-  categories: any[] = [];
+  subCategories: SubCategory[] = []
+  selectedSubCategoryIds: number[] = []
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(private subCategoryService: SubCategoryService) {}
 
   ngOnInit(): void {
-    console.log('Component EditProductComponent được khởi tạo');
-    // if (!this.product) {
-    //   console.error('Sản phẩm không tồn tại');
-    //   return;
-    // }
+    this.subCategoryService.getAllSubCategories().subscribe(
+      (data: SubCategory[]) => {
+        this.subCategories = data;
 
-    this.categoryService.getCategories().subscribe(
-      (data: any[]) => {
-        console.log('Danh mục:', data);
-        this.categories = data;
-        console.log('Danh mục hiện tại của sản phẩm:', this.product.categoryID)
+        if (this.product && this.product.subCategories) {
+          this.selectedSubCategoryIds = this.product.subCategories.map(
+            (sc: any) => sc.subCategoryID
+          );
+        }
       },
       (error) => {
-        console.error('Lỗi khi tải danh mục:', error);
+        console.error('Lỗi khi tải SubCategory:', error);
       }
     );
-  }
+  }  
 
   onCategoryChange(event: any) {
-    console.log('Danh mục được chọn:', this.product.categoryID); // Log danh mục hiện tại
+    console.log('Danh mục được chọn:', this.product.categoryID);
   }
 
   previewImage(event: any) {

@@ -9,13 +9,16 @@
         <div class="product-detail">
           <!-- Ảnh và thông tin chung -->
           <div class="product-image">
-            <img [src]="baseUrl + product.avatarProduct || 'path_to_placeholder_image'" alt="Product Image" />
+            <img [src]="
+                baseUrl + product.avatarProduct || 'path_to_placeholder_image'
+              " alt="Product Image" />
           </div>
           <div class="product-info">
             <div class="info-row">
               <div>
                 <strong>Mã sản phẩm:</strong>
-                <input style="background-color: darkgrey;" type="text" [(ngModel)]="product.productCode" name="productCode" readonly />
+                <input style="background-color: darkgrey" type="text" [(ngModel)]="product.productCode"
+                  name="productCode" readonly />
               </div>
               <div>
                 <strong>Tên sản phẩm:</strong>
@@ -23,39 +26,21 @@
               </div>
             </div>
 
-            <div class="info-row">
-              <div class="info-row">
-                <!-- Hiển thị danh mục dưới dạng dropdown -->
-                <div>
-                  <strong>Danh mục sản phẩm:</strong>
-                  <select [(ngModel)]="product.categoryID" (change)="onCategoryChange($event)">
-                    <option *ngFor="let category of categories" [value]="category.categoryID">
-                      {{ category.categoryName }}
-                    </option>
-                  </select>
-                </div>                
-              
-                <!-- Hiển thị danh mục con dưới dạng checkbox -->
-                <!-- <div>
-                  <strong>Danh mục con:</strong>
-                  <div *ngFor="let subCategory of filteredSubCategories">
-                    <label>
-                      <input
-                        type="checkbox"
-                        [value]="subCategory.subCategoryID"
-                        [(ngModel)]="selectedSubCategoryIds"
-                        (change)="onSubCategoryChange(subCategory.subCategoryID, $event)"
-                      />
-                      {{ subCategory.subCategoryName }}
-                    </label>
-                  </div>
-                </div> -->
+            <!-- <div class="subcategory-container">
+              <strong>Danh mục</strong>
+              <div *ngFor="let subcategory of subCategories" class="subcategory-item">
+                <input
+                  type="checkbox"
+                  [value]="subcategory.subCategoryID"
+                  [(ngModel)]="selectedSubCategoryIds"
+                />
+                <span>{{ subcategory.subCategoryName }}</span>
               </div>
-              
-              <div>
-                <strong>Giảm giá (%):</strong>
-                <input type="number" [(ngModel)]="product.salePercent" name="salePercent" />
-              </div>
+            </div> -->
+
+            <div>
+              <strong>Giảm giá (%):</strong>
+              <input type="number" [(ngModel)]="product.salePercent" name="salePercent" />
             </div>
 
             <div class="info-row">
@@ -74,14 +59,17 @@
                 <img *ngFor="let image of product.imageProduct" [src]="baseUrl + image" alt="Additional Product Image"
                   class="additional-image" />
               </div>
-              <span *ngIf="!product.imageProduct || product.imageProduct.length === 0">Không có hình ảnh bổ sung</span>
+              <span *ngIf="
+                  !product.imageProduct || product.imageProduct.length === 0
+                ">Không có hình ảnh bổ sung</span>
             </div>
           </div>
         </div>
 
-
         <div *ngIf="product" class="product-detail-list">
-          <h4 style="margin-top: 15px; margin-bottom: -10px;">Chi tiết sản phẩm</h4>
+          <h4 style="margin-top: 15px; margin-bottom: -10px">
+            Chi tiết sản phẩm
+          </h4>
 
           <!-- Nếu sản phẩm là Chuột -->
           <div *ngIf="product.categoryID === 1" class="table-responsive">
@@ -108,19 +96,45 @@
               <tbody>
                 <tr *ngFor="let detail of product.productDetail; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td><input type="text" [(ngModel)]="detail.color" [name]="'color' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.price" [name]="'price' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.switch" [name]="'switch' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.dpi" [name]="'dpi' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.connectivity" [name]="'connectivity' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.material" [name]="'material' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.led" [name]="'led' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.dimensions" [name]="'dimensions' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.eyeReading" [name]="'eyeReading' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.ss" [name]="'ss' + i" /></td>
-                  <td><input type="number" [(ngModel)]="detail.batteryCapacity" [name]="'batteryCapacity' + i" /></td>
-                  <td><input type="number" [(ngModel)]="detail.weight" [name]="'weight' + i" /></td>
-                  <td><input type="number" [(ngModel)]="detail.quantity" [name]="'quantity' + i" /></td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.color" [name]="'color' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.price" [name]="'price' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.switch" [name]="'switch' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.dpi" [name]="'dpi' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.connectivity" [name]="'connectivity' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.material" [name]="'material' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.led" [name]="'led' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.dimensions" [name]="'dimensions' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.eyeReading" [name]="'eyeReading' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.ss" [name]="'ss' + i" />
+                  </td>
+                  <td>
+                    <input type="number" [(ngModel)]="detail.batteryCapacity" [name]="'batteryCapacity' + i" />
+                  </td>
+                  <td>
+                    <input type="number" [(ngModel)]="detail.weight" [name]="'weight' + i" />
+                  </td>
+                  <td>
+                    <input type="number" [(ngModel)]="detail.quantity" [name]="'quantity' + i" />
+                  </td>
                   <td>
                     <button type="button" (click)="removeDetail(i)">Xóa</button>
                   </td>
@@ -155,20 +169,48 @@
               <tbody>
                 <tr *ngFor="let detail of product.productDetail; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td><input type="text" [(ngModel)]="detail.color" [name]="'color' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.price" [name]="'price' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.led" [name]="'led' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.keycapMaterial" [name]="'keycapMaterial' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.switchMaterial" [name]="'switchMaterial' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.pcb" [name]="'pcb' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.layout" [name]="'layout' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.case" [name]="'case' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.switch" [name]="'switch' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.switchLife" [name]="'switchLife' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.ss" [name]="'ss' + i" /></td>
-                  <td><input type="text" [(ngModel)]="detail.size" [name]="'size' + i" /></td>
-                  <td><input type="number" [(ngModel)]="detail.weight" [name]="'weight' + i" /></td>
-                  <td><input type="number" [(ngModel)]="detail.quantity" [name]="'quantity' + i" /></td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.color" [name]="'color' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.price" [name]="'price' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.led" [name]="'led' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.keycapMaterial" [name]="'keycapMaterial' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.switchMaterial" [name]="'switchMaterial' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.pcb" [name]="'pcb' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.layout" [name]="'layout' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.case" [name]="'case' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.switch" [name]="'switch' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.switchLife" [name]="'switchLife' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.ss" [name]="'ss' + i" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="detail.size" [name]="'size' + i" />
+                  </td>
+                  <td>
+                    <input type="number" [(ngModel)]="detail.weight" [name]="'weight' + i" />
+                  </td>
+                  <td>
+                    <input type="number" [(ngModel)]="detail.quantity" [name]="'quantity' + i" />
+                  </td>
                   <td>
                     <button type="button" (click)="removeDetail(i)">Xóa</button>
                   </td>
@@ -181,7 +223,9 @@
         <!-- Nút hành động -->
         <div class="action-buttons">
           <button type="submit" class="action-btn">Lưu thay đổi</button>
-          <button type="button" class="cancel-btn" (click)="closeModal()">Hủy</button>
+          <button type="button" class="cancel-btn" (click)="closeModal()">
+            Hủy
+          </button>
         </div>
       </form>
     </div>
