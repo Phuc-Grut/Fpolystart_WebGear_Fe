@@ -38,13 +38,9 @@ import { NavUserHomeComponent } from './nav-user-home/nav-user-home.component';
 import { FeedbackComponent } from './component/feedback/feedback.component';
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
-import { UserHomeComponent } from './component/user-home/user-home.component';
- import { CartComponent } from './component/cart/cart.component';
+import { CartComponent } from './component/cart/cart.component';
 import { ModalComponent } from './modal/modal.component';
 import { OnlinePaymentComponent } from './online-payment/online-payment.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -99,6 +95,6 @@ import { OnlinePaymentComponent } from './online-payment/online-payment.componen
 
   ],
   providers: [],
-  bootstrap: [UserHomeComponent]
+  bootstrap: [DashboardComponent]
 })
 export class AppModule { }
