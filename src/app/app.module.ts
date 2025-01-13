@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import * as toastr from 'toastr';
 import { RegisterComponent } from './component/register/register.component';
 import { LoginComponent } from './component/login/login.component';
 import { EmailComponent } from './component/email/email.component';
@@ -38,6 +38,12 @@ import { FeedbackComponent } from './component/feedback/feedback.component';
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
 import { UserHomeComponent } from './component/user-home/user-home.component';
+ import { CartComponent } from './component/cart/cart.component';
+import { ModalComponent } from './modal/modal.component';
+import { OnlinePaymentComponent } from './online-payment/online-payment.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -70,11 +76,15 @@ import { UserHomeComponent } from './component/user-home/user-home.component';
     AddCategoryComponent,
     DetailOrdersComponent,
     EditOrdersComponent,
-    HomeComponent,
     UserHomeComponent,
     NavUserHomeComponent,
     VerifyCodeComponent,
-    ResendVerificationCodeComponent
+    ResendVerificationCodeComponent,
+    CartComponent,
+    UserHomeComponent,
+    ModalComponent,
+    OnlinePaymentComponent
+
 
   ],
   imports: [
@@ -84,6 +94,7 @@ import { UserHomeComponent } from './component/user-home/user-home.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+
 
   ],
   providers: [],
