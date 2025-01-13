@@ -290,4 +290,9 @@ redirectToCart() {
   this.route.navigate(['/cart'], { queryParamsHandling: 'preserve',replaceUrl: true, });
 // Thay '/cart' bằng URL trang giỏ hàng của bạn
 }
+
+redirectToProfile() {
+  this.route.navigate(['/user-profile'], { queryParamsHandling: 'preserve',replaceUrl: true, });
+// Thay '/cart' bằng URL trang giỏ hàng của bạn
+}
 }

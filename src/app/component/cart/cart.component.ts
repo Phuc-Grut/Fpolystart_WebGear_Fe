@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { PaymentService } from 'src/app/service/payment.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,7 @@ export class CartComponent implements OnInit {
   isModalOpen: boolean = false;
   private apiUrl = 'https://localhost:7249/api/Cart';  // Thay API của bạn vào đây
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private paymentService : PaymentService) {}
 
   ngOnInit(): void {
     this.getCartByUserId(); // Gọi phương thức khi component khởi tạo
@@ -117,6 +118,87 @@ export class CartComponent implements OnInit {
       }, error => {
         console.error('Error removing product:', error);
       });
+    }
+  }
+
+
+
+  // handlePayment(request: any) {
+  //   const userData = localStorage.getItem('user');
+  //   let user: { username: string } | null = null;
+
+  //   if (userData) {
+  //     try {
+  //       user = JSON.parse(userData);
+  //     } catch (error) {
+  //       console.error('Error parsing user data from localStorage:', error);
+  //     }
+  //   }
+
+  //   if (user && user.username) {
+  //     this.paymentService
+  //       .createPayment({
+  //         amount: request.amount,
+  //         orderType: 'other',
+  //         orderDescription: 'Thanh toán VNPay DecorGear',
+  //         name: user.username,
+  //       })
+  //       .subscribe(
+  //         (response) => {
+  //           console.log('Payment URL generated successfully:', response);
+  //           if (response.paymentUrl) {
+  //             // Redirect to the VNPay payment URL
+  //             window.location.href = response.paymentUrl;
+  //           }
+  //         },
+  //         (error) => {
+  //           console.error('Error during payment creation:', error);
+  //           alert('Không thể tạo URL thanh toán. Vui lòng thử lại sau.');
+  //         }
+  //       );
+  //   } else {
+  //     alert('Không tìm thấy thông tin người dùng. Vui lòng đăng nhập lại.');
+  //   }
+  // }
+
+  handlePayment(request: any) {
+    const userData = localStorage.getItem('user');
+    let user: { username: string } | null = null;
+
+    if (userData) {
+      try {
+        user = JSON.parse(userData);
+      } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+      }
+    }
+
+    if (user && user.username) {
+      this.paymentService
+        .createPayment({
+          amount: request.amount,
+          orderType: 'other',
+          orderDescription: 'Thanh toán VNPay DecorGear',
+          name: user.username,
+        })
+        .subscribe(
+          (response) => {
+            console.log('Payment URL generated successfully:', response);
+            if (response.paymentUrl) {
+              // Redirect to the VNPay payment URL
+              window.location.href = response.paymentUrl;
+
+              // Clear cart after successful payment
+              this.clearCart();
+            }
+          },
+          (error) => {
+            console.error('Error during payment creation:', error);
+            alert('Không thể tạo URL thanh toán. Vui lòng thử lại sau.');
+          }
+        );
+    } else {
+      alert('Không tìm thấy thông tin người dùng. Vui lòng đăng nhập lại.');
     }
   }
 }

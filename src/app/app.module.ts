@@ -41,8 +41,7 @@ import { UserHomeComponent } from './component/user-home/user-home.component';
  import { CartComponent } from './component/cart/cart.component';
 import { ModalComponent } from './modal/modal.component';
 import { OnlinePaymentComponent } from './online-payment/online-payment.component';
-
-
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -83,7 +82,8 @@ import { OnlinePaymentComponent } from './online-payment/online-payment.componen
     CartComponent,
     UserHomeComponent,
     ModalComponent,
-    OnlinePaymentComponent
+    OnlinePaymentComponent,
+    UserProfileComponent
 
 
   ],
