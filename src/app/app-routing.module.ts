@@ -28,6 +28,9 @@ import { EditOrdersComponent } from './component/edit-orders/edit-orders.compone
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
+import { UserHomeComponent } from './component/user-home/user-home.component';
+import { CartComponent } from './component/cart/cart.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -58,7 +61,9 @@ const routes: Routes = [
   { path: 'orders/:id', component: DetailOrdersComponent },
   { path: 'edit-orders/:id', component: EditOrdersComponent },
   {path : 'verify-code',component: VerifyCodeComponent},
-  {path: 'resend-verification-code',component: ResendVerificationCodeComponent}
+  {path: 'resend-verification-code',component: ResendVerificationCodeComponent},
+  {path: 'app-user-home', component: UserHomeComponent},
+  {path: 'cart',component:CartComponent}
 ];
 
 @NgModule({

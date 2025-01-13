@@ -14,7 +14,7 @@ header {
     height: 70px;
     width: auto;
   }
-  
+
 .container-3 {
     width: 500px;
     height: 50px;
@@ -26,7 +26,7 @@ header {
     margin-left: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Input search */
   .container-3 input#search {
     width: 80%;
@@ -38,7 +38,7 @@ header {
     border-radius: 5px;
     color: #fff;
   }
-  
+
   /* Placeholder styling */
   .container-3 input#search::-webkit-input-placeholder {
     color: #65737e;
@@ -52,7 +52,7 @@ header {
   .container-3 input#search:-ms-input-placeholder {
     color: #65737e;
   }
-  
+
   /* Icon position */
   .container-3 .icon {
     position: absolute;
@@ -62,13 +62,13 @@ header {
     color: #eff3f6;
     transition: all 0.55s ease;
   }
-  
+
   /* Xử lý khi focus hoặc active vào input */
   .container-3 input#search:focus,
   .container-3 input#search:active {
     outline: none;
   }
-  
+
   /* Hiệu ứng hover trên icon */
   .container-3:hover .icon {
     color: #327cb1;
@@ -76,8 +76,8 @@ header {
     margin-top: 0; /* Đảm bảo icon không bị lệch khi hover */
 
   }
-  
-  
+
+
   /* Container chứa các phần tử */
   .container {
     display: flex; /* Dùng Flexbox để căn chỉnh các item theo chiều ngang */
@@ -85,13 +85,13 @@ header {
     align-items: center; /* Căn giữa các phần tử theo chiều dọc */
     gap: 50px; /* Khoảng cách giữa các phần tử */
   }
-  
+
   /* Mỗi item chứa icon và văn bản */
   .item {
     display: flex;
     align-items: center; /* Căn giữa icon và văn bản theo chiều dọc */
   }
-  
+
   /* Icon */
   .item i {
     color: #29A07E;
@@ -99,20 +99,20 @@ header {
     margin-right: 10px; /* Khoảng cách giữa icon và văn bản */
     animation: shake 1s infinite ease-in-out; /* Hiệu ứng lắc lư */
   }
-  
+
   /* Hotline info */
   .hotline-info {
     display: flex;
     flex-direction: column; /* Đặt Hotline và Số điện thoại theo chiều dọc */
   }
-  
+
   /* Hotline text */
   .hotline-text {
     font-size: 16px;
     font-weight: bold;
     margin: 0;
   }
-  
+
   /* Số điện thoại */
   .phone-number {
     font-size: 16px;
@@ -120,12 +120,12 @@ header {
     color: #007bff;
     margin: 0;
   }
-  
+
   /* Tư vấn trực tiếp */
   .item span {
     font-size: 16px;
   }
-  
+
   /* Hiệu ứng lắc lư cho icon */
   @keyframes shake {
     0% {
@@ -144,8 +144,8 @@ header {
         transform: rotate(0deg);
     }
   }
-  
-  
+
+
   /* Container chứa icon và chữ "Giỏ hàng" */
   .cart-container {
     display: flex;           /* Dùng Flexbox để căn chỉnh các phần tử theo chiều ngang */
@@ -160,20 +160,20 @@ header {
     margin-left: 90px;
     margin-right: 35px;
   }
-  
+
   /* Icon giỏ hàng */
   .cart-container i {
     font-size: 24px;         /* Kích thước icon */
     color: #29A07E;          /* Màu của icon */
     margin-right: 10px;      /* Khoảng cách giữa icon và chữ */
   }
-  
+
   /* Chữ "Giỏ hàng" */
   .cart-container .cart-text {
     font-size: 16px;
     color: #1b1e20;          /* Màu của chữ */
   }
-  
+
   /* Thêm hiệu ứng khi hover */
   .cart-container:hover {
     background-color: #e2f4ff; /* Màu nền khi hover */
@@ -193,7 +193,7 @@ header {
   overflow: hidden; /* Đảm bảo ảnh không bị tràn ra ngoài */
   margin-top: 10px;
   border: 2px  ; /* Viền cho container */
-  border-radius: 15px;  
+  border-radius: 15px;
   margin-left: 130px;
 }
 
@@ -258,7 +258,7 @@ button:hover {
   height: 169px;  /* Điều chỉnh chiều cao ảnh */
   border-radius: 15px;  /* Bo góc ảnh */
   object-fit: cover;  /* Đảm bảo ảnh không bị biến dạng */
-  border-radius: 15px;  
+  border-radius: 15px;
   border: 2px  ;
   margin-bottom: 10px;
 }
@@ -386,4 +386,50 @@ button:disabled {
 
 button:hover {
   background-color: #f1f1f1;
+}
+
+
+
+.cart-containerr {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #29A07e;
+  cursor: pointer; /* Khi hover, con trỏ sẽ thay đổi thành bàn tay */
+  transition: color 0.3s ease; /* Thêm hiệu ứng chuyển đổi màu khi hover */
+}
+
+.cart-containerr:hover {
+  color: #007bff; /* Màu khi hover vào giỏ hàng */
+}
+
+.cart-containerr i {
+  font-size: 24px; /* Kích thước icon giỏ hàng */
+  color: #29A07e; /* Màu icon mặc định */
+}
+
+.cart-containerr .cart-text {
+  font-size: 14px; /* Kích thước chữ của "Giỏ hàng" */
+  color: #29A07e; /* Màu chữ mặc định */
+}
+
+.chu {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red; /* Nền đỏ cho số lượng sản phẩm */
+  color: white; /* Màu chữ trắng */
+  font-size: 12px; /* Kích thước chữ nhỏ */
+  font-weight: bold; /* Làm đậm chữ */
+  width: 18px; /* Chiều rộng của vòng tròn */
+  height: 18px; /* Chiều cao của vòng tròn */
+  border-radius: 50%; /* Tạo hình tròn cho số lượng */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
 }

@@ -1,5 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductService } from '../service/product.service';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductService } from 'src/app/service/product.service';
+import { CartDeatail, CartService } from 'src/app/service/cart.service';
+import * as toastr from 'toastr';
 
 @Component({
   selector: 'app-user-home',
@@ -12,33 +15,30 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     'https://lacdau.com/media/banner/09_Jul9860edbd0f637428e39fde95121313ed.png',
     'https://lacdau.com/media/banner/09_Jul9860edbd0f637428e39fde95121313ed.png',
   ];
-  
+
   currentIndex: number = 0;
   autoplayInterval: any;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private cartService : CartService, private route: Router) {}
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
   baseUrl: string = 'https://lacdau.com';
   products: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10; // 10 products per page (2 rows of 5 products)
   totalPages: number = 0;
   paginatedItems: any[] = [];
-
+  numberNotifi = 0;
+ navigate(){
+  this.route.navigate(['/login'])
+ }
   ngOnInit(): void {
     this.startAutoplay();
     // this.groupItems();
 
     this.updatePagination();
-    this.productService.getAllProducts().subscribe(
-      (data) => {
-        this.products = data;
-        this.totalPages = Math.ceil(this.products.length / this.itemsPerPage);
-        this.updatePagination();
-      },
-      (error) => {
-        console.error('Lỗi khi gọi API:', error);
-      }
-    );
+    this.handlegetNumberNotifi()
   }
 
   ngOnDestroy(): void {
@@ -187,7 +187,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     // thêm các sản phẩm khác vào đây
   ];
 
-  
+
   showNextPageButton: boolean = false;
 
   updatePagination() {
@@ -245,4 +245,49 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   onBlur() {
     this.isFocused = false;
   }
+
+  //Phương thức này sẽ được gọi khi nhấp vào nút "Thêm vào giỏ hàng"
+addToCart(data : any ): void {
+  // Giả sử bạn sẽ gửi thông tin sản phẩm vào giỏ hàng
+  var _data =
+    {
+      produceId : data?.id,
+      quantity : 1,
+      unitPrice : data?.unitPrice,
+    }
+
+  // this.cartService.handleAddCart(_data as unknown as CartDeatail).subscribe(() => {
+  //   this.handlegetNumberNotifi()
+  // })
+  this.cartService.handleAddCart(_data as unknown as CartDeatail).subscribe(
+    () => {
+      this.handlegetNumberNotifi();
+      toastr.success('Sản phẩm đã được thêm vào giỏ hàng thành công!');
+    },
+    (error) => {
+      toastr.error('Có lỗi xảy ra khi thêm vào giỏ hàng.', 'Lỗi');
+      console.error('Error:', error); // Kiểm tra thêm lỗi
+    }
+  );
+}
+
+handlegetNumberNotifi() {
+  this.productService.getAllProducts().subscribe(
+    (data) => {
+      this.products = data;
+      this.totalPages = Math.ceil(this.products.length / this.itemsPerPage);
+      this.updatePagination();
+    },
+    (error) => {
+      console.error('Lỗi khi gọi API:', error);
+    }
+  );
+  this.cartService.handleGetCartByUserId().subscribe((response) => {
+    this.numberNotifi = (response as any)?.result.cartDetails?.length
+  })
+}
+redirectToCart() {
+  this.route.navigate(['/cart'], { queryParamsHandling: 'preserve',replaceUrl: true, });
+// Thay '/cart' bằng URL trang giỏ hàng của bạn
+}
 }
