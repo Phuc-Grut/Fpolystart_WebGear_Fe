@@ -47,51 +47,8 @@
   </div>
 
   <div class="row">
-     Địa chỉ nhận hàng
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">ĐỊA CHỈ NHẬN HÀNG</h5>
-          <form>
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Họ và tên">
-            </div>
-            <div class="row mb-3">
-              <div class="col">
-                <input type="email" class="form-control" placeholder="Email">
-              </div>
-              <div class="col">
-                <input type="tel" class="form-control" placeholder="Số điện thoại">
-              </div>
-            </div>
-            <div class="mb-3">
-              <select class="form-select">
-                <option selected>Tỉnh/Thành phố</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <select class="form-select">
-                <option selected>Quận/Huyện</option>
-            </select>
-
-            </div>
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Toà nhà, Tên đường...">
-            </div>
-            <div class="mb-3">
-              <textarea class="form-control" rows="3" placeholder="Nhập ghi chú cho chúng tôi"></textarea>
-            </div>
-            <div class="d-grid gap-2">
-              <button class="btn btn-secondary" type="button">TẢI ẢNH ĐƠN HÀNG</button>
-              <button class="btn btn-secondary" type="button">TẢI FILE EXCEL</button>
-              <button class="btn btn-secondary" type="button">IN BÁO GIÁ</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-     Hình thức thanh toán
-    <div class="col-md-6">
+    <!-- Hình thức thanh toán -->
+    <div class="col-md-12">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">HÌNH THỨC THANH TOÁN</h5>
@@ -116,13 +73,11 @@
             <span class="text-danger fs-5">{{ totalAmount | number:'1.0-0' }}đ</span>
           </div>
           <div class="d-grid">
-            <button class="btn btn-success btn-lg" type="button">ĐẶT MUA NGAY</button>
+            <button class="btn btn-success btn-lg" type="button" (click)="handlePayment({
+              amount : totalAmount})">ĐẶT MUA NGAY</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./index.js"></script>

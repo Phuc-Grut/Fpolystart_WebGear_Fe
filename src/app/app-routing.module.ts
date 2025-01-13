@@ -30,6 +30,7 @@ import { VerifyCodeComponent } from './component/verify-code/verify-code.compone
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
 import { UserHomeComponent } from './component/user-home/user-home.component';
 import { CartComponent } from './component/cart/cart.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'app-login', component: LoginComponent },
@@ -63,7 +64,8 @@ const routes: Routes = [
   {path : 'verify-code',component: VerifyCodeComponent},
   {path: 'resend-verification-code',component: ResendVerificationCodeComponent},
   {path: 'app-user-home', component: UserHomeComponent},
-  {path: 'cart',component:CartComponent}
+  {path: 'cart',component:CartComponent},
+  {path: 'user-profile',component:UserProfileComponent}
 ];
 
 @NgModule({

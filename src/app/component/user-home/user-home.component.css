@@ -434,3 +434,24 @@ button:hover {
   padding: 0;
   box-sizing: border-box;
 }
+.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  background-color: #007bff; /* Màu nền của nút */
+  border-radius: 50%; /* Để tạo hình tròn */
+  cursor: pointer; /* Chỉ con trỏ chuột thành tay khi di chuột lên nút */
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền */
+}
+
+.user-profile i {
+  font-size: 18px; /* Kích thước biểu tượng */
+  color: white; /* Màu của biểu tượng */
+}
+
+.user-profile:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+}
+
