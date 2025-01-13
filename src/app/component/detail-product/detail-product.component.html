@@ -14,7 +14,7 @@
           <div><strong>Mã sản phẩm:</strong> {{ product.productCode }}</div>
           <div><strong>Tên sản phẩm:</strong> {{ product.productName }}</div>
           <div>
-            <div><strong>Danh mục sản phẩm: </strong> {{ product.subCategoriesName }}</div>
+            <div><strong>Danh mục sản phẩm: </strong> {{ product.subCategories || 'Không xác định' }}</div>
           </div>
           <div><strong>Số lượng:</strong> {{ product.quantity || 'Không xác định' }}</div>
           <div><strong>Giảm giá:</strong> {{ product.salePercent }} %</div>

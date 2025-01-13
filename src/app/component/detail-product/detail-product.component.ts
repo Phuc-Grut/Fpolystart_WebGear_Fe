@@ -6,9 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./detail-product.component.css']
 })
 export class DetailProductComponent {
-  @Input() product: any;
-  @Input() showModal: boolean = false;
-  @Output() close = new EventEmitter<void>();
+  @Input() product: any;  // Thông tin chi tiết sản phẩm
+  @Input() showModal: boolean = false; // Kiểm tra modal có hiển thị không
+  @Output() close = new EventEmitter<void>(); // Đóng modal
   baseUrl: string = 'https://lacdau.com';
 
   closeModal() {

@@ -1,58 +1,12 @@
-<!-- <form (submit)="register()" class="register-form">
-  <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
-  <span>Đăng ký là thành viên để hưởng nhiều lợi ích và đặt mua hàng dễ dàng hơn.</span>
-
-  <input
-    name="userName"
-    [(ngModel)]="user.userName"
-    placeholder="Tên đăng nhập"
-    required
-  />
-
-  <div class="password-container">
-    <input
-      name="password"
-      [(ngModel)]="user.password"
-      [type]="showPassword ? 'text' : 'password'"
-      placeholder="Mật khẩu"
-      required
-    />
-    <i
-      class="eye-icon"
-      (click)="togglePasswordVisibility()"
-      [class.show]="showPassword"
-    >
-      <i class="bx" [class.bxs-eye]="!showPassword" [class.bxs-eye-off]="showPassword"></i>
-    </i>
-  </div>
-
-  <input
-    name="email"
-    [(ngModel)]="user.email"
-    type="email"
-    placeholder="Email"
-    required
-  />
-
-  <input
-    name="phoneNumber"
-    [(ngModel)]="user.phoneNumber"
-    placeholder="Số điện thoại"
-    required
-  />
-
-  <input
-    name="name"
-    [(ngModel)]="user.name"
-    placeholder="Tên"
-    required
-  />
-
-  <button type="submit">Đăng ký</button>
-</form> -->
 <form (submit)="register()" class="register-form">
-  <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
-  <span>Đăng ký là thành viên để hưởng nhiều lợi ích và đặt mua hàng dễ dàng hơn.</span>
+  <h1>Đăng ký</h1>
+  <div class="social-icons">
+    <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
+    <a href="#" class="icon"><i class='bx bxl-tiktok'></i></a>
+    <a href="#" class="icon"><i class='bx bxs-shopping-bag-alt'></i></a>
+    <a href="#" class="icon"><i class='bx bxl-shopify'></i></a>
+  </div>
+  <span>Hoặc sử dụng email của bạn để đăng ký</span>
 
   <!-- Tên đăng nhập -->
   <input

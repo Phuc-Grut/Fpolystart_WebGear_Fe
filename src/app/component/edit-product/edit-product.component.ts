@@ -1,44 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { SubCategory } from 'src/app/Interface/ISubCategory'
-import { SubCategoryService } from 'src/app/service/subCategory.service'
-
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.css'],
+  styleUrls: ['./edit-product.component.css']
 })
-export class EditProductComponent implements OnInit {
-  @Input() product: any;
-  @Input() showModal: boolean = false;
-  @Output() close = new EventEmitter<void>();
-  baseUrl: string = 'https://lacdau.com';
+export class EditProductComponent {
+  @Input() product: any;  // Nhận thông tin sản phẩm từ parent component (ProductComponent)
+  @Input() showModal: boolean = false;  // Kiểm tra modal có hiển thị không
+  @Output() close = new EventEmitter<void>();  // Đóng modal khi cập nhật xong
 
-  subCategories: SubCategory[] = []
-  selectedSubCategoryIds: number[] = []
-
-  constructor(private subCategoryService: SubCategoryService) {}
-
-  ngOnInit(): void {
-    this.subCategoryService.getAllSubCategories().subscribe(
-      (data: SubCategory[]) => {
-        this.subCategories = data;
-
-        if (this.product && this.product.subCategories) {
-          this.selectedSubCategoryIds = this.product.subCategories.map(
-            (sc: any) => sc.subCategoryID
-          );
-        }
-      },
-      (error) => {
-        console.error('Lỗi khi tải SubCategory:', error);
-      }
-    );
-  }  
-
-  onCategoryChange(event: any) {
-    console.log('Danh mục được chọn:', this.product.categoryID);
-  }
-
+  // Xử lý thay đổi hình ảnh
   previewImage(event: any) {
     const image = document.getElementById('productImage') as HTMLImageElement;
     const defaultIcon = document.getElementById('defaultIcon') as HTMLElement;
@@ -48,31 +19,30 @@ export class EditProductComponent implements OnInit {
     defaultIcon.style.display = 'none';
   }
 
-  onSubmit() {
+  // Lưu thông tin sản phẩm sau khi chỉnh sửa
+  saveProduct() {
+    // Gọi API hoặc xử lý lưu dữ liệu ở đây
     alert('Sản phẩm đã được cập nhật!');
-    this.closeModal();
+    this.closeModal();  // Đóng modal sau khi lưu thành công
   }
 
+  // Hủy chỉnh sửa và đóng modal
   cancelEditProduct() {
-    const confirmation = confirm(
-      'Bạn có chắc chắn muốn hủy chỉnh sửa sản phẩm không?'
-    );
+    const confirmation = confirm("Bạn có chắc chắn muốn hủy chỉnh sửa sản phẩm không?");
     if (confirmation) {
-      this.closeModal();
+      this.closeModal();  // Đóng modal
     }
   }
 
+  // Đóng modal
   closeModal() {
     this.close.emit();
   }
 
+  // Nếu người dùng click vào overlay, modal sẽ đóng
   onOverlayClick(event: MouseEvent) {
     if ((event.target as HTMLElement).classList.contains('modal-overlay')) {
       this.closeModal();
     }
-  }
-
-  removeDetail(index: number) {
-    this.product.productDetail.splice(index, 1);
   }
 }

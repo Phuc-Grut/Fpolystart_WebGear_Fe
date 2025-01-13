@@ -1,47 +1,17 @@
-<!-- <form (submit)="login()">
-  <h3>ĐĂNG NHẬP TÀI KHOẢN</h3>
-  <span style="font-weight: bold;">Thông tin khách hàng đăng nhập hệ thống</span>
+<form (submit)="login()">
+  <h1>Đăng nhập</h1>
+  <div class="social-icons">
+    <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
+    <a href="#" class="icon"><i class='bx bxl-tiktok'></i></a>
+    <a href="#" class="icon"><i class='bx bxs-shopping-bag-alt'></i></a>
+    <a href="#" class="icon"><i class='bx bxl-shopify'></i></a>
+  </div>
+  <span>hoặc sử dụng email và mật khẩu của bạn</span>
   <input [(ngModel)]="credentials.username" name="username" placeholder="Username" required />
   <input [(ngModel)]="credentials.password" name="password" placeholder="Password" type="password" required />
   <a routerLink="/forgot-password">Quên mật khẩu?</a>
   <button type="submit">Đăng nhập</button>
 </form>
 <div>
-  <span>Bạn chưa là thành viên ?</span>
-  <span>Đăng ký là thành viên để hưởng nhiều lợi ích và đặt mua hàng dễ dàng hơn.</span>
-  <a routerLink="/register">Đăng ký tài khoản</a>
-</div> -->
-<div class="auth-wrapper">
-  <div class="auth-container">
-    <form (submit)="login()" class="login-form">
-      <h3>ĐĂNG NHẬP TÀI KHOẢN</h3>
-      <span style="font-weight: bold"
-        >Thông tin khách hàng đăng nhập hệ thống</span
-      >
-      <input
-        [(ngModel)]="credentials.username"
-        name="username"
-        placeholder="Username"
-        required
-      />
-      <input
-        [(ngModel)]="credentials.password"
-        name="password"
-        placeholder="Password"
-        type="password"
-        required
-      />
-      <a routerLink="/forgot-password">Quên mật khẩu?</a>
-      <button type="submit">Đăng nhập</button>
-    </form>
-
-    <div class="register-section">
-      <span>Bạn chưa là thành viên ?</span>
-      <span
-        >Đăng ký là thành viên để hưởng nhiều lợi ích và đặt mua hàng dễ dàng
-        hơn.</span
-      >
-      <a routerLink="/register">Đăng ký tài khoản</a>
-    </div>
-  </div>
+  <span>Chưa có tài khoản? <a routerLink="/register">Đăng ký ngay</a></span>
 </div>

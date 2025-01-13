@@ -1,4 +1,4 @@
-/* .login-form {
+.login-form {
   max-width: 200px;
   margin: auto;
   padding: 20px;
@@ -45,77 +45,4 @@ input {
 .register-prompt {
   text-align: center;
   margin-top: 20px;
-} */
-
-
-/* Căn giữa toàn bộ khối chứa phần đăng nhập và đăng ký */
-.auth-wrapper {
-  display: flex;
-  justify-content: center; /* Căn giữa theo chiều ngang */
-  align-items: center;
-  width: 145vh; /* Căn giữa theo chiều dọc */
-  height: 70vh; /* Chiếm toàn bộ chiều cao của màn hình */
-  background-color: #f0f0f0; /* Có thể tùy chỉnh màu nền cho trang */
-  margin-left: 100px;
-}
-
-.auth-container {
-  display: flex;
-  justify-content: space-between;
-  
-}
-
-.login-form {
-  flex: 3; /* Đăng nhập chiếm 3 phần */
-  display: flex;
-  flex-direction: column; /* Các trường dọc */
-  gap: 8px;
-  padding: 10px;
-  width: 100%;
-}
-
-.login-form h3 {
-  text-align: center;
-}
-
-.login-form input {
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.login-form a {
-  color: #007bff;
-  text-decoration: none;
-  margin-bottom: 10px;
-}
-
-.login-form button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.login-form button:hover {
-  background-color: #0056b3;
-}
-
-.register-section {
-  flex: 2; /* Đăng ký chiếm 2 phần */
-  display: flex;
-  flex-direction: column; /* Các trường dọc */
-  gap: 25px;
-  padding: 25px;
-  width: 100%;
-  margin-top: 70px;
-}
-
-.register-section a {
-  color: #007bff;
-  text-decoration: none;
-  margin-top: 10px;
 }
