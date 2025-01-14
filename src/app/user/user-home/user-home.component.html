@@ -40,12 +40,15 @@
 
         </div>
       </div>
-      <a routerLink="/login" class="profile">
+      <!-- <a routerLink="/login" class="profile">
         <img src="../../assets/imager/student.png" style="width: 36px;
         height: 36px;
         object-fit: cover;
         border-radius: 50%;">
-    </a>
+    </a> -->
+    <div class="user-profile" (click)="redirectToProfile()">
+      <i class="bi bi-person-vcard">hi</i>
+    </div>
     </div>
   </nav>
   

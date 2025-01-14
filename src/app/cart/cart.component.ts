@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { PaymentService } from '../service/payment.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +15,7 @@ export class CartComponent implements OnInit {
   isModalOpen: boolean = false;
   private apiUrl = 'https://localhost:7249/api/Cart';  // Thay API của bạn vào đây
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private paymentService : PaymentService, private router: Router) {}
 
   ngOnInit(): void {
     this.getCartByUserId(); // Gọi phương thức khi component khởi tạo
@@ -86,9 +88,9 @@ export class CartComponent implements OnInit {
     }
 
     if (user && user.userId) {
-      this.http.delete(`${this.apiUrl}/user/${user.userId}/clear`).subscribe(response => {
+this.http.delete(`${this.apiUrl}/user/${user.userId}/clear`).subscribe(response => {
         console.log('Cart cleared:', response);
-// Cập nhật lại giỏ hàng sau khi xóa toàn bộ
+        // Cập nhật lại giỏ hàng sau khi xóa toàn bộ
         this.cartItems = [];
         this.calculateTotals();
       }, error => {
@@ -116,6 +118,53 @@ export class CartComponent implements OnInit {
       }, error => {
         console.error('Error removing product:', error);
       });
+    }
+  }
+
+  redirectToAppUserHome() {
+    this.router.navigate(['app-user-home']);
+  }
+
+  
+
+  handlePayment(request: any) {
+    const userData = localStorage.getItem('user');
+    let user: { username: string } | null = null;
+
+    if (userData) {
+      try {
+        user = JSON.parse(userData);
+      } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+      }
+    }
+
+    if (user && user.username) {
+      this.paymentService
+        .createPayment({
+          amount: request.amount,
+          orderType: 'other',
+          orderDescription: 'Thanh toán VNPay DecorGear',
+          name: user.username,
+        })
+        .subscribe(
+          (response) => {
+            console.log('Payment URL generated successfully:', response);
+            if (response.paymentUrl) {
+              // Redirect to the VNPay payment URL
+              window.location.href = response.paymentUrl;
+
+              // Clear cart after successful payment
+              this.clearCart();
+            }
+          },
+          (error) => {
+            console.error('Error during payment creation:', error);
+            alert('Không thể tạo URL thanh toán. Vui lòng thử lại sau.');
+          }
+        );
+    } else {
+      alert('Không tìm thấy thông tin người dùng. Vui lòng đăng nhập lại.');
     }
   }
 }

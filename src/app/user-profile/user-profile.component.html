@@ -1,0 +1,78 @@
+
+<div class="user-profile">
+    <!-- Tiêu đề và nút chuyển đổi -->
+    <h2 (click)="showUserProfile()">Thông Tin Người Dùng</h2>
+    <h2 (click)="showChangePassword()">Đổi Mật Khẩu</h2>
+  
+    <!-- Chi tiết thông tin người dùng -->
+    <div *ngIf="!isChangingPassword">
+      <div *ngIf="isLoading">Đang tải...</div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+  
+      <div *ngIf="userProfile">
+        <form (ngSubmit)="onUpdateProfile()">
+          <div>
+            <label for="name">Tên:</label>
+            <input id="name" [(ngModel)]="userProfile.name" name="name" required />
+          </div>
+  
+          <div>
+            <label for="phoneNumber">Số Điện Thoại:</label>
+  <input id="phoneNumber" [(ngModel)]="userProfile.phoneNumber" name="phoneNumber" required />
+          </div>
+  
+          <div>
+            <label for="email">Email:</label>
+            <input id="email" [(ngModel)]="userProfile.email" name="email" required />
+          </div>
+  
+          <div>
+            <label for="userName">Tên Đăng Nhập:</label>
+            <input id="userName" [(ngModel)]="userProfile.userName" name="userName" required />
+          </div>
+  
+          <button type="submit">Cập Nhật Hồ Sơ</button>
+        </form>
+      </div>
+  
+      <!-- Hiển thị thông báo thành công sau khi cập nhật hồ sơ -->
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+    </div>
+  
+    <!-- Form thay đổi mật khẩu -->
+    <div *ngIf="isChangingPassword">
+      <h3>Đổi Mật Khẩu</h3>
+  
+      <form (ngSubmit)="onChangePassword()">
+        <div>
+          <label for="oldPassword">Mật khẩu cũ:</label>
+          <input id="oldPassword" [(ngModel)]="oldPassword" name="oldPassword" type="password" required />
+        </div>
+  
+        <div>
+          <label for="newPassword">Mật khẩu mới:</label>
+          <input id="newPassword" [(ngModel)]="newPassword" name="newPassword" type="password" required />
+        </div>
+  
+        <div>
+          <label for="newPasswordConfirm">Xác nhận mật khẩu mới:</label>
+          <input id="newPasswordConfirm" [(ngModel)]="newPasswordConfirm" name="newPasswordConfirm" type="password" required />
+        </div>
+  
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+  
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
+  
+        <button type="submit">Cập Nhật Mật Khẩu</button>
+      </form>
+    </div>
+  </div>
+  

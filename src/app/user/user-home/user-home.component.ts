@@ -301,4 +301,9 @@ addToCart(data : any ): void {
     this.cartItems = this.cartItems.filter(item => item.productID !== productID);
     this.calculateTotalPrice(); // Cập nhật lại tổng tiền sau khi xóa sản phẩm
   }
+  redirectToProfile() {
+    this.route.navigate(['/user-profile'], { queryParamsHandling: 'preserve',replaceUrl: true, });
+  // Thay '/cart' bằng URL trang giỏ hàng của bạn
+  }
+  
 }
