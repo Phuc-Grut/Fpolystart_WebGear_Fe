@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import * as toastr from 'toastr';
 import { RegisterComponent } from './component/register/register.component';
 import { LoginComponent } from './component/login/login.component';
 import { EmailComponent } from './component/email/email.component';
@@ -37,6 +37,7 @@ import { ResendVerificationCodeComponent } from './component/resend-verification
 import { UserHomeComponent } from './user/user-home/user-home.component';
 import { DetailProductComponent } from './component/detail-product/detail-product.component';
 import { ProductDetailUserComponent } from './user/product-detail-user/product-detail-user.component';
+import { CartComponent } from './cart/cart.component';
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -71,7 +72,8 @@ import { ProductDetailUserComponent } from './user/product-detail-user/product-d
     UserHomeComponent,
     VerifyCodeComponent,
     ResendVerificationCodeComponent,
-    ProductDetailUserComponent
+    ProductDetailUserComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

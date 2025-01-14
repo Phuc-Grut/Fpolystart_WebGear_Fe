@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartService } from 'src/app/cart.service';
+import { CartDeatail, CartService } from 'src/app/cart.service';
 import { ProductService } from 'src/app/service/product.service';
+import * as toastr from 'toastr';
+
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
@@ -22,6 +24,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   
   currentIndex: number = 0;
   autoplayInterval: any;
+  
   // cartItems: any[] = [];
   // isCartVisible: boolean = false;
   constructor(private productService: ProductService, private route: Router, private cartService: CartService) {}
@@ -32,6 +35,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 10; // 10 products per page (2 rows of 5 products)
   totalPages: number = 0;
   paginatedItems: any[] = [];
+  numberNotifi = 0;
  navigate(){
   this.route.navigate(['/login'])
  }
@@ -178,9 +182,50 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   }
 
   // Khi nhấn vào sản phẩm, gọi API để lấy chi tiết sản phẩm và mở modal
-  
+  //Phương thức này sẽ được gọi khi nhấp vào nút "Thêm vào giỏ hàng"
+addToCart(data : any ): void {
+  // Giả sử bạn sẽ gửi thông tin sản phẩm vào giỏ hàng
+  var _data =
+    {
+      produceId : data?.id,
+      quantity : 1,
+      unitPrice : data?.unitPrice,
+    }
+
+  // this.cartService.handleAddCart(_data as unknown as CartDeatail).subscribe(() => {
+  //   this.handlegetNumberNotifi()
+  // })
+  this.cartService.handleAddCart(_data as unknown as CartDeatail).subscribe(
+    () => {
+      this.handlegetNumberNotifi();
+      toastr.success('Sản phẩm đã được thêm vào giỏ hàng thành công!');
+    },
+    (error) => {
+      toastr.error('Có lỗi xảy ra khi thêm vào giỏ hàng.', 'Lỗi');
+      console.error('Error:', error); // Kiểm tra thêm lỗi
+    }
+  );
+}
   // Đóng modal
-  
+  handlegetNumberNotifi() {
+    this.productService.getAllProducts().subscribe(
+      (data) => {
+        this.products = data;
+        this.totalPages = Math.ceil(this.products.length / this.itemsPerPage);
+        this.updatePagination();
+      },
+      (error) => {
+        console.error('Lỗi khi gọi API:', error);
+      }
+    );
+    this.cartService.handleGetCartByUserId().subscribe((response) => {
+      this.numberNotifi = (response as any)?.result.cartDetails?.length
+    })
+  }
+  redirectToCart() {
+    this.route.navigate(['/cart'], { queryParamsHandling: 'preserve',replaceUrl: true, });
+  // Thay '/cart' bằng URL trang giỏ hàng của bạn
+  }
 
   openModalDetail(productId: number): void {
     this.productService.getProductById(productId).subscribe(

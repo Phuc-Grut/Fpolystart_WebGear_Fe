@@ -351,18 +351,6 @@ button:hover {
   font-weight: bold;
 }
 
-.add-to-cart-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: #007bff;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.add-to-cart-btn:hover {
-  color: #0056b3;
-}
 
 /* Căn chỉnh và kiểu dáng cho các nút phân trang */
 button {

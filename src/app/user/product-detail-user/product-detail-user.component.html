@@ -209,7 +209,9 @@
                 <!-- Các nút hành động (Mua ngay, Thêm vào giỏ hàng) -->
                 <div class="action-buttons">
                     <button class="buy-now-btn" (click)="buyNow()">MUA NGAY</button>
-                    <button class="add-to-cart-btn" (click)="addToCart()">THÊM VÀO GIỎ HÀNG</button>
+                    <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;" onclick="onToCart(productid, price, userid, quantity)">
+                      <i class="fas fa-shopping-cart" (click)="addToCart({id : product.productID, unitPrice : product.price})" ></i>
+                    </button>
                 </div>
             </div>
         </div>

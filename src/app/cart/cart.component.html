@@ -1,0 +1,148 @@
+<div class="container py-4">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+        <h5 class="mb-0">THÔNG TIN GIỎ HÀNG</h5>
+        <button class="btn btn-danger" (click)="clearCart()" title="Xoá giỏ hàng">
+          XOÁ GIỎ HÀNG
+        </button>
+      </div>
+  
+      <!-- Cart Items Table -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Số tiền</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of cartItems">
+                <td style="width: 40%">
+                  <div class="d-flex align-items-center">
+                    <img
+                      src="https://via.placeholder.com/50"
+                      alt="Product Image"
+                      class="me-3"
+                      height="50"
+                    />
+                    <div>
+                      <h6 class="mb-1">{{ product.productName }}</h6>
+                      <small class="text-muted">Mã sản phẩm: {{ product.productCode }}</small>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ product.unitPrice | number : '1.0-0' }}đ</td>
+                <td style="width: 15%">
+                  <div class="input-group">
+                    <button
+                      class="btn btn-outline-secondary"
+                      (click)="onQuantityChange(product, product.quantity - 1)"
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      class="form-control text-center"
+                      [(ngModel)]="product.quantity"
+                      (input)="onQuantityChange(product, product.quantity)"
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      (click)="onQuantityChange(product, product.quantity + 1)"
+                    >
+                      +
+                    </button>
+                  </div>
+                </td>
+                <td>{{ product.quantity * product.unitPrice | number : '1.0-0' }}đ</td>
+                <td>
+                  <button
+                    class="btn btn-link text-danger"
+                    (click)="removeProduct(product.productID)"
+                  >
+                    Xoá
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Buttons for Downloading/Printing -->
+    <div class="row mb-4">
+      <div class="d-grid gap-2">
+        <button class="btn btn-secondary" type="button">
+          TẢI ẢNH ĐƠN HÀNG
+        </button>
+        <button class="btn btn-secondary" type="button">
+          TẢI FILE EXCEL
+        </button>
+        <button class="btn btn-secondary" type="button">
+          IN BÁO GIÁ
+        </button>
+      </div>
+    </div>
+  
+    <!-- Payment Form -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">HÌNH THỨC THANH TOÁN</h5>
+            <div class="form-check mb-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="payment"
+                id="payment-cod"
+                checked
+              />
+              <label class="form-check-label" for="payment-cod">
+                Thanh toán khi nhận hàng - COD
+              </label>
+            </div>
+            <div class="form-check mb-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="payment"
+                id="payment-bank"
+              />
+              <label class="form-check-label" for="payment-bank">
+                Thanh toán trước qua chuyển khoản
+              </label>
+            </div>
+  
+            <!-- Voucher Section -->
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Mã Voucher" />
+              <button class="btn btn-danger" type="button">
+                Nhập mã voucher
+              </button>
+            </div>
+  
+            <!-- Total Amount and Button -->
+            <div class="d-flex justify-content-between mb-3">
+              <span>Tổng tiền hàng ({{ totalQuantity }} Sản Phẩm):</span>
+              <span class="text-danger fs-5">{{ totalAmount | number : '1.0-0' }}đ</span>
+            </div>
+  
+            <!-- Final Purchase Button -->
+            <div class="d-grid">
+              <button class="btn btn-success btn-lg" type="button">
+                ĐẶT MUA NGAY
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

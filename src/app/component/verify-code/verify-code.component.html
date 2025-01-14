@@ -1,3 +1,39 @@
+<!-- <div class="verify-code-container">
+  <header>
+    <h1>Xác thực tài khoản</h1>
+    <p>Vui lòng nhập mã xác thực 6 số đã gửi đến email: <strong>{{ email }}</strong></p>
+  </header>
+
+  <section class="messages">
+    <p *ngIf="errorMessage" class="error-message">
+      <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+    </p>
+    <p *ngIf="successMessage" class="success-message">
+      <i class="fas fa-check-circle"></i> {{ successMessage }}
+    </p>
+  </section>
+  <form (submit)="verifyCode()" class="verify-code-form">
+    <label for="verificationCode" class="sr-only">Nhập mã xác thực</label>
+    <input
+      id="verificationCode"
+      type="text"
+      name="verificationCode"
+      [(ngModel)]="code"
+      placeholder="Nhập mã xác thực"
+      maxlength="6"
+      required
+      [disabled]="isLoading"
+      pattern="[0-9]*"
+      autofocus
+    />
+    <button type="submit" [disabled]="isLoading">Xác nhận</button>
+  </form>
+  <app-resend-verification-code
+    [email]="email"
+    (onResendSuccess)="handleResendSuccess()"
+    (onResendError)="handleResendError($event)"
+  ></app-resend-verification-code>
+</div> -->
 <div class="verify-code-container">
   <header>
     <h1>Xác thực tài khoản</h1>
@@ -32,7 +68,12 @@
     <button type="submit" [disabled]="isLoading">Xác nhận</button>
   </form>
 
-  <!-- Sử dụng component con resend -->
+  <!-- Nếu đang xác thực -->
+  <div *ngIf="isLoading" class="loading-spinner">
+    <i class="fas fa-spinner fa-spin"></i> Đang xác thực...
+  </div>
+
+  <!-- Component con gửi lại mã xác thực -->
   <app-resend-verification-code
     [email]="email"
     (onResendSuccess)="handleResendSuccess()"

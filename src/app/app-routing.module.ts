@@ -28,9 +28,9 @@ import { VerifyEmailComponent } from './component/verify-email/verify-email.comp
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
 import { UserHomeComponent } from './user/user-home/user-home.component';
-import { ProductDetailUserComponent } from './user/product-detail-user/product-detail-user.component';
 import { DetailProductComponent } from './component/detail-product/detail-product.component';
-
+import { ProductDetailUserComponent } from './user/product-detail-user/product-detail-user.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -66,8 +66,7 @@ const routes: Routes = [
   {path: 'resend-verification-code',component: ResendVerificationCodeComponent},
   {path: 'app-user-home', component: UserHomeComponent},
   {path: 'app-product-detail-user', component: ProductDetailUserComponent},
-
-
+  {path: 'cart', component: CartComponent},
   
 ];
 

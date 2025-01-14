@@ -1,36 +1,44 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+export interface CartDeatail {
+  produceId : string,
+  quantity : string,
+  unitPrice : number,
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
 
-  private cart: any[] = []; // Giỏ hàng lưu trữ các sản phẩm
+export class CartService{
+  private apiUrl = 'https://localhost:7249/api/Cart';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  // Thêm sản phẩm vào giỏ hàng
-  addToCart(product: any) {
-    const existingProduct = this.cart.find(item => item.productID === product.productID);
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-    } else {
-      this.cart.push({ ...product, quantity: 1 });
+  handleAddCart(data : CartDeatail){
+    const temp = localStorage.getItem('user');
+    let user;
+    if (temp) {
+      user = JSON.parse(temp as string);
     }
+
+
+    return this.http.post(`${this.apiUrl}/add`, {
+      userId :  user.userId,
+      productID : data.produceId,
+      quantity : data.quantity,
+      unitPrice : data.unitPrice
+    });
   }
 
-  // Lấy danh sách sản phẩm trong giỏ hàng
-  getCart() {
-    return this.cart;
-  }
+  handleGetCartByUserId(){
+    const data = localStorage.getItem('user');
+    let user;
+    if (data) {
+      user = JSON.parse(data);
+    }
 
-  // Xóa sản phẩm khỏi giỏ hàng
-  removeFromCart(productID: string) {
-    this.cart = this.cart.filter(item => item.productID !== productID);
-  }
-
-  // Làm trống giỏ hàng
-  clearCart() {
-    this.cart = [];
+    return  this.http.get(`${this.apiUrl}/user/${user.userId}`)
   }
 }
