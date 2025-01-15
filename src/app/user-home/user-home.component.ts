@@ -9,7 +9,7 @@ import * as toastr from 'toastr';
   templateUrl: './user-home.component.html',
   styleUrls: ['./user-home.component.css'],
 })
-export class UserHomeComponent implements OnInit, OnDestroy,AfterViewInit {
+export class UserHomeComponent implements OnInit, OnDestroy {
   images: string[] = [
     'https://lacdau.com/media/banner/04_Jul4b2820f0c4fe29e2d289589b90e47f4c.png',
     'https://lacdau.com/media/banner/09_Jul9860edbd0f637428e39fde95121313ed.png',

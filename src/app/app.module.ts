@@ -33,12 +33,12 @@ import { DetailOrdersComponent } from './component/detail-orders/detail-orders.c
 import { EditOrdersComponent } from './component/edit-orders/edit-orders.component';
 import { UsersComponent } from './component/users/users.component';
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
+import { UserHomeComponent } from './user-home/user-home.component';
 import { NavUserHomeComponent } from './nav-user-home/nav-user-home.component';
 import { FeedbackComponent } from './component/feedback/feedback.component';
 import { VerifyCodeComponent } from './component/verify-code/verify-code.component';
 import { ResendVerificationCodeComponent } from './component/resend-verification-code/resend-verification-code.component';
-import { UserHomeComponent } from './component/user-home/user-home.component';
- import { CartComponent } from './component/cart/cart.component';
+import { CartComponent } from './component/cart/cart.component';
 import { ModalComponent } from './modal/modal.component';
 import { OnlinePaymentComponent } from './online-payment/online-payment.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -98,6 +98,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
   ],
   providers: [],
-  bootstrap: [UserHomeComponent]
+  bootstrap: [DashboardComponent]
 })
 export class AppModule { }

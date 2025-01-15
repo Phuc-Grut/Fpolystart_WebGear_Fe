@@ -7,9 +7,8 @@ header {
     display: flex;
     align-items: center;
     padding: 1rem;
-    background-color: white;
+    margin: 30px;
     z-index: 1000;
-    width: 100%;
   }
   .navbar-brand img {
     height: 70px;
