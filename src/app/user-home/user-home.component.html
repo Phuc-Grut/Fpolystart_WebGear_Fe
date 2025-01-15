@@ -142,7 +142,7 @@
       <div *ngFor="let row of paginatedItems" class="row" style="display: flex; width: 100%; gap: 16px;">
         <div *ngFor="let product of row" class="card" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
           <div class="card-image">
-            <img [src]="baseUrl + product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
+            <img [src]="product.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
           </div>
           <div class="card-body" style="padding: 12px;">
             <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px; flex-direction: column;">
@@ -283,7 +283,7 @@
     <div *ngFor="let row of paginatedItems" class="card-row" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;">
       <div class="card" *ngFor="let item of row" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
         <div class="card-image">
-          <img [src]="baseUrl + item.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
+          <img [src]="item.avatarProduct" alt="Product Image" style="width: 100%; height: 180px; object-fit: cover;">
         </div>
         <div class="card-body" style="padding: 12px;">
           <div class="card-info" style="display: flex; justify-content: space-between; margin-bottom: 8px; flex-direction: column;">
@@ -347,7 +347,7 @@
       <div class="card" *ngFor="let product of products" style="background: white; border: 1px solid #ccc; border-radius: 8px; width: 18%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
         <div class="card-image">
           <img
-              [src]=" baseUrl + product.avatarProduct"
+              [src]="product.avatarProduct"
               alt="{{ product.productName }}"
               class="product-image"
               style="width: 80px; height: auto;"
