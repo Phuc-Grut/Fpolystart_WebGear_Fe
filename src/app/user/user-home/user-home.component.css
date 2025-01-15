@@ -566,3 +566,69 @@ button {
   font-size: 14px; /* Kích thước chữ của "Giỏ hàng" */
   color: #29A07e; /* Màu chữ mặc định */
 }
+/* Overlay to cover the screen */
+.cart-success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Animation for spinner */
+.spinner {
+  border: 4px solid transparent;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+}
+
+/* Success Icon (Check Circle) */
+.success-icon {
+  font-size: 40px;
+  color: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+/* Success message */
+.success-message {
+  position: absolute;
+  top: 80px;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  animation: fade-in 1s ease-in-out;
+}
+
+/* Keyframes for spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade in effect for success message */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -11,7 +11,7 @@
           placeholder="Username"
           required
         />
-        <!-- Hiển thị thông báo lỗi cho username -->
+        <br>
         <div *ngIf="errorMessage && !credentials.username" class="error-message">
           Tên đăng nhập không được để trống.
         </div>
@@ -25,7 +25,8 @@
           type="password"
           required
         />
-        <!-- Hiển thị thông báo lỗi cho password -->
+        <br>
+       
         <div *ngIf="errorMessage && !credentials.password" class="error-message">
           Mật khẩu không được để trống.
         </div>
@@ -34,7 +35,6 @@
       <a routerLink="/forgot-password">Quên mật khẩu?</a>
       <button type="submit">Đăng nhập</button>
       
-      <!-- Hiển thị thông báo lỗi chung -->
       <div *ngIf="errorMessage && !credentials.username && !credentials.password" class="error-message">
         Vui lòng điền đầy đủ thông tin đăng nhập.
       </div>

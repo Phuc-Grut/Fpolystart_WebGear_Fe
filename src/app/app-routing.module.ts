@@ -32,7 +32,6 @@ import { DetailProductComponent } from './component/detail-product/detail-produc
 import { ProductDetailUserComponent } from './user/product-detail-user/product-detail-user.component';
 import { CartComponent } from './cart/cart.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -69,7 +68,6 @@ const routes: Routes = [
   {path: 'app-product-detail-user', component: ProductDetailUserComponent},
   {path: 'cart', component: CartComponent},
   {path: 'user-profile', component: UserProfileComponent},
-  
 ];
 
 @NgModule({

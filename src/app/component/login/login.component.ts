@@ -50,5 +50,12 @@ export class LoginComponent {
         alert('Đăng nhập thất bại.');
       });
   }
-  
+  email: string = '';
+  password: string = '';
+  rememberMe: boolean = false;
+  passwordType: string = 'password';
+
+  togglePasswordVisibility(): void {
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
+  }
 }

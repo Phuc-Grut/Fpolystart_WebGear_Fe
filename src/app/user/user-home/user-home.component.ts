@@ -195,7 +195,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  showSuccessOverlay: boolean = false;
   // Khi nhấn vào sản phẩm, gọi API để lấy chi tiết sản phẩm và mở modal
   //Phương thức này sẽ được gọi khi nhấp vào nút "Thêm vào giỏ hàng"
 addToCart(data : any ): void {

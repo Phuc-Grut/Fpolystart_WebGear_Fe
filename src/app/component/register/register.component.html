@@ -1,8 +1,8 @@
-<form (submit)="register()" class="register-form">
+<!-- <form (submit)="register()" class="register-form">
   <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
   <span>Đăng ký là thành viên để hưởng nhiều lợi ích và đặt mua hàng dễ dàng hơn.</span>
 
-  <!-- Tên đăng nhập -->
+
   <input
     name="userName"
     [(ngModel)]="user.userName"
@@ -10,7 +10,7 @@
     required
   />
 
-  <!-- Mật khẩu -->
+
   <div class="password-container">
     <input
       name="password"
@@ -28,7 +28,6 @@
     </i>
   </div>
 
-  <!-- Email -->
   <input
     name="email"
     [(ngModel)]="user.email"
@@ -37,7 +36,7 @@
     required
   />
 
-  <!-- Số điện thoại -->
+
   <input
     name="phoneNumber"
     [(ngModel)]="user.phoneNumber"
@@ -45,7 +44,7 @@
     required
   />
 
-  <!-- Tên -->
+
   <input
     name="name"
     [(ngModel)]="user.name"
@@ -53,9 +52,95 @@
     required
   />
 
-  <!-- Nút đăng ký -->
+
   <button type="submit">Đăng ký</button>
 
-  <!-- Nút Đăng nhập -->
+
   <p class="login-link">Tôi đã có tài khoản? <a href="/login">Đăng nhập</a></p>
+</form> -->
+<form (submit)="register()" class="register-form">
+  <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
+  <span>Đăng ký là thành viên để hưởng nhiều lợi ích và đặt mua hàng dễ dàng hơn.</span>
+
+  <div class="input-group">
+    <input
+      name="userName"
+      [(ngModel)]="user.userName"
+      placeholder="Tên đăng nhập"
+      required
+    />
+    <div *ngIf="errorMessage && !user.userName" class="error-message">
+      Tên đăng nhập không được để trống.
+    </div>
+  </div>
+
+  <div class="password-container">
+    <input
+      name="password"
+      [(ngModel)]="user.password"
+      [type]="showPassword ? 'text' : 'password'"
+      placeholder="Mật khẩu"
+      required
+    />
+    <i
+      class="eye-icon"
+      (click)="togglePasswordVisibility()"
+      [class.show]="showPassword"
+    >
+      <i class="bx" [class.bxs-eye]="!showPassword" [class.bxs-eye-off]="showPassword"></i>
+    </i>
+    <div *ngIf="errorMessage && !user.password" class="error-message">
+      Mật khẩu không được để trống.
+    </div>
+    <div *ngIf="passwordStrengthError" class="error-message">
+      Mật khẩu phải có chữ hoa, chữ thường, số và ký tự đặc biệt.
+    </div>
+  </div>
+
+  <div class="input-group">
+    <input
+      name="email"
+      [(ngModel)]="user.email"
+      type="email"
+      placeholder="Email"
+      required
+    />
+    <div *ngIf="errorMessage && !user.email" class="error-message">
+      Email không được để trống.
+    </div>
+    <div *ngIf="emailInvalid" class="error-message">
+      Email không hợp lệ.
+    </div>
+  </div>
+
+  <div class="input-group">
+    <input
+      name="phoneNumber"
+      [(ngModel)]="user.phoneNumber"
+      placeholder="Số điện thoại"
+      required
+    />
+    <div *ngIf="errorMessage && !user.phoneNumber" class="error-message">
+      Số điện thoại không được để trống.
+    </div>
+    <div *ngIf="phoneInvalid" class="error-message">
+      Số điện thoại không hợp lệ.
+    </div>
+  </div>
+
+  <div class="input-group">
+    <input
+      name="name"
+      [(ngModel)]="user.name"
+      placeholder="Tên"
+      required
+    />
+    <div *ngIf="errorMessage && !user.name" class="error-message">
+      Tên không được để trống.
+    </div>
+  </div>
+
+  <button type="submit">Đăng ký</button>
+
+  <p class="login-link">Tôi đã có tài khoản? <a routerLink="/login">Đăng nhập</a></p>
 </form>
