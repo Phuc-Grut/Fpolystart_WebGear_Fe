@@ -39,6 +39,8 @@ import { DetailProductComponent } from './component/detail-product/detail-produc
 import { ProductDetailUserComponent } from './user/product-detail-user/product-detail-user.component';
 import { CartComponent } from './cart/cart.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { LocationSelectorComponent } from './location-selector/location-selector.component';
+import { CartDetailComponent } from './cart-detail/cart-detail.component';
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -76,6 +78,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ProductDetailUserComponent,
     CartComponent,
     UserProfileComponent,
+    LocationSelectorComponent,
+    CartDetailComponent,
   ],
   imports: [
     BrowserModule,

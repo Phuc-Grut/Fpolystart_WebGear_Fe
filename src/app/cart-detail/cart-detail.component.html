@@ -1,0 +1,60 @@
+<div *ngIf="showModal" class="modal-overlay" (click)="onOverlayClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeModal()">×</button>
+  
+      <div *ngIf="currentProduct" class="product-detail-container">
+        <div class="main-image-container">
+          <img [src]="baseUrl + currentProduct.avatarProduct || 'path_to_placeholder_image'" alt="Product Image" class="main-image" />
+        </div>
+  
+        <div class="product-info">
+          <h2>Thông tin sản phẩm</h2>
+          <div><strong>Mã sản phẩm:</strong> {{ currentProduct.productCode }}</div>
+          <div><strong>Tên sản phẩm:</strong> {{ currentProduct.productName }}</div>
+          <div><strong>Danh mục sản phẩm:</strong> {{ currentProduct.subCategories || 'Không xác định' }}</div>
+          <div><strong>Số lượng:</strong> {{ currentProduct.quantity || 'Không xác định' }}</div>
+          <div><strong>Giảm giá:</strong> {{ currentProduct.salePercent }} %</div>
+          <div><strong>Brand:</strong> {{ currentProduct.brandName || 'Không xác định' }}</div>
+          <div><strong>Mô tả:</strong> {{ currentProduct.description || 'Không có mô tả' }}</div>
+  
+          <span *ngIf="!showMoreDetails" (click)="toggleDetails(true)" class="show-more">
+            Xem thêm
+          </span>
+  
+          <div *ngIf="showMoreDetails && currentProduct" class="product-detail-list">
+            <h4>Chi tiết sản phẩm</h4>
+            <div *ngIf="currentProduct.productDetail?.length > 0">
+              <h4>Chọn màu:</h4>
+              <ul>
+                <li *ngFor="let detail of currentProduct.productDetail">{{ detail.color }}</li>
+              </ul>
+            </div>
+  
+            <div class="content-detail">
+              <ul>
+                <li><strong>Giá:</strong> {{ currentProduct.productDetail[0]?.price | number:'1.0-0' }}</li>
+                <li><strong>Switch:</strong> {{ currentProduct.productDetail[0]?.switch }}</li>
+                <li><strong>DPI:</strong> {{ currentProduct.productDetail[0]?.dpi }}</li>
+                <li><strong>Kết nối:</strong> {{ currentProduct.productDetail[0]?.connectivity }}</li>
+                <li><strong>Chất liệu:</strong> {{ currentProduct.productDetail[0]?.material }}</li>
+                <li><strong>LED:</strong> {{ currentProduct.productDetail[0]?.led }}</li>
+                <li><strong>Size:</strong> {{ currentProduct.productDetail[0]?.dimensions }}</li>
+                <li><strong>Tần số quét:</strong> {{ currentProduct.productDetail[0]?.eyeReading }}</li>
+                <li><strong>Phần mềm hỗ trợ:</strong> {{ currentProduct.productDetail[0]?.ss }}</li>
+                <li><strong>Dung lượng pin (mhw):</strong> {{ currentProduct.productDetail[0]?.batteryCapacity }}</li>
+                <li><strong>Trọng lượng (gam):</strong> {{ currentProduct.productDetail[0]?.weight }}</li>
+                <li><strong>Số lượng:</strong> {{ currentProduct.productDetail[0]?.quantity }}</li>
+              </ul>
+            </div>
+          </div>
+  
+          <span *ngIf="showMoreDetails" (click)="toggleDetails(false)" class="show-more">
+            Rút gọn
+          </span>
+  
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  

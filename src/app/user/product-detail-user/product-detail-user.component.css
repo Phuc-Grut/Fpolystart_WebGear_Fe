@@ -56,17 +56,19 @@
     gap: 20px; /* Khoảng cách giữa ảnh và thông tin sản phẩm */
   }
   
-  /* Ảnh sản phẩm chính */
-  .main-image-container {
-    flex: 1; /* Chiếm 1 phần trong không gian của container */
-    display: flex;
-    justify-content: center; /* Canh giữa ảnh trong container */
-  }
-  
-  .main-image {
-    max-width: 100%; /* Đảm bảo ảnh không vượt quá container */
-    height: auto;
-  }
+.main-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Canh giữa ảnh theo chiều dọc */
+}
+
+.main-image {
+  width: 500px; 
+  height: 500px; 
+  object-fit: cover; 
+}
+
   
   /* Thông tin sản phẩm */
   .product-info {
@@ -78,20 +80,16 @@
   }
   
   /* Cấu trúc các nút "Xem thêm", "Rút gọn" */
-  .show-more-btn {
-    margin-top: 20px;
-    padding: 10px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-right: 550px;
+  .show-more {
+    cursor: pointer; /* Thêm hiệu ứng con trỏ khi hover vào */
+    text-decoration: none; /* Ban đầu không có gạch chân */
+    color: #007bff; /* Màu văn bản mặc định */
   }
   
-  .show-more-btn:hover {
-    background-color: #0056b3;
+  .show-more:hover {
+    text-decoration: underline; /* Khi hover sẽ có gạch chân */
   }
+  
   
   .action-buttons {
     display: flex;

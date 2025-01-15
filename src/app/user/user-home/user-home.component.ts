@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartDeatail, CartService } from 'src/app/cart.service';
@@ -8,7 +9,18 @@ import * as toastr from 'toastr';
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
   styleUrls: ['./user-home.component.css'],
+  animations: [
+    trigger('focus', [
+      state('focused', style({
+        // Các style khi focus
+      })),
+      transition('void <=> focused', [
+        animate('300ms')  // Hiệu ứng khi chuyển trạng thái
+      ])
+    ])
+  ]
 })
+
 export class UserHomeComponent implements OnInit, OnDestroy {
   cartItems: any[] = [];  // Mảng chứa các sản phẩm trong giỏ hàng
   isCartVisible: boolean = false;  // Trạng thái giỏ hàng có hiển thị hay không
@@ -27,7 +39,8 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   
   // cartItems: any[] = [];
   // isCartVisible: boolean = false;
-  constructor(private productService: ProductService, private route: Router, private cartService: CartService) {}
+  constructor(private productService: ProductService, private router: Router, private cartService: CartService) {
+  }
   
   baseUrl: string = 'https://lacdau.com';
   products: any[] = [];
@@ -37,10 +50,12 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   paginatedItems: any[] = [];
   numberNotifi = 0;
  navigate(){
-  this.route.navigate(['/login'])
+  this.router.navigate(['/login'])
  }
   ngOnInit(): void {
     this.startAutoplay();
+    this.checkLoginStatus();
+
     // this.groupItems();
     this.loadProducts();
     this.updatePagination();
@@ -223,7 +238,7 @@ addToCart(data : any ): void {
     })
   }
   redirectToCart() {
-    this.route.navigate(['/cart'], { queryParamsHandling: 'preserve',replaceUrl: true, });
+    this.router.navigate(['/cart'], { queryParamsHandling: 'preserve',replaceUrl: true, });
   // Thay '/cart' bằng URL trang giỏ hàng của bạn
   }
 
@@ -302,8 +317,60 @@ addToCart(data : any ): void {
     this.calculateTotalPrice(); // Cập nhật lại tổng tiền sau khi xóa sản phẩm
   }
   redirectToProfile() {
-    this.route.navigate(['/user-profile'], { queryParamsHandling: 'preserve',replaceUrl: true, });
+    this.router.navigate(['/user-profile'], { queryParamsHandling: 'preserve',replaceUrl: true, });
   // Thay '/cart' bằng URL trang giỏ hàng của bạn
   }
+  isLoggedIn = false;  // Kiểm tra trạng thái đăng nhập
+  userName = '';  // Lưu trữ tên người dùng
+  dropdownVisible = false;  // Trạng thái menu thả xuống
+
   
+
+  // Kiểm tra trạng thái đăng nhập từ localStorage hoặc sessionStorage
+  checkLoginStatus() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.isLoggedIn = true;
+      this.userName = JSON.parse(user).name;  // Giả sử lưu tên người dùng trong localStorage
+    }
+  }
+
+  // Hiển thị dropdown
+  showDropdown() {
+    this.dropdownVisible = true;
+  }
+
+  // Ẩn dropdown
+  hideDropdown() {
+    this.dropdownVisible = false;
+  }
+
+  // Chuyển hướng đến trang hồ sơ
+  // redirectToProfile() {
+  //   this.router.navigate(['/profile']);
+  // }
+
+  // Đăng xuất
+  logout() {
+    localStorage.removeItem('user');  // Xóa thông tin người dùng khỏi localStorage
+    localStorage.removeItem('token');  // Xóa token nếu có
+    this.isLoggedIn = false;  // Cập nhật trạng thái đăng nhập
+    this.userName = '';  // Xóa tên người dùng
+    this.router.navigate(['/login']);  // Điều hướng về trang đăng nhập
+  }
+
+  // Chức năng đăng nhập
+  login() {
+    // Giả sử người dùng đăng nhập thành công và thông tin được lưu vào localStorage
+    this.router.navigate(['/login']);
+    this.checkLoginStatus();  // Kiểm tra lại trạng thái đăng nhập
+  }
+
+  // Chức năng đăng ký
+  register() {
+    // Điều hướng đến trang đăng ký
+    this.router.navigate(['/register']);
+  }
 }
+  
+

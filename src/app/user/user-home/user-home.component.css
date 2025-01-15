@@ -179,12 +179,43 @@ header {
   .cart-container:hover {
     background-color: #e2f4ff; /* Màu nền khi hover */
   }
- .profile img {
-    width: 36px;
-    height: 36px;
-    object-fit: cover;
-    border-radius: 50%;
-}
+  .profile {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    min-width: 180px;
+    z-index: 10;
+  }
+  
+  .profile:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-menu ul li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu ul li:hover {
+    background-color: #f0f0f0;
+  }
+  
 
 /* article */
 .slideshow-container {
@@ -350,27 +381,7 @@ button:hover {
   font-size: 16px;
   font-weight: bold;
 }
-.user-profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 40px;
-  background-color: #007bff; /* Màu nền của nút */
-  border-radius: 50%; /* Để tạo hình tròn */
-  cursor: pointer; /* Chỉ con trỏ chuột thành tay khi di chuột lên nút */
-  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền */
-}
-
-.user-profile i {
-  font-size: 18px; /* Kích thước biểu tượng */
-  color: white; /* Màu của biểu tượng */
-}
-
-.user-profile:hover {
-  background-color: #0056b3; /* Màu nền khi hover */
-}
-
+/* 
 
 /* Căn chỉnh và kiểu dáng cho các nút phân trang */
 button {
@@ -530,4 +541,28 @@ button {
   margin-top: 20px;
   text-align: right;
   font-size: 20px;
+}
+.cart-containerr {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #29A07e;
+  cursor: pointer; /* Khi hover, con trỏ sẽ thay đổi thành bàn tay */
+  transition: color 0.3s ease; /* Thêm hiệu ứng chuyển đổi màu khi hover */
+}
+
+.cart-containerr:hover {
+  color: #007bff; /* Màu khi hover vào giỏ hàng */
+}
+
+.cart-containerr i {
+  font-size: 24px; /* Kích thước icon giỏ hàng */
+  color: #29A07e; /* Màu icon mặc định */
+}
+
+.cart-containerr .cart-text {
+  font-size: 14px; /* Kích thước chữ của "Giỏ hàng" */
+  color: #29A07e; /* Màu chữ mặc định */
 }

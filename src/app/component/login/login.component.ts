@@ -18,28 +18,37 @@ export class LoginComponent {
     username: '',
     password: ''
   };
-
+  errorMessage = '';
   constructor(private http: HttpClient, private router: Router) {}
 
   // Phương thức đăng nhập
   login() {
+    this.errorMessage = ''; // Reset thông báo lỗi trước khi kiểm tra
+    if (!this.credentials.username) {
+      this.errorMessage = 'Tên đăng nhập không được để trống.';
+      return;
+    }
+    if (!this.credentials.password) {
+      this.errorMessage = 'Mật khẩu không được để trống.';
+      return;
+    }
+  
+    // Tiến hành gọi API nếu không có lỗi
     this.http.post<LoginResponse>('https://localhost:7249/api/Login/login', this.credentials)
       .subscribe(response => {
-        // Lưu thông tin người dùng vào sessionStorage/localStorage
         sessionStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('user', JSON.stringify(response.user));
-        
-        // Kiểm tra nếu username là 'admin'
         if (this.credentials.username === 'admin') {
           alert('Đăng nhập thành công với quyền Admin!');
-          this.router.navigate(['dashboard']); // Điều hướng đến trang admin (dashboard)
+          this.router.navigate(['dashboard']);
         } else {
           alert('Đăng nhập thành công với quyền User!');
-          this.router.navigate(['app-user-home']); // Điều hướng đến trang người dùng
+          this.router.navigate(['app-user-home']);
         }
       }, error => {
         console.error(error);
         alert('Đăng nhập thất bại.');
       });
   }
+  
 }

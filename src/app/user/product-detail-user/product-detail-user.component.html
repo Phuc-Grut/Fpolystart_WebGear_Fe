@@ -169,9 +169,9 @@
                 <div><strong>Mô tả:</strong> {{ product.description || 'Không có mô tả' }}</div>
 
                 <!-- Nút "Xem thêm" -->
-                <button *ngIf="!showMoreDetails" (click)="toggleDetails(true)" class="show-more-btn">
+                <span *ngIf="!showMoreDetails" (click)="toggleDetails(true)" class="show-more">
                     Xem thêm
-                </button>
+                </span>
 
                 <!-- Chi tiết sản phẩm hiển thị khi nhấn "Xem thêm" -->
                 <div *ngIf="showMoreDetails && product" class="product-detail-list">
@@ -202,15 +202,14 @@
                 </div>
 
                 <!-- Nút "Rút gọn" -->
-                <button *ngIf="showMoreDetails" (click)="toggleDetails(false)" class="show-more-btn">
+                <span *ngIf="showMoreDetails" (click)="toggleDetails(false)" class="show-more">
                     Rút gọn
-                </button>
+                </span>
 
                 <!-- Các nút hành động (Mua ngay, Thêm vào giỏ hàng) -->
                 <div class="action-buttons">
                     <button class="buy-now-btn" (click)="buyNow()">MUA NGAY</button>
-                    <button class="add-to-cart-btn" style="background: none; border: none; font-size: 10px; color: #29A07E;" onclick="onToCart(productid, price, userid, quantity)">
-                      <i class="fas fa-shopping-cart" (click)="addToCart({id : product.productID, unitPrice : product.price})" ></i>
+                    <button class="buy-now-btn" onclick="onToCart(productid, price, userid, quantity)">THÊM VÀO GIỎ HÀNG
                     </button>
                 </div>
             </div>

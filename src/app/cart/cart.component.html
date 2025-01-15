@@ -39,8 +39,15 @@
               </td>
               <td>{{ product.quantity * product.unitPrice | number:'1.0-0'}}đ</td>
               <td>
+                <button class="btn btn-link text-danger" (click)="viewProductDetail(product.productID)">Xem chi tiết</button>
                 <button class="btn btn-link text-danger" (click)="removeProduct(product.productID)">Xoá</button>
+                
               </td>
+              <app-product-detail-user
+  [product]="selectedProduct"
+  [showModal]="isModalOpen"
+  (close)="closeModal()">
+</app-product-detail-user>
             </tr>
           </tbody>
         </table>
